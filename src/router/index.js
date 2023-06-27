@@ -6,9 +6,9 @@ import ProfileLayout from "../views/Layout/ProfileLayout.vue";
 import DashboardLayoutVr from "../views/Layout/DashboardLayoutVr.vue";
 import PageLayout from "../views/Layout/PageLayout";
 import AuthBasicLayout from "../views/Layout/AuthBasicLayout";
+import AuthLayout from "../views/Platform/Layout/AuthBasicLayout";
 import AuthCoverLayout from "../views/Layout/AuthCoverLayout";
 import AuthIllustrationLayout from "../views/Layout/AuthIllustrationLayout";
-
 
 const Home = () => import("../views/Platform/Home.vue");
 // Dashboard pages
@@ -57,6 +57,13 @@ const SignUpBasic = () =>
   import(
     /* webpackChunkName: "pages" */ "@/views/Pages/Authentication/SignUp/Basic.vue"
   );
+
+const Login = () =>
+  import(/* webpackChunkName: "pages" */ "@/views/Platform/Auth/Login.vue");
+
+const Register = () =>
+  import(/* webpackChunkName: "pages" */ "@/views/Platform/Auth/Register.vue");
+
 const SignUpCover = () =>
   import(
     /* webpackChunkName: "pages" */ "@/views/Pages/Authentication/SignUp/Cover.vue"
@@ -294,6 +301,32 @@ let authBasicPages = {
   ],
 };
 
+let login = {
+  path: "/",
+  component: AuthLayout,
+  name: "Authentication Basic",
+  children: [
+    {
+      path: "/login",
+      name: "Login",
+      component: Login,
+    },
+  ],
+};
+
+let register = {
+  path: "/",
+  component: AuthLayout,
+  name: "Authentication Basic",
+  children: [
+    {
+      path: "/register",
+      name: "Register",
+      component: Register,
+    },
+  ],
+};
+
 let authCoverPages = {
   path: "/",
   component: AuthCoverLayout,
@@ -474,10 +507,26 @@ const routes = [
   authBasicPages,
   authCoverPages,
   authIllustrationPages,
+  login,
+  register,
 ];
 
 const router = new VueRouter({
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const publicPages = ["/login", "/register"];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem("user");
+
+  // trying to access a restricted page + not logged in
+  // redirect to login page
+  if (authRequired && !loggedIn) {
+    next("/login");
+  } else {
+    next();
+  }
 });
 
 export default router;

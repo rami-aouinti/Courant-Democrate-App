@@ -21,7 +21,7 @@
                       font-weight-bold
                     "
                     target="_blank"
-                    >Creative Tim</a
+                    >Rami Aouinti</a
                   >
                   for a better web.
                 </div>
@@ -96,10 +96,10 @@
                   Copyright © {{ new Date().getFullYear() }}
                   Material by
                   <a
-                    href="https://www.creative-tim.com"
+                    href="https://www.linkedin.com/in/rami-aouinti-78998a59"
                     class="text-decoration-none btn-hover text-body ls-0"
                     target="_blank"
-                    >Creative Tim</a
+                    >Rami Aouinti</a
                   >
                 </p>
               </v-col>
@@ -170,16 +170,16 @@ export default {
     return {
       footer: [
         {
-          linkName: "Creative Tim",
-          link: "https://www.creative-tim.com/",
+          linkName: "Rami Aouinti",
+          link: "https://www.linkedin.com/in/rami-aouinti-78998a59/",
         },
         {
-          linkName: "About Us",
-          link: "https://www.creative-tim.com/presentation",
+          linkName: "About Me",
+          link: "https://www.linkedin.com/in/rami-aouinti-78998a59/",
         },
         {
           linkName: "Blog",
-          link: "http://blog.creative-tim.com/",
+          link: "https://www.linkedin.com/in/rami-aouinti-78998a59/",
         },
         {
           linkName: "License",

@@ -31,9 +31,7 @@
               v-else
             >
             </v-img>
-            <span class="ms-2 font-weight-bold text-sm"
-              >Ramy Platform</span
-            >
+            <span class="ms-2 font-weight-bold text-sm">Ramy Platform</span>
           </div>
         </v-list-item-title>
       </v-list-item-content>
@@ -58,7 +56,7 @@
 
           <v-list-item-content>
             <v-list-item-title class="ms-2 ps-1 font-weight-light">
-              Rami Aouinti
+              {{ currentUser.username }}
             </v-list-item-title>
           </v-list-item-content>
         </template>
@@ -129,7 +127,7 @@
       :class="sidebarTheme == 'dark' ? 'light' : 'dark'"
     />
 
-    <v-list nav dense>
+    <v-list v-if="showAdminBoard" nav dense>
       <v-list-group
         :ripple="false"
         v-for="item in items"
@@ -796,6 +794,25 @@ export default {
           .querySelector(".v-list-group__header")
           .classList.add("v-list-item--active", "item-active");
       }
+    },
+  },
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
+    showAdminBoard() {
+      if (this.currentUser && this.currentUser.roles) {
+        return this.currentUser.roles.includes("ROLE_ADMIN");
+      }
+
+      return false;
+    },
+    showModeratorBoard() {
+      if (this.currentUser && this.currentUser.roles) {
+        return this.currentUser.roles.includes("ROLE_MODERATOR");
+      }
+
+      return false;
     },
   },
 };
