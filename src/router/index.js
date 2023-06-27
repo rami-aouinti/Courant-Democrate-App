@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import DashboardLayout from "../views/Layout/DashboardLayout.vue";
+import HomeLayout from "../views/Platform/Layout/DashboardLayout.vue";
 import ProfileLayout from "../views/Layout/ProfileLayout.vue";
 import DashboardLayoutVr from "../views/Layout/DashboardLayoutVr.vue";
 import PageLayout from "../views/Layout/PageLayout";
@@ -8,6 +9,8 @@ import AuthBasicLayout from "../views/Layout/AuthBasicLayout";
 import AuthCoverLayout from "../views/Layout/AuthCoverLayout";
 import AuthIllustrationLayout from "../views/Layout/AuthIllustrationLayout";
 
+
+const Home = () => import("../views/Platform/Home.vue");
 // Dashboard pages
 const Dashboard = () => import("../views/Dashboard/Dashboard.vue");
 const Discover = () => import("../views/Dashboard/Discover.vue");
@@ -321,9 +324,16 @@ const routes = [
   {
     path: "/",
     name: "Dashboard",
-    redirect: "/pages/dashboards/analytics",
-    component: DashboardLayout,
+    component: HomeLayout,
     children: [
+      {
+        path: "/",
+        name: "Home",
+        component: Home,
+        meta: {
+          groupName: "Dashboards",
+        },
+      },
       {
         path: "pages/dashboards/analytics",
         name: "Analytics",
