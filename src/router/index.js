@@ -31,6 +31,23 @@ const ProfileOverview = () =>
   import(
     /* webpackChunkName: "pages" */ "@/views/Pages/Profile/ProfileOverview.vue"
   );
+
+const Profile = () =>
+  import(
+    /* webpackChunkName: "pages" */ "@/views/Platform/Profile/ProfileOverview.vue"
+  );
+
+const UserManagement = () =>
+  import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/User.vue");
+
+const GroupManagement = () =>
+  import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/Group.vue");
+
+const ProfileSetting = () =>
+  import(
+    /* webpackChunkName: "pages" */ "@/views/Platform/Profile/Settings.vue"
+  );
+
 const Messages = () =>
   import(/* webpackChunkName: "pages" */ "@/views/Pages/Profile/Messages.vue");
 const Projects = () =>
@@ -158,6 +175,54 @@ let profilePages = {
       component: Projects,
       meta: {
         groupName: "Pages",
+      },
+    },
+  ],
+};
+
+let admin = {
+  path: "/",
+  component: HomeLayout,
+  name: "Profile",
+  children: [
+    {
+      path: "/admin/users",
+      name: "user",
+      component: UserManagement,
+      meta: {
+        groupName: "Users Management",
+      },
+    },
+    {
+      path: "/admin/groups",
+      name: "group",
+      component: GroupManagement,
+      meta: {
+        groupName: "Users Management",
+      },
+    },
+  ],
+};
+
+let profile = {
+  path: "/",
+  component: HomeLayout,
+  name: "Profile",
+  children: [
+    {
+      path: "/profile/overview",
+      name: "ProfileOverview",
+      component: Profile,
+      meta: {
+        groupName: "Profile",
+      },
+    },
+    {
+      path: "/profile/settings",
+      name: "Messages",
+      component: ProfileSetting,
+      meta: {
+        groupName: "Profile",
       },
     },
   ],
@@ -509,6 +574,8 @@ const routes = [
   authIllustrationPages,
   login,
   register,
+  profile,
+  admin,
 ];
 
 const router = new VueRouter({

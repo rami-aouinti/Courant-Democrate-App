@@ -136,9 +136,9 @@
             <p class="text-sm text-body mt-3 mb-0">
               Already have an account?
               <a
-                href="javascript:;"
+                href="/#/register"
                 class="text-dark text-decoration-none font-weight-bolder"
-                >Sign in</a
+                >Sign up</a
               >
             </p>
             <div class="form-group">

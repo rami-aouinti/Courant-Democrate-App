@@ -1,6 +1,7 @@
 import axios from "axios";
+import authHeader from "@/services/auth-header";
 
-const API_URL = "http://localhost/api/v1/auth/";
+const API_URL = "https://zomra.de/api/v1/auth/";
 
 class AuthService {
   login(user) {
@@ -24,11 +25,23 @@ class AuthService {
   }
 
   register(user) {
-    return axios.post(API_URL + "signup", {
-      username: user.username,
-      email: user.email,
-      password: user.password,
-    });
+    return axios
+      .post(
+        API_URL + "registration",
+        {
+          username: user.username,
+          email: user.email,
+          password: user.password,
+        },
+        { headers: authHeader() }
+      )
+      .then((response) => {
+        if (response.data) {
+          console.log(response.data);
+        }
+
+        return response.data;
+      });
   }
 }
 

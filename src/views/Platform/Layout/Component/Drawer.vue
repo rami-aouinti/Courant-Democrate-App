@@ -67,6 +67,7 @@
           class="mb-1 no-default-hover py-2"
           v-for="child in userInfo"
           :key="child.title"
+          :to="child.path"
         >
           <span
             class="v-list-item-mini ms-0 font-weight-light text-center w-20"
@@ -128,6 +129,114 @@
     />
 
     <v-list v-if="showAdminBoard" nav dense>
+      <h5
+        class="
+          text-uppercase text-caption
+          ls-0
+          font-weight-bolder
+          p-0
+          mx-4
+          mt-4
+          mb-2
+          ps-2
+          d-none-mini
+          white-space-nowrap
+        "
+        :class="sidebarTheme == 'dark' ? 'text-white' : 'text-default'"
+      >
+        Administration
+      </h5>
+      <v-list-group
+        :ripple="false"
+        v-for="item in admin"
+        :key="item.title"
+        v-model="item.active"
+        append-icon="fas fa-angle-down"
+        class="pb-1 mx-2"
+        active-class="item-active"
+      >
+        <template v-slot:activator>
+          <v-list-item-icon class="me-2 align-center">
+            <i class="material-icons-round opacity-10">{{ item.action }}</i>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title
+              v-text="item.title"
+              class="ms-1"
+            ></v-list-item-title>
+          </v-list-item-content>
+        </template>
+
+        <v-list-item
+          :ripple="false"
+          link
+          class="mb-1 no-default-hover px-0"
+          :class="child.items ? 'has-children' : ''"
+          v-for="child in item.items"
+          :key="child.title"
+          :to="child.link"
+        >
+          <div class="w-100 d-flex align-center pa-2 border-radius-lg">
+            <span class="v-list-item-mini" v-text="child.prefix"></span>
+
+            <v-list-item-content class="ms-6 ps-1" v-if="!child.items">
+              <v-list-item-title
+                v-text="child.title"
+                @click="listClose($event)"
+              ></v-list-item-title>
+            </v-list-item-content>
+
+            <v-list-item-content class="ms-6 ps-1 py-0" v-if="child.items">
+              <v-list-group
+                prepend-icon=""
+                :ripple="false"
+                sub-group
+                no-action
+                v-model="child.active"
+              >
+                <template v-slot:activator>
+                  <v-list nav dense class="pa-0">
+                    <v-list-group
+                      :ripple="false"
+                      append-icon="fas fa-angle-down me-auto ms-1"
+                      active-class="item-active"
+                      class="mb-0"
+                    >
+                      <template v-slot:activator class="mb-0">
+                        <v-list-item-content class="py-0">
+                          <v-list-item-title
+                            v-text="child.title"
+                          ></v-list-item-title>
+                        </v-list-item-content>
+                      </template>
+                    </v-list-group>
+                  </v-list>
+                </template>
+
+                <v-list-item
+                  v-for="child2 in child.items"
+                  :ripple="false"
+                  :key="child2.title"
+                  :to="child2.link"
+                  @click="listClose($event)"
+                >
+                  <span class="v-list-item-mini" v-text="child2.prefix"></span>
+                  <v-list-item-content>
+                    <v-list-item-title
+                      v-text="child2.title"
+                    ></v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list-group>
+            </v-list-item-content>
+          </div>
+        </v-list-item>
+      </v-list-group>
+
+
+
+
+
       <v-list-group
         :ripple="false"
         v-for="item in items"
@@ -413,6 +522,7 @@
   </v-navigation-drawer>
 </template>
 <script>
+import UserService from "@/services/user.service";
 export default {
   name: "drawer",
   props: {
@@ -441,10 +551,12 @@ export default {
       {
         title: "My Profile",
         prefix: "MP",
+        path: "/profile/overview",
       },
       {
         title: "Settings",
         prefix: "S",
+        path: "/profile/settings",
       },
       {
         title: "Logout",
@@ -501,6 +613,25 @@ export default {
             title: "Smart Home",
             prefix: "S",
             link: "/pages/dashboards/smart-home",
+          },
+        ],
+      },
+    ],
+    admin: [
+      {
+        action: "admin",
+        active: true,
+        title: "Admin Management",
+        items: [
+          {
+            title: "Users",
+            prefix: "U",
+            link: "/admin/users",
+          },
+          {
+            title: "Groups",
+            prefix: "G",
+            link: "/admin/groups",
           },
         ],
       },
@@ -712,6 +843,9 @@ export default {
         ],
       },
     ],
+    userProfile: [],
+    userRoles: [],
+    userGroups: [],
   }),
   methods: {
     listClose(event) {
@@ -801,19 +935,55 @@ export default {
       return this.$store.state.auth.user;
     },
     showAdminBoard() {
-      if (this.currentUser && this.currentUser.roles) {
-        return this.currentUser.roles.includes("ROLE_ADMIN");
+      console.log(this.userRoles);
+      if (this.currentUser && this.userRoles) {
+        return this.userRoles.includes("ROLE_ADMIN");
       }
 
       return false;
     },
     showModeratorBoard() {
-      if (this.currentUser && this.currentUser.roles) {
-        return this.currentUser.roles.includes("ROLE_MODERATOR");
+      if (this.currentUser && this.userRoles) {
+        return this.userRoles.includes("ROLE_MODERATOR");
       }
 
       return false;
     },
+  },
+  mounted() {
+    UserService.getProfile().then(
+      (response) => {
+        this.userProfile = response.data;
+      },
+      (error) => {
+        this.content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    );
+    UserService.getRoles().then(
+      (response) => {
+        this.userRoles = response.data;
+      },
+      (error) => {
+        this.content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    );
+    UserService.getGroups().then(
+      (response) => {
+        this.userGroups = response.data;
+      },
+      (error) => {
+        this.content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    );
   },
 };
 </script>

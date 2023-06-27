@@ -67,90 +67,152 @@
           </p>
         </div>
         <div class="card-padding">
-          <v-text-field
-            label="Name"
-            placeholder="Name"
-            color="#e91e63"
-            required
-            class="font-size-input input-style"
-          ></v-text-field>
+          <form name="form" @submit.prevent="handleRegister">
+            <v-text-field
+              label="Name"
+              placeholder="Name"
+              color="#e91e63"
+              required
+              class="font-size-input input-style"
+              v-model="user.username"
+              type="text"
+              name="username"
+            ></v-text-field>
 
-          <v-text-field
-            label="Email"
-            placeholder="Email"
-            color="#e91e63"
-            required
-            class="font-size-input input-style"
-          ></v-text-field>
+            <v-text-field
+              label="Email"
+              placeholder="Email"
+              color="#e91e63"
+              required
+              class="font-size-input input-style"
+              v-model="user.email"
+              type="email"
+              name="username"
+            ></v-text-field>
 
-          <v-text-field
-            label="Password"
-            placeholder="Password"
-            color="#e91e63"
-            required
-            type="password"
-            class="font-size-input input-style"
-          ></v-text-field>
+            <v-text-field
+              label="Password"
+              placeholder="Password"
+              color="#e91e63"
+              required
+              type="password"
+              class="font-size-input input-style"
+              v-model="user.password"
+              name="password"
+            ></v-text-field>
 
-          <v-checkbox
-            v-model="checkbox"
-            color="#141727"
-            :ripple="false"
-            class="ma-0 checkbox-custom checkbox-thinner"
-            hide-details
-          >
-            <template v-slot:label>
-              <span class="text-body text-sm ls-0"
-                >I agree the
-                <a
-                  href="javascript:;"
-                  class="text-dark font-weight-bolder text-decoration-none"
-                  >Terms and Conditions</a
-                ></span
-              >
-            </template>
-          </v-checkbox>
-
-          <v-btn
-            elevation="0"
-            :ripple="false"
-            height="43"
-            class="
-              font-weight-bold
-              text-uppercase
-              btn-default
-              bg-gradient-default
-              py-2
-              px-6
-              me-2
-              mt-6
-              mb-2
-              w-100
-            "
-            color="#5e72e4"
-            small
-            >Sign Up</v-btn
-          >
-          <p class="text-sm text-body mt-3 mb-0">
-            Already have an account?
-            <a
-              href="javascript:;"
-              class="text-dark text-decoration-none font-weight-bolder"
-              >Sign in</a
+            <v-checkbox
+              v-model="checkbox"
+              color="#141727"
+              :ripple="false"
+              class="ma-0 checkbox-custom checkbox-thinner"
+              hide-details
             >
-          </p>
+              <template v-slot:label>
+                <span class="text-body text-sm ls-0"
+                  >I agree the
+                  <a
+                    href="javascript:;"
+                    class="text-dark font-weight-bolder text-decoration-none"
+                    >Terms and Conditions</a
+                  ></span
+                >
+              </template>
+            </v-checkbox>
+
+            <button
+              class="
+                font-weight-bold
+                text-uppercase
+                btn-default
+                bg-gradient-default
+                py-2
+                px-6
+                me-2
+                mt-6
+                mb-2
+                w-100
+                rounded
+                evaluation-0
+                height-43
+              "
+              :disabled="loading"
+            >
+              <span
+                v-show="loading"
+                class="spinner-border spinner-border-sm"
+              ></span>
+              <span>Sign Up</span>
+            </button>
+            <p class="text-sm text-body mt-3 mb-0">
+              Already have an account?
+              <a
+                href="/#/login"
+                class="text-dark text-decoration-none font-weight-bolder"
+                >Sign in</a
+              >
+            </p>
+            <div class="form-group">
+              <div v-if="message" class="alert alert-danger" role="alert">
+                {{ message }}
+              </div>
+            </div>
+          </form>
         </div>
       </v-card>
     </v-col>
   </v-row>
 </template>
 <script>
+import User from "../../../models/userRegister";
+
 export default {
-  name: "sign-up-basic",
+  name: "Register",
   data() {
     return {
       checkbox: false,
+      user: new User("", "", ""),
+      loading: false,
+      message: "",
     };
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push("/");
+    }
+  },
+  methods: {
+    handleRegister() {
+      this.loading = true;
+      this.$validator.validateAll().then((isValid) => {
+        if (!isValid) {
+          this.loading = false;
+          return;
+        }
+
+        if (this.user.username && this.user.password && this.user.email) {
+          this.$store.dispatch("auth/register", this.user).then(
+            () => {
+              this.$router.push("/login");
+            },
+            (error) => {
+              this.loading = false;
+              this.message =
+                (error.response &&
+                  error.response.data &&
+                  error.response.data.message) ||
+                error.message ||
+                error.toString();
+            }
+          );
+        }
+      });
+    },
   },
 };
 </script>
