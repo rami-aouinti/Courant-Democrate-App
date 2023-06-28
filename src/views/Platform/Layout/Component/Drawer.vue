@@ -934,7 +934,6 @@ export default {
       return this.$store.state.auth.user;
     },
     showAdminBoard() {
-      console.log(this.userRoles);
       if (this.currentUser && this.userRoles) {
         return this.userRoles.includes("ROLE_ADMIN");
       }

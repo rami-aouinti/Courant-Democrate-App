@@ -57,6 +57,8 @@
   </div>
 </template>
 <script>
+import UserService from "@/services/user.service";
+
 export default {
   name: "dropzone",
   props: {
@@ -144,6 +146,18 @@ export default {
           this.$emit(evt, data);
           if (evt === "addedfile") {
             this.files.push(data);
+            UserService.uploadPhoto(data).then(
+              (response) => {
+                console.log(response.data);
+              },
+              (error) => {
+                this.content =
+                  (error.response && error.response.data) ||
+                  error.message ||
+                  error.toString();
+              }
+            );
+
             this.$emit("change", this.files);
           } else if (evt === "removedfile") {
             let index = this.files.findIndex(
@@ -159,7 +173,7 @@ export default {
     },
   },
   async mounted() {
-    this.initDropzone();
+    await this.initDropzone();
   },
 };
 </script>

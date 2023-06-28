@@ -28,6 +28,10 @@ class UserService {
     return axios.get(API_URL + "profile", { headers: authHeader() });
   }
 
+  updateProfile(item) {
+    return axios.post(API_URL + "setting", { item }, { headers: authHeader() });
+  }
+
   getGroups() {
     return axios.get(API_URL + "profile/groups", { headers: authHeader() });
   }
