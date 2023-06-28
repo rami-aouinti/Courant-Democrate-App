@@ -130,9 +130,14 @@
               v-on="on"
               small
             >
-              <v-icon class="material-icons-round" size="20">
-                account_circle
-              </v-icon>
+              <v-avatar size="25" class="my-3 ms-2">
+                <span v-if="userProfile.photo === null" class="text-h5">{{
+                  getInitials(
+                    userProfile.firstName + " " + userProfile.lastName
+                  )
+                }}</span>
+                <img v-else :src="userProfile.photo" alt="Brooklyn" />
+              </v-avatar>
             </v-btn>
           </template>
 
@@ -159,11 +164,10 @@
                   class="text-body-2 ls-0 text-typo font-weight-600 mb-0"
                 >
                   <v-row>
-                    <v-col>
+                    <v-col :to="item.path">
                       <h6
                         class="text-sm font-weight-normal ms-2 text-typo"
                         v-html="item.title"
-                        :to="item.path"
                       >
                         {{ item.title }}
                       </h6>
@@ -290,6 +294,8 @@
   </v-app-bar>
 </template>
 <script>
+import UserService from "@/services/user.service";
+
 export default {
   name: "app-bar",
   props: {
@@ -337,6 +343,9 @@ export default {
           title: "Payment successfully completed",
         },
       ],
+      userProfile: [],
+      userRoles: [],
+      userGroups: [],
     };
   },
   computed: {
@@ -345,6 +354,15 @@ export default {
     },
   },
   methods: {
+    getInitials(string) {
+      var names = string.split(" "),
+        initials = names[0].substring(0, 1).toUpperCase();
+
+      if (names.length > 1) {
+        initials += names[names.length - 1].substring(0, 1).toUpperCase();
+      }
+      return initials;
+    },
     drawerClose() {
       this.togglerActive = !this.togglerActive;
       this.$emit("drawer-toggle", true);
@@ -369,6 +387,41 @@ export default {
     toggleActive(val) {
       this.togglerActive = val;
     },
+  },
+  mounted() {
+    UserService.getProfile().then(
+      (response) => {
+        this.userProfile = response.data;
+      },
+      (error) => {
+        this.content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    );
+    UserService.getRoles().then(
+      (response) => {
+        this.userRoles = response.data;
+      },
+      (error) => {
+        this.content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    );
+    UserService.getGroups().then(
+      (response) => {
+        this.userGroups = response.data;
+      },
+      (error) => {
+        this.content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    );
   },
 };
 </script>

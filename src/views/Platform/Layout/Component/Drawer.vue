@@ -50,8 +50,11 @@
         active-class="item-active"
       >
         <template v-slot:activator>
-          <v-avatar size="30" class="my-3 ms-2">
-            <img src="@/assets/img/team-3.jpg" alt="Brooklyn" />
+          <v-avatar size="50" class="my-3 ms-2">
+            <span v-if="userProfile.photo === null" class="text-h5">{{
+              getInitials(userProfile.firstName + " " + userProfile.lastName)
+            }}</span>
+            <img v-else :src="userProfile.photo" alt="Brooklyn" />
           </v-avatar>
 
           <v-list-item-content>
@@ -924,6 +927,16 @@ export default {
           .querySelector(".v-list-group__header")
           .classList.add("v-list-item--active", "item-active");
       }
+    },
+
+    getInitials(string) {
+      var names = string.split(" "),
+        initials = names[0].substring(0, 1).toUpperCase();
+
+      if (names.length > 1) {
+        initials += names[names.length - 1].substring(0, 1).toUpperCase();
+      }
+      return initials;
     },
   },
   computed: {

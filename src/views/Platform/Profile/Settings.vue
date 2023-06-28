@@ -75,8 +75,14 @@
             <v-row>
               <v-col cols="auto">
                 <v-avatar width="74" height="74" class="shadow rounded-circle">
+                  <span v-if="userProfile.photo === null" class="text-h5">{{
+                    getInitials(
+                      userProfile.firstName + " " + userProfile.lastName
+                    )
+                  }}</span>
                   <img
-                    src="@/assets/img/bruce-mars.jpg"
+                    v-else
+                    :src="userProfile.photo"
                     alt="Avatar"
                     class="rounded-circle"
                   />
@@ -88,9 +94,6 @@
                     {{ this.userProfile.firstName }}
                     {{ this.userProfile.lastName }}
                   </h5>
-                  <p class="mb-0 font-weight-light text-body text-sm">
-                    CEO / Co-Founder
-                  </p>
                 </div>
               </v-col>
               <v-col
@@ -195,6 +198,17 @@ export default {
       userRoles: [],
       userGroups: [],
     };
+  },
+  methods: {
+    getInitials(string) {
+      var names = string.split(" "),
+        initials = names[0].substring(0, 1).toUpperCase();
+
+      if (names.length > 1) {
+        initials += names[names.length - 1].substring(0, 1).toUpperCase();
+      }
+      return initials;
+    },
   },
   mounted() {
     UserService.getProfile().then(

@@ -40,6 +40,7 @@
             class="font-size-input input-style"
             single-line
             height="36"
+            v-model="userProfile.gender"
           >
           </v-select>
         </v-col>
@@ -54,6 +55,7 @@
                 class="font-size-input input-style"
                 single-line
                 height="36"
+                v-model="userProfile.month"
               >
               </v-select>
             </v-col>
@@ -65,6 +67,7 @@
                 class="font-size-input input-style mt-7"
                 single-line
                 height="36"
+                v-model="userProfile.day"
               >
               </v-select>
             </v-col>
@@ -76,6 +79,7 @@
                 class="font-size-input input-style mt-7"
                 single-line
                 height="36"
+                v-model="userProfile.year"
               >
               </v-select>
             </v-col>
@@ -99,6 +103,7 @@
             label="Confirmation Email"
             placeholder="example@email.com"
             class="font-size-input input-style"
+            v-model="userProfile.confirm"
           >
           </v-text-field>
         </v-col>
@@ -110,6 +115,7 @@
             label="Your Location"
             placeholder="Sydney, A"
             class="font-size-input input-style"
+            v-model="userProfile.location"
           >
           </v-text-field>
         </v-col>
@@ -119,6 +125,7 @@
             label="Phone Number"
             placeholder="+40 735 631 620"
             class="font-size-input input-style"
+            v-model="userProfile.phone"
           >
           </v-text-field>
         </v-col>
@@ -133,6 +140,7 @@
             class="font-size-input input-style"
             single-line
             height="36"
+            v-model="userProfile.language"
           >
           </v-select>
         </v-col>
@@ -146,6 +154,7 @@
             chips
             multiple
             height="36"
+            v-model="userProfile.skills"
           >
           </v-select>
         </v-col>
@@ -280,6 +289,8 @@ export default {
       this.user.firstName = this.userProfile.firstName;
       this.user.lastName = this.userProfile.lastName;
       this.user.email = this.userProfile.email;
+      this.user.gender = this.userProfile.gender;
+      this.user.phone = this.userProfile.phone;
       UserService.updateProfile(this.user).then(
         (response) => {
           console.log(response.data);
