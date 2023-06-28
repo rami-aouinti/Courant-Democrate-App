@@ -521,7 +521,6 @@
   </v-navigation-drawer>
 </template>
 <script>
-import UserService from "@/services/user.service";
 export default {
   name: "drawer",
   props: {
@@ -537,6 +536,9 @@ export default {
       type: String,
       default: "transparent",
     },
+    userProfile: Object,
+    userGroups: Object,
+    userRoles: Object,
   },
   data: () => ({
     mini: false,
@@ -842,9 +844,6 @@ export default {
         ],
       },
     ],
-    userProfile: [],
-    userRoles: [],
-    userGroups: [],
   }),
   methods: {
     listClose(event) {
@@ -960,41 +959,6 @@ export default {
 
       return false;
     },
-  },
-  mounted() {
-    UserService.getProfile().then(
-      (response) => {
-        this.userProfile = response.data;
-      },
-      (error) => {
-        this.content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
-      }
-    );
-    UserService.getRoles().then(
-      (response) => {
-        this.userRoles = response.data;
-      },
-      (error) => {
-        this.content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
-      }
-    );
-    UserService.getGroups().then(
-      (response) => {
-        this.userGroups = response.data;
-      },
-      (error) => {
-        this.content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
-      }
-    );
-  },
+  }
 };
 </script>

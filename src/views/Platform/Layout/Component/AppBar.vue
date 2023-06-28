@@ -294,8 +294,6 @@
   </v-app-bar>
 </template>
 <script>
-import UserService from "@/services/user.service";
-
 export default {
   name: "app-bar",
   props: {
@@ -307,6 +305,9 @@ export default {
       type: Boolean,
       default: false,
     },
+    userProfile: Object,
+    userGroups: Object,
+    userRoles: Object,
   },
   data() {
     return {
@@ -343,9 +344,6 @@ export default {
           title: "Payment successfully completed",
         },
       ],
-      userProfile: [],
-      userRoles: [],
-      userGroups: [],
     };
   },
   computed: {
@@ -387,41 +385,6 @@ export default {
     toggleActive(val) {
       this.togglerActive = val;
     },
-  },
-  mounted() {
-    UserService.getProfile().then(
-      (response) => {
-        this.userProfile = response.data;
-      },
-      (error) => {
-        this.content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
-      }
-    );
-    UserService.getRoles().then(
-      (response) => {
-        this.userRoles = response.data;
-      },
-      (error) => {
-        this.content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
-      }
-    );
-    UserService.getGroups().then(
-      (response) => {
-        this.userGroups = response.data;
-      },
-      (error) => {
-        this.content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
-      }
-    );
   },
 };
 </script>

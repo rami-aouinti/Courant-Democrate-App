@@ -4,6 +4,9 @@
       :drawer="drawer"
       :sidebarColor="sidebarColor"
       :sidebarTheme="sidebarTheme"
+      :userProfile="userProfile"
+      :userGroups="userGroups"
+      :userRoles="userRoles"
     >
     </drawer>
     <v-main>
@@ -20,6 +23,9 @@
         :toggle-active="drawer"
         :navbarFixed="navbarFixed"
         @toggleSettingsDrawer="toggleSettingsDrawer"
+        :userProfile="userProfile"
+        :userGroups="userGroups"
+        :userRoles="userRoles"
       ></app-bar>
       <app-bar
         v-else-if="$route.name == 'Profile'"
@@ -27,6 +33,9 @@
         has-bg
         @drawer-toggle="drawer = $event"
         :toggle-active="drawer"
+        :userProfile="userProfile"
+        :userGroups="userGroups"
+        :userRoles="userRoles"
       ></app-bar>
       <app-bar
         v-else
@@ -34,6 +43,9 @@
         linkColor="rgba(0,0,0,.6)"
         @drawer-toggle="drawer = $event"
         :toggle-active="drawer"
+        :userProfile="userProfile"
+        :userGroups="userGroups"
+        :userRoles="userRoles"
       ></app-bar>
       <fade-transition :duration="200" origin="center top" mode="out-in">
         <!-- your content here -->
@@ -96,6 +108,7 @@ import Drawer from "@/views/Platform/Layout/Component/Drawer.vue";
 import AppBar from "@/views/Platform/Layout/Component/AppBar.vue";
 import ContentFooter from "@/views/Platform/Layout/Component/Footer.vue";
 import SettingsDrawer from "@/views/Platform/Layout/Component/SettingsDrawer.vue";
+import UserService from "@/services/user.service";
 
 export default {
   components: {
@@ -112,6 +125,9 @@ export default {
       sidebarColor: "default",
       sidebarTheme: "transparent",
       navbarFixed: true,
+      userProfile: [],
+      userRoles: [],
+      userGroups: [],
     };
   },
   methods: {
@@ -143,6 +159,39 @@ export default {
   },
   mounted() {
     this.initScrollbar();
+    UserService.getProfile().then(
+      (response) => {
+        this.userProfile = response.data;
+      },
+      (error) => {
+        this.content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    );
+    UserService.getRoles().then(
+      (response) => {
+        this.userRoles = response.data;
+      },
+      (error) => {
+        this.content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    );
+    UserService.getGroups().then(
+      (response) => {
+        this.userGroups = response.data;
+      },
+      (error) => {
+        this.content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    );
   },
 };
 </script>
