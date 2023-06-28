@@ -27,9 +27,9 @@
   </v-app>
 </template>
 <script>
-import AppBarAuth from "@/components/AppBarAuth";
+import AppBarAuth from "./../Layout/Auth/AppBarAuth.vue";
 import { FadeTransition } from "vue2-transitions";
-import ContentFooter from "@/components/Footer.vue";
+import ContentFooter from "./../Layout/Component/Footer.vue";
 
 export default {
   name: "page-layout",

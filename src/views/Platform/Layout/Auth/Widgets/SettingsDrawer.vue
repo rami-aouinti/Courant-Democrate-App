@@ -4,7 +4,7 @@
       <div class="card-padding mb-16">
         <div class="float-start">
           <h5 class="text-h5 text-dark font-weight-bold mt-3 mb-0">
-            Setting
+            Material UI Configurator
           </h5>
           <p class="text-body font-weight-light">See our dashboard options.</p>
         </div>
@@ -287,13 +287,13 @@ export default {
     },
     navbarFixed: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   data() {
     return {
       sidebarColorModel: this.sidebarColor,
-      isActive: true,
+      isActive: false,
       navbarFixedModel: this.navbarFixed,
     };
   },

@@ -3,68 +3,6 @@
     <v-row>
       <v-col lg="4" md="6" cols="12" class="position-relative">
         <v-card class="h-100">
-          <div class="pt-4">
-            <h6 class="mb-0 text-h6 text-typo">Platform Settings</h6>
-          </div>
-          <div class="py-4">
-            <h6 class="text-uppercase text-body text-xs font-weight-bolder">
-              Account
-            </h6>
-            <v-list>
-              <v-list-item-group class="border-radius-sm">
-                <v-list-item
-                  :ripple="false"
-                  v-for="setting in accountSettings"
-                  :key="setting.text"
-                  class="pe-2 ps-0 border-radius-sm mb-3"
-                >
-                  <v-switch
-                    :ripple="false"
-                    class="d-inline-flex mt-0 pt-0 switch ms-auto"
-                    v-model="setting.switchState"
-                    hide-details
-                  ></v-switch>
-                  <v-list-item-content class="py-0">
-                    <div class="ms-4 text-body text-sm">
-                      {{ setting.text }}
-                    </div>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list-item-group>
-            </v-list>
-            <h6
-              class="text-uppercase text-body text-xs font-weight-bolder mt-4"
-            >
-              Application
-            </h6>
-            <v-list>
-              <v-list-item-group class="border-radius-sm">
-                <v-list-item
-                  :ripple="false"
-                  v-for="setting in applicationSettings"
-                  :key="setting.text"
-                  class="px-0 border-radius-sm mb-3"
-                >
-                  <v-switch
-                    :ripple="false"
-                    class="d-inline-flex mt-0 pt-0 switch ms-auto"
-                    v-model="setting.switchState"
-                    hide-details
-                  ></v-switch>
-                  <v-list-item-content class="py-0">
-                    <div class="ms-4 text-body text-sm">
-                      {{ setting.text }}
-                    </div>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list-item-group>
-            </v-list>
-          </div>
-        </v-card>
-        <hr class="vertical dark" />
-      </v-col>
-      <v-col lg="4" md="6" cols="12" class="position-relative">
-        <v-card class="h-100">
           <div class="px-4 pt-4">
             <h6 class="mb-0 text-h6 text-typo">Profile Information</h6>
           </div>
@@ -133,7 +71,69 @@
         </v-card>
         <hr class="vertical dark" />
       </v-col>
-      <v-col lg="4" cols="12">
+      <v-col lg="4" md="6" cols="12" class="position-relative">
+        <v-card class="h-100">
+          <div class="px-4 pt-4">
+            <h6 class="mb-0 text-h6 text-typo">Platform Settings</h6>
+          </div>
+          <div class="px-4 py-4">
+            <h6 class="text-uppercase text-body text-xs font-weight-bolder">
+              Account
+            </h6>
+            <v-list>
+              <v-list-item-group class="border-radius-sm">
+                <v-list-item
+                  :ripple="false"
+                  v-for="setting in accountSettings"
+                  :key="setting.text"
+                  class="pe-2 ps-0 border-radius-sm mb-3"
+                >
+                  <v-switch
+                    :ripple="false"
+                    class="d-inline-flex mt-0 pt-0 switch ms-auto"
+                    v-model="setting.switchState"
+                    hide-details
+                  ></v-switch>
+                  <v-list-item-content class="py-0">
+                    <div class="ms-4 text-body text-sm">
+                      {{ setting.text }}
+                    </div>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
+            <h6
+              class="text-uppercase text-body text-xs font-weight-bolder mt-4"
+            >
+              Application
+            </h6>
+            <v-list>
+              <v-list-item-group class="border-radius-sm">
+                <v-list-item
+                  :ripple="false"
+                  v-for="setting in applicationSettings"
+                  :key="setting.text"
+                  class="px-0 border-radius-sm mb-3"
+                >
+                  <v-switch
+                    :ripple="false"
+                    class="d-inline-flex mt-0 pt-0 switch ms-auto"
+                    v-model="setting.switchState"
+                    hide-details
+                  ></v-switch>
+                  <v-list-item-content class="py-0">
+                    <div class="ms-4 text-body text-sm">
+                      {{ setting.text }}
+                    </div>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </div>
+        </v-card>
+        <hr class="vertical dark" />
+      </v-col>
+      <v-col lg="4" cols="12" class="position-relative">
         <v-card class="h-100">
           <div class="px-4 pt-4">
             <h6 class="mb-0 text-h6 text-typo">Conversations</h6>

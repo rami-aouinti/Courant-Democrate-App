@@ -13,21 +13,21 @@
     :data-color="sidebarColor"
     :data-theme="sidebarTheme"
   >
-    <v-list-item class="pa-0">
+    <v-list-item class="pa-0" :to="dashboard">
       <v-list-item-content class="pa-0">
         <v-list-item-title class="title d-flex align-center mb-0">
           <div class="v-navigation-drawer-brand pa-5 d-flex align-center">
             <v-img
-              src="@/assets/img/logo-ct-white.png"
+              src="@/assets/img/world.png"
               class="navbar-brand-img ms-3"
-              width="32"
-              v-if="sidebarTheme == 'dark'"
+              width="70"
+              v-if="sidebarTheme === 'dark'"
             >
             </v-img>
             <v-img
-              src="@/assets/img/logo-ct.png"
+              src="@/assets/img/world.png"
               class="navbar-brand-img ms-3"
-              width="32"
+              width="70"
               v-else
             >
             </v-img>
@@ -39,7 +39,7 @@
 
     <hr
       class="horizontal mb-0"
-      :class="sidebarTheme == 'dark' ? 'light' : 'dark'"
+      :class="sidebarTheme === 'dark' ? 'light' : 'dark'"
     />
 
     <v-list nav dense>
@@ -125,7 +125,7 @@
 
     <hr
       class="horizontal mb-3"
-      :class="sidebarTheme == 'dark' ? 'light' : 'dark'"
+      :class="sidebarTheme === 'dark' ? 'light' : 'dark'"
     />
 
     <v-list v-if="showAdminBoard" nav dense>
@@ -142,7 +142,7 @@
           d-none-mini
           white-space-nowrap
         "
-        :class="sidebarTheme == 'dark' ? 'text-white' : 'text-default'"
+        :class="sidebarTheme === 'dark' ? 'text-white' : 'text-default'"
       >
         Administration
       </h5>
@@ -232,10 +232,6 @@
           </div>
         </v-list-item>
       </v-list-group>
-
-
-
-
 
       <v-list-group
         :ripple="false"
@@ -337,7 +333,7 @@
           d-none-mini
           white-space-nowrap
         "
-        :class="sidebarTheme == 'dark' ? 'text-white' : 'text-default'"
+        :class="sidebarTheme === 'dark' ? 'text-white' : 'text-default'"
       >
         Pages
       </h5>
@@ -446,7 +442,7 @@
 
       <hr
         class="horizontal my-4"
-        :class="sidebarTheme == 'dark' ? 'light' : 'dark'"
+        :class="sidebarTheme === 'dark' ? 'light' : 'dark'"
       />
 
       <h5
@@ -462,7 +458,7 @@
           d-none-mini
           white-space-nowrap
         "
-        :class="sidebarTheme == 'dark' ? 'text-white' : 'text-default'"
+        :class="sidebarTheme === 'dark' ? 'text-white' : 'text-default'"
       >
         Docs
       </h5>
@@ -532,11 +528,11 @@ export default {
     },
     sidebarColor: {
       type: String,
-      default: "success",
+      default: "default",
     },
     sidebarTheme: {
       type: String,
-      default: "dark",
+      default: "transparent",
     },
   },
   data: () => ({
@@ -931,6 +927,9 @@ export default {
     },
   },
   computed: {
+    dashboard() {
+      return "/";
+    },
     currentUser() {
       return this.$store.state.auth.user;
     },

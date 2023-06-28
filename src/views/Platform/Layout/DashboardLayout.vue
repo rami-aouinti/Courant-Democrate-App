@@ -109,9 +109,9 @@ export default {
     return {
       drawer: null,
       showSettingsDrawer: false,
-      sidebarColor: "success",
-      sidebarTheme: "dark",
-      navbarFixed: false,
+      sidebarColor: "default",
+      sidebarTheme: "transparent",
+      navbarFixed: true,
     };
   },
   methods: {
