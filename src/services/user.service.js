@@ -32,6 +32,22 @@ class UserService {
     return axios.post(API_URL + "setting", { item }, { headers: authHeader() });
   }
 
+  statusProfile(item) {
+    return axios.post(
+      API_URL + "user/activate",
+      { item },
+      { headers: authHeader() }
+    );
+  }
+
+  changePassword(item) {
+    return axios.post(
+      API_URL + "user/password/update",
+      { item },
+      { headers: authHeader() }
+    );
+  }
+
   getGroups() {
     return axios.get(API_URL + "profile/groups", { headers: authHeader() });
   }

@@ -40,37 +40,9 @@
         </v-col>
       </v-row>
       <v-row class="px-4">
-        <v-col lg="3">
-          <v-card class="card-shadow border-radius-xl position-sticky top-1">
-            <div class="px-4 pt-3 pb-0">
-              <v-list>
-                <v-list-item-group class="border-radius-sm">
-                  <v-list-item
-                    class="px-3 py-1 border-radius-lg mb-2"
-                    v-for="item in menu"
-                    :key="item.icon"
-                  >
-                    <v-icon
-                      size="18"
-                      class="material-icons-round me-2 text-dark"
-                      >{{ item.icon }}</v-icon
-                    >
-                    <v-list-item-content class="py-0">
-                      <a href="#profile" class="text-decoration-none">
-                        <div class="d-flex flex-column">
-                          <span class="text-dark text-sm">{{ item.text }}</span>
-                        </div>
-                      </a>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list-item-group>
-              </v-list>
-            </div>
-          </v-card>
-        </v-col>
-        <v-col lg="9">
+        <v-col lg="12">
           <v-card
-            class="card-shadow px-4 py-4 overflow-hidden border-radius-xl"
+            class="card-shadow px-4 py-4 overflow-hidden border-radius-xl elevation-10"
           >
             <v-row>
               <v-col cols="auto">
@@ -118,6 +90,7 @@
                     :ripple="false"
                     class="mt-0 pt-0 ms-3 switch"
                     v-model="switche"
+                    @click="activateProfile"
                     hide-details
                   ></v-switch>
                 </div>
@@ -126,8 +99,6 @@
           </v-card>
           <basic-info></basic-info>
           <change-password></change-password>
-          <two-factor></two-factor>
-          <accounts></accounts>
           <notifications></notifications>
           <sessions></sessions>
           <delete-account></delete-account>
@@ -159,7 +130,7 @@ export default {
   },
   data() {
     return {
-      switche: true,
+      switche: null,
       menu: [
         {
           icon: "person",
@@ -209,11 +180,25 @@ export default {
       }
       return initials;
     },
+    activateProfile() {
+      UserService.statusProfile(this.switche).then(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          this.content =
+            (error.response && error.response.data) ||
+            error.message ||
+            error.toString();
+        }
+      );
+    },
   },
   mounted() {
     UserService.getProfile().then(
       (response) => {
         this.userProfile = response.data;
+        this.switche = this.userProfile.active;
       },
       (error) => {
         this.content =

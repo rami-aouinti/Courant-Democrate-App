@@ -13,6 +13,7 @@
             dense
             type="password"
             class="font-size-input input-style py-0"
+            v-model="oldPassword"
           ></v-text-field>
           <v-text-field
             label="New password"
@@ -21,6 +22,7 @@
             dense
             type="password"
             class="font-size-input input-style py-0"
+            v-model="newPassword"
           ></v-text-field>
           <v-text-field
             label="Confirm new password"
@@ -29,6 +31,7 @@
             dense
             type="password"
             class="font-size-input input-style py-0"
+            v-model="newConfirmPassword"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -66,6 +69,7 @@
             mt-sm-auto mt-4
           "
           small
+          @click="save"
         >
           Update password
         </v-btn>
@@ -74,7 +78,36 @@
   </v-card>
 </template>
 <script>
+import UserService from "@/services/user.service";
+
 export default {
   name: "change-password",
+  data() {
+    return {
+      oldPassword: "",
+      newPassword: "",
+      newConfirmPassword: "",
+      passwords: {},
+    };
+  },
+  methods: {
+    save() {
+      if (this.newPassword === this.newConfirmPassword) {
+        this.passwords.oldPassword = this.oldPassword;
+        this.passwords.newPassword = this.newPassword;
+        UserService.changePassword(this.passwords).then(
+          (response) => {
+            console.log(response.data);
+          },
+          (error) => {
+            this.content =
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString();
+          }
+        );
+      }
+    },
+  },
 };
 </script>

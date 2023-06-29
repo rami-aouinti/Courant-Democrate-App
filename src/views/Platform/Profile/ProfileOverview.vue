@@ -182,12 +182,8 @@
               <h6 class="mb-0 text-h6 text-typo">Profile Information</h6>
             </div>
             <div class="px-4 py-4">
-              <p class="text-sm font-weight-light text-body">
-                Hi, I’m {{ this.userProfile.firstName }}
-                {{ this.userProfile.lastName }}, Decisions: If you can’t decide,
-                the answer is no. If two equally difficult paths, choose the one
-                more painful in the short term (pain avoidance is creating an
-                illusion of equality).
+              <p class="text-sm font-weight-light text-body" v-html="this.userProfile.description">
+                {{ this.userProfile.description }}
               </p>
               <hr class="horizontal dark mt-6 mb-3" />
               <v-list>

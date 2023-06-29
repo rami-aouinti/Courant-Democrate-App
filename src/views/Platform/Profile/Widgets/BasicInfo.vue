@@ -5,9 +5,25 @@
     </div>
     <div class="px-6 pb-6 pt-0">
       <v-row>
-        <v-col cols="12">
+        <v-col md="4" cols="12">
           <label class="text-sm text-body ms-1">Image Profile</label>
           <dropzone v-model="fileSingle"></dropzone>
+        </v-col>
+        <v-col md="8" cols="12">
+          <label class="text-sm text-body ms-1">Description Profile</label>
+          <html-editor :value="this.userProfile.description"></html-editor>
+        </v-col>
+        <v-col cols="12">
+          <v-select
+            :items="gender"
+            label="Male"
+            color="#e91e63"
+            class="font-size-input input-style"
+            single-line
+            height="36"
+            v-model="userProfile.gender"
+          >
+          </v-select>
         </v-col>
         <v-col cols="6">
           <v-text-field
@@ -30,21 +46,8 @@
           </v-text-field>
         </v-col>
       </v-row>
-      <v-row class="mt-0">
-        <v-col sm="4" cols="12">
-          <label class="text-sm text-body">I'm</label>
-          <v-select
-            :items="gender"
-            label="Male"
-            color="#e91e63"
-            class="font-size-input input-style"
-            single-line
-            height="36"
-            v-model="userProfile.gender"
-          >
-          </v-select>
-        </v-col>
-        <v-col sm="8">
+      <v-row>
+        <v-col sm="12">
           <v-row>
             <v-col cols="5">
               <label class="text-sm text-body">Birth Date</label>
@@ -131,48 +134,25 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="6" class="pb-0">
-          <label class="text-sm text-body">Language</label>
-          <v-select
-            :items="languages"
-            label="English"
-            color="#e91e63"
-            class="font-size-input input-style"
-            single-line
-            height="36"
-            v-model="userProfile.language"
+        <div class="d-sm-flex align-center">
+          <v-btn
+            @click="save"
+            elevation="0"
+            :ripple="false"
+            color="#cb0c9f"
+            class="
+              font-weight-bolder
+              btn-default
+              bg-gradient-default
+              py-4
+              px-8
+              ms-auto
+              mt-sm-auto mt-4
+            "
+            small
+            >Update Information</v-btn
           >
-          </v-select>
-        </v-col>
-        <v-col cols="6">
-          <label class="text-sm text-body">Skills</label>
-          <v-select
-            :items="skills"
-            color="#e91e63"
-            class="font-size-input input-style"
-            single-line
-            chips
-            multiple
-            height="36"
-            v-model="userProfile.skills"
-          >
-          </v-select>
-        </v-col>
-        <v-btn
-          @click="save"
-          elevation="0"
-          :ripple="false"
-          height="43"
-          class="
-            font-weight-normal
-            text-capitalize
-            btn-ls btn-default
-            bg-gradient-default
-            py-3
-            px-6
-          "
-          >Save</v-btn
-        >
+        </div>
       </v-row>
     </div>
   </v-card>
@@ -180,10 +160,11 @@
 <script>
 import UserService from "@/services/user.service";
 import Dropzone from "@/views/Ecommerce/Products/Widgets/Dropzone.vue";
+import HtmlEditor from "@/views/Platform/Profile/Widgets/HtmlEditor.vue";
 
 export default {
   name: "basic-info",
-  components: { Dropzone },
+  components: { HtmlEditor, Dropzone },
   data() {
     return {
       fileSingle: [],
@@ -277,7 +258,7 @@ export default {
         "1983",
         "1982",
       ],
-      languages: ["English", "French", "Spanish", "Deutsch", "Arabish"],
+      languages: ["English", "French", "Spanish", "Deutsch", "Arabic"],
       skills: ["vuejs", "angular", "react"],
       userProfile: [],
       user: {},
@@ -291,6 +272,18 @@ export default {
       this.user.email = this.userProfile.email;
       this.user.gender = this.userProfile.gender;
       this.user.phone = this.userProfile.phone;
+      if (
+        this.userProfile.day &&
+        this.userProfile.month &&
+        this.userProfile.year
+      ) {
+        this.user.birthday = this.getBirthdayDate(
+          this.userProfile.day,
+          this.userProfile.month,
+          this.userProfile.year
+        );
+      }
+
       UserService.updateProfile(this.user).then(
         (response) => {
           console.log(response.data);
@@ -302,7 +295,12 @@ export default {
             error.toString();
         }
       );
-      console.log(this.userProfile.email);
+    },
+    getBirthdayDate(day, month, year) {
+      return day + "/" + this.getMonthNumberFromName(month) + "/" + year;
+    },
+    getMonthNumberFromName(monthName) {
+      return new Date(`${monthName} 1, 2022`).getMonth() + 1;
     },
   },
   mounted() {
