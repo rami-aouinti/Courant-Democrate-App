@@ -1,86 +1,91 @@
 <template>
   <v-app>
-    <drawer
-      :drawer="drawer"
-      :sidebarColor="sidebarColor"
-      :sidebarTheme="sidebarTheme"
-      :userProfile="userProfile"
-      :userGroups="userGroups"
-      :userRoles="userRoles"
+    <div
+      class="position-relative min-vh-100"
+      :style="`background-image:  url('https://zomra.de/img/world.webp'); background-size: cover; background-position: 100%;`"
     >
-    </drawer>
-    <v-main>
-      <div
-        @click="drawer = false"
-        v-if="drawer"
-        class="position-absolute drawer-state"
-      ></div>
-      <app-bar
-        v-if="$route.name != 'Profile'"
-        background="bg-transparent"
-        has-bg
-        @drawer-toggle="drawer = $event"
-        :toggle-active="drawer"
-        :navbarFixed="navbarFixed"
-        @toggleSettingsDrawer="toggleSettingsDrawer"
+      <drawer
+        :drawer="drawer"
+        :sidebarColor="sidebarColor"
+        :sidebarTheme="sidebarTheme"
         :userProfile="userProfile"
         :userGroups="userGroups"
         :userRoles="userRoles"
-      ></app-bar>
-      <app-bar
-        v-else-if="$route.name == 'Profile'"
-        background="bg-default"
-        has-bg
-        @drawer-toggle="drawer = $event"
-        :toggle-active="drawer"
-        :userProfile="userProfile"
-        :userGroups="userGroups"
-        :userRoles="userRoles"
-      ></app-bar>
-      <app-bar
-        v-else
-        background="primary"
-        linkColor="rgba(0,0,0,.6)"
-        @drawer-toggle="drawer = $event"
-        :toggle-active="drawer"
-        :userProfile="userProfile"
-        :userGroups="userGroups"
-        :userRoles="userRoles"
-      ></app-bar>
-      <fade-transition :duration="200" origin="center top" mode="out-in">
-        <!-- your content here -->
-        <router-view></router-view>
-      </fade-transition>
-      <content-footer v-if="!$route.meta.hideFooter"></content-footer>
-      <v-btn
-        :ripple="false"
-        icon
-        rounded
-        color="#fff"
-        width="52px"
-        height="52px"
-        class="
-          fixed-plugin-button
-          position-fixed
-          btn-light
-          bg-white
-          text-dark
-          z-index-9999
-        "
-        @click="showSettingsDrawer = true"
       >
-        <v-icon size="20">fa fa-cog py-2</v-icon>
-      </v-btn>
+      </drawer>
+      <v-main>
+        <div
+          @click="drawer = false"
+          v-if="drawer"
+          class="position-absolute drawer-state"
+        ></div>
+        <app-bar
+          v-if="$route.name !== 'Profile'"
+          background="bg-transparent"
+          has-bg
+          @drawer-toggle="drawer = $event"
+          :toggle-active="drawer"
+          :navbarFixed="navbarFixed"
+          @toggleSettingsDrawer="toggleSettingsDrawer"
+          :userProfile="userProfile"
+          :userGroups="userGroups"
+          :userRoles="userRoles"
+        ></app-bar>
+        <app-bar
+          v-else-if="$route.name === 'Profile'"
+          background="bg-default"
+          has-bg
+          @drawer-toggle="drawer = $event"
+          :toggle-active="drawer"
+          :userProfile="userProfile"
+          :userGroups="userGroups"
+          :userRoles="userRoles"
+        ></app-bar>
+        <app-bar
+          v-else
+          background="primary"
+          linkColor="rgba(0,0,0,.6)"
+          @drawer-toggle="drawer = $event"
+          :toggle-active="drawer"
+          :userProfile="userProfile"
+          :userGroups="userGroups"
+          :userRoles="userRoles"
+        ></app-bar>
+        <fade-transition :duration="200" origin="center top" mode="out-in">
+          <!-- your content here -->
+          <router-view></router-view>
+        </fade-transition>
+        <content-footer v-if="!$route.meta.hideFooter"></content-footer>
+        <v-btn
+          :ripple="false"
+          icon
+          rounded
+          color="#fff"
+          width="52px"
+          height="52px"
+          class="
+            fixed-plugin-button
+            position-fixed
+            btn-light
+            bg-dark
+            text-warning
+            z-index-9999
+          "
+          @click="showSettingsDrawer = true"
+        >
+          <v-icon size="20">fa fa-cog py-2</v-icon>
+        </v-btn>
 
-      <settings-drawer
-        :showSettingsDrawer="showSettingsDrawer"
-        @toggleSettingsDrawer="toggleSettingsDrawer"
-        @updateSidebarColor="updateSidebarColor"
-        @updateSidebarTheme="updateSidebarTheme"
-        @toggleNavbarPosition="toggleNavbarPosition"
-      >
-      </settings-drawer>
-    </v-main>
+        <settings-drawer
+          :showSettingsDrawer="showSettingsDrawer"
+          @toggleSettingsDrawer="toggleSettingsDrawer"
+          @updateSidebarColor="updateSidebarColor"
+          @updateSidebarTheme="updateSidebarTheme"
+          @toggleNavbarPosition="toggleNavbarPosition"
+        >
+        </settings-drawer>
+      </v-main>
+    </div>
   </v-app>
 </template>
 <script>
@@ -122,9 +127,9 @@ export default {
     return {
       drawer: null,
       showSettingsDrawer: false,
-      sidebarColor: "default",
-      sidebarTheme: "transparent",
-      navbarFixed: true,
+      sidebarColor: "warning",
+      sidebarTheme: "dark",
+      navbarFixed: false,
       userProfile: [],
       userRoles: [],
       userGroups: [],
@@ -162,6 +167,10 @@ export default {
     UserService.getProfile().then(
       (response) => {
         this.userProfile = response.data;
+        this.$i18n.locale = this.userProfile.locale;
+        if (this.userProfile.locale === "ar") {
+          this.$vuetify.rtl = true;
+        }
       },
       (error) => {
         this.content =

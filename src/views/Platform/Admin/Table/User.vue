@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="card-shadow border-radius-xl">
+    <v-card class="card-shadow border-radius-xl elevation-20" dark>
       <div class="card-header-padding">
         <h5 class="font-weight-bold text-h5 text-typo mb-0">Users</h5>
         <p class="text-sm text-body font-weight-light mb-0">List of users</p>
@@ -63,17 +63,19 @@
                     height="43"
                     class="
                       font-weight-normal
-                      text-capitalize
-                      btn-primary
-                      bg-gradient-primary
+                      text-capitalize text-dark
+                      btn-warning
+                      bg-gradient-warning
                       py-3
                       px-6
                       ms-3
+                      rounded-5
                     "
-                    >New User</v-btn
                   >
+                    <v-icon size="20" class="material-icons-round">add</v-icon>
+                  </v-btn>
                 </template>
-                <v-card class="card-shadow border-radius-xl">
+                <v-card class="card-shadow border-radius-xl" dark>
                   <div class="card-header-padding card-border-bottom">
                     <span class="font-weight-bold text-h5 text-typo mb-0">{{
                       formTitle
@@ -98,7 +100,7 @@
                             filled
                             solo
                             height="43"
-                            placeholder="Name"
+                            placeholder="Username"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="6">
@@ -136,7 +138,7 @@
                             filled
                             solo
                             height="43"
-                            placeholder="FirstName"
+                            placeholder="First Name"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="6">
@@ -155,12 +157,12 @@
                             filled
                             solo
                             height="43"
-                            placeholder="LastName"
+                            placeholder="Last Name"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="6">
                           <v-text-field
-                            v-model="editedItem.password"
+                            v-model="editedItem.phone"
                             hide-details
                             class="
                               input-style
@@ -174,8 +176,37 @@
                             filled
                             solo
                             height="43"
-                            placeholder="Password"
+                            placeholder="Phone"
                           ></v-text-field>
+                        </v-col>
+                        <v-col cols="6">
+                          <v-select
+                            :items="gender"
+                            label="Male"
+                            color="#e91e63"
+                            class="font-size-input input-style"
+                            single-line
+                            height="36"
+                            v-model="editedItem.gender"
+                          >
+                          </v-select>
+                        </v-col>
+                        <v-col cols="6">
+                          <v-autocomplete
+                            :items="[
+                              'Skiing',
+                              'Ice hockey',
+                              'Soccer',
+                              'Basketball',
+                              'Hockey',
+                              'Reading',
+                              'Writing',
+                              'Coding',
+                              'Basejump',
+                            ]"
+                            label="Interests"
+                            multiple
+                          ></v-autocomplete>
                         </v-col>
                       </v-row>
                     </v-container>
@@ -206,8 +237,8 @@
                       class="
                         font-weight-normal
                         text-capitalize
-                        btn-ls btn-primary
-                        bg-gradient-primary
+                        btn-ls btn-warning
+                        bg-gradient-warning
                         py-3
                         px-6
                       "
@@ -216,6 +247,43 @@
                   </v-card-actions>
                 </v-card>
               </v-dialog>
+              <v-btn
+                elevation="0"
+                :ripple="false"
+                height="43"
+                class="
+                  font-weight-normal
+                  text-capitalize text-dark
+                  btn-warning
+                  bg-gradient-warning
+                  py-3
+                  px-6
+                  ms-3
+                  rounded-5
+                "
+                small
+                @click="generatePdf"
+              >
+                <v-icon size="20" class="material-icons-round">download</v-icon>
+              </v-btn>
+              <v-btn
+                elevation="0"
+                :ripple="false"
+                height="43"
+                class="
+                  font-weight-normal
+                  text-capitalize text-dark
+                  btn-warning
+                  bg-gradient-warning
+                  py-3
+                  px-6
+                  ms-3
+                  rounded-5
+                "
+                small
+              >
+                <v-icon size="20" class="material-icons-round">email</v-icon>
+              </v-btn>
 
               <v-dialog v-model="dialogDelete" max-width="500px">
                 <v-card class="card-shadow card-padding border-radius-xl">
@@ -249,8 +317,8 @@
                       class="
                         font-weight-normal
                         text-capitalize
-                        btn-ls btn-primary
-                        bg-gradient-primary
+                        btn-ls btn-warning
+                        bg-gradient-warning
                         py-3
                         px-6
                       "
@@ -265,32 +333,32 @@
 
           <template v-slot:item.name="{ item }">
             <div class="d-flex align-center ms-2">
-              <span class="text-sm font-weight-normal text-body">
+              <span class="text-sm font-weight-normal text-body text-warning">
                 {{ item.username }}
               </span>
             </div>
           </template>
 
           <template v-slot:item.email="{ item }">
-            <span class="text-sm font-weight-normal text-body">
+            <span class="text-sm font-weight-normal text-body text-warning">
               {{ item.email }}
             </span>
           </template>
 
           <template v-slot:item.firstName="{ item }">
-            <span class="text-sm font-weight-normal text-body">
+            <span class="text-sm font-weight-normal text-body text-warning">
               {{ item.firstName }}
             </span>
           </template>
 
           <template v-slot:item.lastName="{ item }">
-            <span class="text-sm font-weight-normal text-body">
+            <span class="text-sm font-weight-normal text-body text-warning">
               {{ item.lastName }}
             </span>
           </template>
 
           <template v-slot:item.password="{ item }">
-            <span class="text-sm font-weight-normal text-body">
+            <span class="text-sm font-weight-normal text-body text-warning">
               {{ item.password }}
             </span>
           </template>
@@ -305,7 +373,7 @@
               min-width="36"
               width="36"
               class="btn-ls me-2 my-2 rounded-sm"
-              color="#67748e"
+              color="orange"
             >
               <v-icon size="14" class="material-icons-round"
                 >construction</v-icon
@@ -321,7 +389,7 @@
               min-width="36"
               width="36"
               class="btn-ls me-2 my-2 rounded-sm"
-              color="#67748e"
+              color="orange"
             >
               <v-icon size="14" class="material-icons-round">close</v-icon>
             </v-btn>
@@ -349,6 +417,7 @@
                 placeholder-lighter
                 text-color-light
                 input-alternative input-focused-alternative input-icon
+                text-warning
               "
             >
             </v-text-field>
@@ -358,7 +427,7 @@
               prev-icon="fa fa-angle-left"
               next-icon="fa fa-angle-right"
               class="pagination"
-              color="#D81B60"
+              color="orange"
               v-model="page"
               :length="pageCount"
               circle
@@ -372,6 +441,7 @@
 <script>
 import users from "./Users";
 import AdminService from "@/services/admin.service";
+import PdfService from "@/services/pdf.service";
 export default {
   name: "paginated-tables",
   data() {
@@ -383,12 +453,17 @@ export default {
       dialogDelete: false,
       users,
       search: "",
+      gender: ["Female", "Male"],
       editedIndex: -1,
       editedItem: {
         email: "",
         username: "",
         firstName: "",
         lastName: "",
+        gender: "",
+        description: "",
+        phone: "",
+        photo: "",
       },
       defaultItem: {
         email: "",
@@ -435,6 +510,7 @@ export default {
         },
       ],
       items: [],
+      address: "",
     };
   },
   methods: {
@@ -486,6 +562,9 @@ export default {
         );
         Object.assign(this.items[this.editedIndex], this.editedItem);
       } else {
+        this.editedItem.description = "example description";
+        this.editedItem.photo = "https://zomra.de/img/user.png";
+        this.editedItem.password = "testtest";
         AdminService.addItem(this.editedItem, "user").then(
           (response) => {
             this.items.push(response);
@@ -499,6 +578,20 @@ export default {
         );
       }
       this.close();
+    },
+
+    generatePdf() {
+      PdfService.generatePdf(this.items, "List of Users").then(
+        (response) => {
+          window.open(response, "_blank");
+        },
+        (error) => {
+          this.content =
+            (error.response && error.response.data) ||
+            error.message ||
+            error.toString();
+        }
+      );
     },
   },
   watch: {

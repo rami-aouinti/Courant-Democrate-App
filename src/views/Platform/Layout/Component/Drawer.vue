@@ -8,7 +8,7 @@
     :expand-on-hover="mini"
     :value="drawer"
     :right="$vuetify.rtl"
-    class="my-4 ms-4 border-radius-xl"
+    class="my-4 ms-4 border-radius-xl text-warning elevation-20"
     :class="!$vuetify.breakpoint.mobile ? '' : 'bg-white'"
     :data-color="sidebarColor"
     :data-theme="sidebarTheme"
@@ -16,22 +16,32 @@
     <v-list-item class="pa-0" :to="dashboard">
       <v-list-item-content class="pa-0">
         <v-list-item-title class="title d-flex align-center mb-0">
-          <div class="v-navigation-drawer-brand pa-5 d-flex align-center">
+          <div
+            class="
+              v-navigation-drawer-brand
+              pa-5
+              d-flex
+              align-center
+              opacity-100
+            "
+          >
             <v-img
-              src="@/assets/img/world.png"
+              src="@/assets/img/logo-world.webp"
               class="navbar-brand-img ms-3"
-              width="70"
+              width="50"
               v-if="sidebarTheme === 'dark'"
             >
             </v-img>
             <v-img
-              src="@/assets/img/world.png"
+              src="@/assets/img/logo-world.webp"
               class="navbar-brand-img ms-3"
-              width="70"
+              width="50"
               v-else
             >
             </v-img>
-            <span class="ms-2 font-weight-bold text-sm">Ramy Platform</span>
+            <span class="ms-2 font-weight-bold text-sm text-warning">{{
+              $t("Platform")
+            }}</span>
           </div>
         </v-list-item-title>
       </v-list-item-content>
@@ -46,7 +56,7 @@
       <v-list-group
         :ripple="false"
         append-icon="fas fa-angle-down"
-        class="pb-1 mx-2"
+        class="pb-1 mx-2 text-warning"
         active-class="item-active"
       >
         <template v-slot:activator>
@@ -58,7 +68,7 @@
           </v-avatar>
 
           <v-list-item-content>
-            <v-list-item-title class="ms-2 ps-1 font-weight-light">
+            <v-list-item-title class="ms-2 ps-1 font-weight-light text-warning">
               {{ currentUser.username }}
             </v-list-item-title>
           </v-list-item-content>
@@ -69,16 +79,25 @@
           link
           class="mb-1 no-default-hover py-2"
           v-for="child in userInfo"
-          :key="child.title"
+          :key="$t(child.title)"
           :to="child.path"
         >
           <span
-            class="v-list-item-mini ms-0 font-weight-light text-center w-20"
+            class="
+              v-list-item-mini
+              ms-0
+              font-weight-light
+              text-center text-warning
+              w-20
+            "
             v-text="child.prefix"
           ></span>
 
-          <v-list-item-content class="ms-2 ps-1" v-if="!child.items">
-            <v-list-item-title v-text="child.title"></v-list-item-title>
+          <v-list-item-content
+            class="ms-2 ps-1 text-warning"
+            v-if="!child.items"
+          >
+            <v-list-item-title v-text="$t(child.title)"></v-list-item-title>
           </v-list-item-content>
 
           <v-list-item-content class="ms-1 ps-1 py-0" v-if="child.items">
@@ -95,12 +114,12 @@
                     :ripple="false"
                     append-icon="fas fa-angle-down me-auto ms-1"
                     active-class="item-active"
-                    class="mb-0"
+                    class="mb-0 text-warning"
                   >
                     <template v-slot:activator class="mb-0">
                       <v-list-item-content class="py-0">
                         <v-list-item-title
-                          v-text="child.title"
+                          v-text="$t(child.title)"
                         ></v-list-item-title>
                       </v-list-item-content>
                     </template>
@@ -131,6 +150,56 @@
       :class="sidebarTheme === 'dark' ? 'light' : 'dark'"
     />
 
+    <v-list-item-group>
+      <div v-for="(item, i) in itemPosts" :key="i">
+        <v-list-item
+          link
+          :to="item.link"
+          class="pb-1 mx-2 no-default-hover py-2"
+          :ripple="false"
+          active-class="item-active"
+          v-if="!item.external"
+        >
+          <v-list-item-icon class="me-2 align-center">
+            <i class="material-icons-round text-warning opacity-10">{{
+              item.action
+            }}</i>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title
+              v-text="$t(item.title)"
+              class="ms-1 text-warning"
+            ></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          link
+          :href="item.link"
+          class="pb-1 mx-2 no-default-hover py-2"
+          :ripple="false"
+          active-class="item-active"
+          v-if="item.external"
+          target="_blank"
+        >
+          <v-list-item-icon class="me-2 align-center">
+            <i class="material-icons-round opacity-10">{{ item.action }}</i>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title
+              v-text="$t(item.title)"
+              class="ms-1 text-warning"
+            ></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </div>
+    </v-list-item-group>
+
+    <hr
+      class="horizontal mb-3"
+      :class="sidebarTheme === 'dark' ? 'light' : 'dark'"
+    />
+
     <v-list v-if="showAdminBoard" nav dense>
       <h5
         class="
@@ -145,27 +214,27 @@
           d-none-mini
           white-space-nowrap
         "
-        :class="sidebarTheme === 'dark' ? 'text-white' : 'text-default'"
+        :class="sidebarTheme === 'dark' ? 'text-warning' : 'text-default'"
       >
         Administration
       </h5>
       <v-list-group
         :ripple="false"
         v-for="item in admin"
-        :key="item.title"
+        :key="$t(item.title)"
         v-model="item.active"
         append-icon="fas fa-angle-down"
-        class="pb-1 mx-2"
+        class="pb-1 mx-2 text-warning"
         active-class="item-active"
       >
         <template v-slot:activator>
           <v-list-item-icon class="me-2 align-center">
-            <i class="material-icons-round opacity-10">{{ item.action }}</i>
+            <i class="material-icons-round opacity-50">{{ item.action }}</i>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title
-              v-text="item.title"
-              class="ms-1"
+              v-text="$t(item.title)"
+              class="ms-1 text-warning"
             ></v-list-item-title>
           </v-list-item-content>
         </template>
@@ -176,7 +245,7 @@
           class="mb-1 no-default-hover px-0"
           :class="child.items ? 'has-children' : ''"
           v-for="child in item.items"
-          :key="child.title"
+          :key="$t(child.title)"
           :to="child.link"
         >
           <div class="w-100 d-flex align-center pa-2 border-radius-lg">
@@ -184,7 +253,7 @@
 
             <v-list-item-content class="ms-6 ps-1" v-if="!child.items">
               <v-list-item-title
-                v-text="child.title"
+                v-text="$t(child.title)"
                 @click="listClose($event)"
               ></v-list-item-title>
             </v-list-item-content>
@@ -203,12 +272,12 @@
                       :ripple="false"
                       append-icon="fas fa-angle-down me-auto ms-1"
                       active-class="item-active"
-                      class="mb-0"
+                      class="mb-0 text-warning"
                     >
                       <template v-slot:activator class="mb-0">
                         <v-list-item-content class="py-0">
                           <v-list-item-title
-                            v-text="child.title"
+                            v-text="$t(child.title)"
                           ></v-list-item-title>
                         </v-list-item-content>
                       </template>
@@ -239,20 +308,20 @@
       <v-list-group
         :ripple="false"
         v-for="item in items"
-        :key="item.title"
+        :key="$t(item.title)"
         v-model="item.active"
         append-icon="fas fa-angle-down"
-        class="pb-1 mx-2"
+        class="pb-1 mx-2 text-warning"
         active-class="item-active"
       >
         <template v-slot:activator>
           <v-list-item-icon class="me-2 align-center">
-            <i class="material-icons-round opacity-10">{{ item.action }}</i>
+            <i class="material-icons-round opacity-25">{{ item.action }}</i>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title
-              v-text="item.title"
-              class="ms-1"
+              v-text="$t(item.title)"
+              class="ms-1 text-warning"
             ></v-list-item-title>
           </v-list-item-content>
         </template>
@@ -263,7 +332,7 @@
           class="mb-1 no-default-hover px-0"
           :class="child.items ? 'has-children' : ''"
           v-for="child in item.items"
-          :key="child.title"
+          :key="$t(child.title)"
           :to="child.link"
         >
           <div class="w-100 d-flex align-center pa-2 border-radius-lg">
@@ -271,7 +340,7 @@
 
             <v-list-item-content class="ms-6 ps-1" v-if="!child.items">
               <v-list-item-title
-                v-text="child.title"
+                v-text="$t(child.title)"
                 @click="listClose($event)"
               ></v-list-item-title>
             </v-list-item-content>
@@ -295,7 +364,7 @@
                       <template v-slot:activator class="mb-0">
                         <v-list-item-content class="py-0">
                           <v-list-item-title
-                            v-text="child.title"
+                            v-text="$t(child.title)"
                           ></v-list-item-title>
                         </v-list-item-content>
                       </template>
@@ -336,7 +405,7 @@
           d-none-mini
           white-space-nowrap
         "
-        :class="sidebarTheme === 'dark' ? 'text-white' : 'text-default'"
+        :class="sidebarTheme === 'dark' ? 'text-warning' : 'text-default'"
       >
         Pages
       </h5>
@@ -344,20 +413,20 @@
       <v-list-group
         :ripple="false"
         v-for="item in itemsPages"
-        :key="item.title"
+        :key="$t(item.title)"
         v-model="item.active"
         append-icon="fas fa-angle-down"
-        class="pb-1 mx-2"
+        class="pb-1 mx-2 text-warning"
         active-class="item-active"
       >
         <template v-slot:activator>
           <v-list-item-icon class="me-2 align-center">
-            <i class="material-icons-round opacity-10">{{ item.action }}</i>
+            <i class="material-icons-round opacity-25">{{ item.action }}</i>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title
-              v-text="item.title"
-              class="ms-1"
+              v-text="$t(item.title)"
+              class="ms-1 text-warning"
             ></v-list-item-title>
           </v-list-item-content>
         </template>
@@ -368,7 +437,7 @@
           class="mb-1 no-default-hover px-0"
           :class="child.items ? 'has-children' : ''"
           v-for="child in item.items"
-          :key="child.title"
+          :key="$t(child.title)"
           :to="child.link"
         >
           <v-list-item-content class="ps-4" v-if="!child.items">
@@ -376,7 +445,7 @@
               <span class="v-list-item-mini ms-0" v-text="child.prefix"></span>
               <v-list-item-title
                 class="ms-6"
-                v-text="child.title"
+                v-text="$t(child.title)"
                 @click="listClose($event)"
               ></v-list-item-title>
             </div>
@@ -401,14 +470,14 @@
                     <template v-slot:activator class="mb-0">
                       <div class="w-100 d-flex align-center">
                         <span
-                          class="v-list-item-mini ms-1"
+                          class="v-list-item-mini ms-1 text-warning"
                           v-text="child.prefix"
                         ></span>
 
                         <v-list-item-content class="py-0 ms-4">
                           <v-list-item-title
-                            class="ms-2"
-                            v-text="child.title"
+                            class="ms-2 text-warning"
+                            v-text="$t(child.title)"
                           ></v-list-item-title>
                         </v-list-item-content>
                       </div>
@@ -428,12 +497,12 @@
                 <v-list-item-content>
                   <div class="d-flex align-items-center pa-2">
                     <span
-                      class="v-list-item-mini"
+                      class="v-list-item-mini text-warning"
                       v-text="child2.prefix"
                     ></span>
                     <v-list-item-title
                       v-text="child2.title"
-                      class="ms-6"
+                      class="ms-6 text-warning"
                     ></v-list-item-title>
                   </div>
                 </v-list-item-content>
@@ -461,7 +530,7 @@
           d-none-mini
           white-space-nowrap
         "
-        :class="sidebarTheme === 'dark' ? 'text-white' : 'text-default'"
+        :class="sidebarTheme === 'dark' ? 'text-warning' : 'text-default'"
       >
         Docs
       </h5>
@@ -476,12 +545,12 @@
             v-if="!item.external"
           >
             <v-list-item-icon class="me-2 align-center">
-              <i class="material-icons-round opacity-10">{{ item.action }}</i>
+              <i class="material-icons-round opacity-25">{{ item.action }}</i>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title
-                v-text="item.title"
-                class="ms-1"
+                v-text="$t(item.title)"
+                class="ms-1 text-warning"
               ></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -500,8 +569,8 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title
-                v-text="item.title"
-                class="ms-1"
+                v-text="$t(item.title)"
+                class="ms-1 text-warning"
               ></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -550,12 +619,12 @@ export default {
     ],
     userInfo: [
       {
-        title: "My Profile",
+        title: "MyProfile",
         prefix: "MP",
         path: "/profile/overview",
       },
       {
-        title: "Settings",
+        title: "Setting",
         prefix: "S",
         path: "/profile/settings",
       },
@@ -564,64 +633,20 @@ export default {
         prefix: "L",
       },
     ],
-    itemsDocs: [
+    itemsDocs: [],
+    itemPosts: [
       {
-        action: "upcoming",
-        link: "/getting-started",
-        title: "Getting Started",
+        action: "article",
+        link: "/article",
+        title: "Article",
         external: false,
       },
-      {
-        action: "view_in_ar",
-        link: "https://vuetifyjs.com/en/components/alerts/",
-        title: "Components",
-        external: true,
-      },
-      {
-        action: "receipt_long",
-        link: "https://github.com/creativetimofficial/ct-vuetify-soft-ui-dashboard-pro/blob/main/CHANGELOG.md",
-        title: "Changelog",
-        external: true,
-      },
     ],
-    items: [
-      {
-        action: "dashboard",
-        active: true,
-        title: "Dashboards",
-        items: [
-          {
-            title: "Analytics",
-            prefix: "A",
-            link: "/pages/dashboards/analytics",
-          },
-          {
-            title: "Discover",
-            prefix: "D",
-            link: "/pages/dashboards/discover",
-          },
-          {
-            title: "Sales",
-            prefix: "S",
-            link: "/pages/dashboards/sales",
-          },
-          {
-            title: "Automotive",
-            prefix: "A",
-            link: "/pages/dashboards/automotive",
-          },
-          {
-            title: "Smart Home",
-            prefix: "S",
-            link: "/pages/dashboards/smart-home",
-          },
-        ],
-      },
-    ],
+    items: [],
     admin: [
       {
         action: "admin",
-        active: true,
+        active: false,
         title: "Admin Management",
         items: [
           {
@@ -634,216 +659,15 @@ export default {
             prefix: "G",
             link: "/admin/groups",
           },
-        ],
-      },
-    ],
-    itemsPages: [
-      {
-        action: "image",
-        active: false,
-        title: "Pages",
-        items: [
           {
-            title: "Profile",
-            prefix: "P",
-            active: false,
-            items: [
-              {
-                title: "Profile Overview",
-                prefix: "P",
-                link: "/pages/pages/profile/overview",
-              },
-              {
-                title: "All Projects",
-                prefix: "A",
-                link: "/pages/pages/profile/projects",
-              },
-              {
-                title: "Messages",
-                prefix: "M",
-                link: "/pages/pages/profile/messages",
-              },
-            ],
-          },
-          {
-            title: "Users",
-            prefix: "U",
-            active: false,
-            items: [
-              {
-                title: "Reports",
-                prefix: "R",
-                link: "/pages/pages/users/reports",
-              },
-              {
-                title: "New User",
-                prefix: "N",
-                link: "/pages/pages/users/new-user",
-              },
-            ],
-          },
-          {
-            title: "Account",
-            prefix: "A",
-            active: false,
-            items: [
-              {
-                title: "Settings",
-                prefix: "S",
-                link: "/pages/pages/account/settings",
-              },
-              {
-                title: "Billing",
-                prefix: "B",
-                link: "/pages/pages/account/billing",
-              },
-              {
-                title: "Invoice",
-                prefix: "I",
-                link: "/pages/pages/account/invoice",
-              },
-            ],
-          },
-          {
-            title: "Projects",
-            prefix: "P",
-            active: false,
-            items: [
-              {
-                title: "Timeline",
-                prefix: "T",
-                link: "/pages/pages/projects/timeline",
-              },
-            ],
-          },
-          {
-            title: "Virtual Reality",
-            prefix: "V",
-            active: false,
-            items: [
-              {
-                title: "VR Default",
-                prefix: "V",
-                link: "/pages/dashboards/vr/vr-default",
-              },
-              {
-                title: "VR Info",
-                prefix: "V",
-                link: "/pages/dashboards/vr/vr-info",
-              },
-            ],
-          },
-          {
-            title: "Pricing Page",
-            prefix: "P",
-            link: "/pages/pages/pricing-page",
-          },
-          { title: "RTL", prefix: "R", link: "/pages/pages/rtl" },
-          { title: "Charts", prefix: "C", link: "/pages/pages/charts" },
-          { title: "Alerts", prefix: "A", link: "/pages/pages/alerts" },
-          {
-            title: "Notifications",
-            prefix: "N",
-            link: "/pages/pages/notifications",
-          },
-        ],
-      },
-      {
-        action: "apps",
-        active: false,
-        title: "Applications",
-        items: [
-          { title: "CRM", prefix: "C", link: "/pages/dashboards/crm" },
-          { title: "Kanban", prefix: "K", link: "/pages/applications/kanban" },
-          { title: "Wizard", prefix: "W", link: "/pages/applications/wizard" },
-          {
-            title: "DataTables",
-            prefix: "D",
-            link: "/pages/applications/datatables",
-          },
-          {
-            title: "Calendar",
-            prefix: "C",
-            link: "/pages/applications/calendar",
-          },
-        ],
-      },
-      {
-        action: "shopping_basket",
-        active: false,
-        title: "Ecommerce",
-        items: [
-          {
-            title: "Products",
-            prefix: "P",
-            active: false,
-            items: [
-              {
-                title: "New Product",
-                prefix: "N",
-                link: "/pages/ecommerce/products/new-product",
-              },
-              {
-                title: "Edit Product",
-                prefix: "E",
-                link: "/pages/ecommerce/products/edit-product",
-              },
-              {
-                title: "Product Page",
-                prefix: "P",
-                link: "/pages/ecommerce/products/product-page",
-              },
-            ],
-          },
-          {
-            title: "Orders",
+            title: "Offices",
             prefix: "O",
-            active: false,
-            items: [
-              {
-                title: "Order List",
-                prefix: "O",
-                link: "/pages/ecommerce/orders/list",
-              },
-              {
-                title: "Order Details",
-                prefix: "O",
-                link: "/pages/ecommerce/orders/details",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        action: "content_paste",
-        active: false,
-        title: "Authentication",
-        items: [
-          {
-            title: "Sign Up",
-            prefix: "S",
-            active: false,
-            items: [
-              {
-                title: "Basic",
-                prefix: "B",
-                link: "/pages/authentication/signup/basic",
-              },
-              {
-                title: "Cover",
-                prefix: "C",
-                link: "/pages/authentication/signup/cover",
-              },
-              {
-                title: "Illustration",
-                prefix: "I",
-                link: "/pages/authentication/signup/illustration",
-              },
-            ],
+            link: "/admin/offices",
           },
         ],
       },
     ],
+    itemsPages: [],
   }),
   methods: {
     listClose(event) {
@@ -959,6 +783,6 @@ export default {
 
       return false;
     },
-  }
+  },
 };
 </script>

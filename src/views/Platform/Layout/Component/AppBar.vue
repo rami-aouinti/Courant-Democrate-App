@@ -1,3 +1,13 @@
+<style scoped>
+.v-menu__content {
+  margin-top: 40px;
+}
+
+.theme--light.v-list {
+  background: #181414;
+  color: rgba(0, 0, 0, 0.87);
+}
+</style>
 <template>
   <v-app-bar
     :color="background"
@@ -10,7 +20,7 @@
     "
     flat
   >
-    <v-row class="py-1">
+    <v-row class="py-2">
       <v-col cols="12" sm="6" class="d-flex">
         <div>
           <v-breadcrumbs class="pb-0 pt-1 px-0">
@@ -54,21 +64,23 @@
                 </g>
               </svg>
             </v-breadcrumbs-item>
-            <li class="v-breadcrumbs__divider opacity-5 px-2 text-muted">/</li>
-            <v-breadcrumbs-item class="opacity-5 text-dark">
-              {{ $route.meta.groupName }}
+            <li class="v-breadcrumbs__divider opacity-5 px-2 text-warning">
+              /
+            </li>
+            <v-breadcrumbs-item class="opacity-5 text-warning">
+              {{ $t($route.meta.groupName) }}
             </v-breadcrumbs-item>
             <li class="v-breadcrumbs__divider opacity-5 px-2 text-muted">/</li>
             <v-breadcrumbs-item
               active-class="active-breadcrumb"
-              class="no-default-hover text-dark"
+              class="no-default-hover text-warning"
             >
               <template v-if="$route.name === 'Dashboard'">Default</template>
               <template v-else>{{ $route.name }}</template>
             </v-breadcrumbs-item>
           </v-breadcrumbs>
 
-          <h6 class="text-h6 font-weight-bolder text-typo mb-0">
+          <h6 class="text-h6 font-weight-bolder text-warning mb-0">
             {{ $route.name }}
           </h6>
         </div>
@@ -79,9 +91,9 @@
           v-if="!$vuetify.breakpoint.mobile"
         >
           <div class="drawer-toggler-inner">
-            <i class="drawer-toggler-line bg-body"></i>
-            <i class="drawer-toggler-line bg-body"></i>
-            <i class="drawer-toggler-line bg-body"></i>
+            <i class="drawer-toggler-line bg-body bg-warning"></i>
+            <i class="drawer-toggler-line bg-body bg-warning"></i>
+            <i class="drawer-toggler-line bg-body bg-warning"></i>
           </div>
         </div>
       </v-col>
@@ -101,16 +113,52 @@
           <v-text-field
             rounded-sm
             background-color="transparent"
-            color="#e91e63"
+            color="orange"
             dense
             hide-details
             outlined
-            label="Search here"
+            :label="$t('SearchHere')"
             class="input-style font-size-input me-md-3"
           >
           </v-text-field>
         </v-form>
-
+        <v-col sm="3" style="margin-top: 25px">
+          <v-select
+            v-model="$i18n.locale"
+            :items="locales"
+            color="orange"
+            item-text="name"
+            item-value="val"
+            item-icon="icon"
+            class="text-capitalize text-warning rounded-sm ms-2"
+            dense
+            outlined
+            dark
+          >
+            <template v-slot:selection="{ item }">
+              <v-img
+                :alt="`${item.name} avatar`"
+                :src="item.icon"
+                max-width="20px"
+                class="me-6"
+              ></v-img>
+            </template>
+            <template v-slot:item="slotProps">
+              <v-row
+                @click="changeDirection(slotProps.item.name)"
+                class="text-warning"
+              >
+                <v-img
+                  :alt="`${slotProps.item.name} avatar`"
+                  :src="slotProps.item.icon"
+                  max-width="20px"
+                  class="me-6"
+                ></v-img>
+                {{ slotProps.item.name }}
+              </v-row>
+            </template>
+          </v-select>
+        </v-col>
         <v-menu
           transition="slide-y-transition"
           offset-y
@@ -130,7 +178,7 @@
               v-on="on"
               small
             >
-              <v-avatar size="25" class="my-3 ms-2">
+              <v-avatar size="20" class="border border-warning my-3 ms-2">
                 <span v-if="userProfile.photo === null" class="text-h5">{{
                   getInitials(
                     userProfile.firstName + " " + userProfile.lastName
@@ -167,9 +215,79 @@
                     <v-col :to="item.path">
                       <h6
                         class="text-sm font-weight-normal ms-2 text-typo"
-                        v-html="item.title"
+                        v-html="$t(item.title)"
                       >
-                        {{ item.title }}
+                        {{ $t(item.title) }}
+                      </h6>
+                    </v-col>
+                  </v-row>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+        <v-menu
+          transition="slide-y-transition"
+          offset-y
+          offset-x
+          min-width="300"
+          max-width="300"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              icon
+              :ripple="false"
+              :class="{ 'btn-dark-hover': !hasBg, 'btn-hover': hasBg }"
+              class="text-body text-warning"
+              :color="linkColor"
+              v-bind="attrs"
+              v-on="on"
+              small
+            >
+              <v-icon class="material-icons-round text-warning" size="20">
+                notifications
+              </v-icon>
+              <v-badge
+                color="#f44335"
+                content="11"
+                offset-x="1"
+                offset-y="0"
+                class="position-absolute"
+                bordered
+              >
+              </v-badge>
+            </v-btn>
+          </template>
+
+          <v-list class="pa-3" dark>
+            <v-list-item
+              v-for="(item, i) in dropdown"
+              :key="i"
+              class="
+                pa-4
+                list-item-hover-active
+                d-flex
+                align-items-center
+                py-1
+                my-1
+                border-radius-md
+              "
+            >
+              <v-icon class="material-icons-round text-warning" size="20">{{
+                item.icon
+              }}</v-icon>
+
+              <v-list-item-content class="pa-0">
+                <v-list-item-title
+                  class="text-body-2 ls-0 text-warning font-weight-600 mb-0"
+                >
+                  <v-row>
+                    <v-col>
+                      <h6
+                        class="text-sm font-weight-normal ms-2 text-warning"
+                        v-html="$t(item.title)"
+                      >
+                        {{ $t(item.title) }}
                       </h6>
                     </v-col>
                   </v-row>
@@ -185,7 +303,7 @@
           height="43"
           class="
             font-weight-600
-            text-capitalize
+            text-capitalize text-warning
             drawer-toggler
             py-3
             px-0
@@ -197,7 +315,7 @@
             active: togglerActive,
           }"
           v-if="$vuetify.breakpoint.mobile"
-          color="transparent"
+          color="orange"
           @click="drawerClose"
         >
           <div class="drawer-toggler-inner">
@@ -206,94 +324,13 @@
             <i class="drawer-toggler-line text-body"></i>
           </div>
         </v-btn>
-
-        <v-btn
-          icon
-          :ripple="false"
-          :class="{ 'btn-dark-hover': !hasBg, 'btn-hover': hasBg }"
-          class="text-body px-5"
-          :color="linkColor"
-          small
-          @click="$emit('toggleSettingsDrawer', true)"
-        >
-          <v-icon class="material-icons-round" size="20"> settings </v-icon>
-        </v-btn>
-
-        <v-menu
-          transition="slide-y-transition"
-          offset-y
-          offset-x
-          min-width="300"
-          max-width="300"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              icon
-              :ripple="false"
-              :class="{ 'btn-dark-hover': !hasBg, 'btn-hover': hasBg }"
-              class="text-body"
-              :color="linkColor"
-              v-bind="attrs"
-              v-on="on"
-              small
-            >
-              <v-icon class="material-icons-round" size="20">
-                notifications
-              </v-icon>
-              <v-badge
-                color="#f44335"
-                content="11"
-                offset-x="1"
-                offset-y="0"
-                class="position-absolute"
-                bordered
-              >
-              </v-badge>
-            </v-btn>
-          </template>
-
-          <v-list class="pa-3">
-            <v-list-item
-              v-for="(item, i) in dropdown"
-              :key="i"
-              class="
-                pa-4
-                list-item-hover-active
-                d-flex
-                align-items-center
-                py-1
-                my-1
-                border-radius-md
-              "
-            >
-              <v-icon class="material-icons-round text-body" size="20">{{
-                item.icon
-              }}</v-icon>
-
-              <v-list-item-content class="pa-0">
-                <v-list-item-title
-                  class="text-body-2 ls-0 text-typo font-weight-600 mb-0"
-                >
-                  <v-row>
-                    <v-col>
-                      <h6
-                        class="text-sm font-weight-normal ms-2 text-typo"
-                        v-html="item.title"
-                      >
-                        {{ item.title }}
-                      </h6>
-                    </v-col>
-                  </v-row>
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-menu>
       </v-col>
     </v-row>
   </v-app-bar>
 </template>
 <script>
+import UserService from "@/services/user.service";
+
 export default {
   name: "app-bar",
   props: {
@@ -311,12 +348,13 @@ export default {
   },
   data() {
     return {
+      language: "en",
       drawer: false,
       togglerActive: false,
       userMenu: [
         {
           icon: "account_circle",
-          title: "Profile",
+          title: "MyProfile",
           path: "/profile",
         },
         {
@@ -344,14 +382,61 @@ export default {
           title: "Payment successfully completed",
         },
       ],
+      languages: [
+        {
+          name: "en",
+          icon: require("@/assets/img/icons/flags/US.png"),
+        },
+        {
+          name: "ar",
+          icon: require("@/assets/img/icons/flags/AU.png"),
+        },
+        {
+          name: "fr",
+          icon: require("@/assets/img/icons/flags/GB.png"),
+        },
+        {
+          name: "de",
+          icon: require("@/assets/img/icons/flags/DE.png"),
+        },
+      ],
     };
   },
   computed: {
     currentUser() {
       return this.$store.state.auth.user;
     },
+    locales() {
+      return this.$i18n.availableLocales.map((local) => {
+        return {
+          name: this.$t(local),
+          val: local,
+          icon: require("@/assets/img/icons/flags/" +
+            local.toUpperCase() +
+            ".png"),
+        };
+      });
+    },
   },
   methods: {
+    changeDirection(language) {
+      if (language === "ar") {
+        this.$vuetify.rtl = true;
+      } else {
+        this.$vuetify.rtl = false;
+      }
+      UserService.updateLocale(language).then(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          this.content =
+            (error.response && error.response.data) ||
+            error.message ||
+            error.toString();
+        }
+      );
+    },
     getInitials(string) {
       var names = string.split(" "),
         initials = names[0].substring(0, 1).toUpperCase();
@@ -388,3 +473,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.v-menu__content {
+  margin-top: 40px;
+}
+</style>

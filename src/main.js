@@ -34,20 +34,29 @@ library.add(faHome, faUser, faUserPlus, faSignInAlt, faSignOutAlt);
 Vue.config.productionTip = false;
 
 Vue.use(VeeValidate);
-
 import vuetify from "./plugins/vuetify";
 import DashboardPlugin from "./plugins/dashboard-plugin";
 
 // Photoswipe Gallery
 import Photoswipe from "vue-pswipe";
+import VueI18n from "vue-i18n";
+import locales from "@/locales/locales";
 Vue.use(Photoswipe);
 
 // plugin setup
 Vue.use(DashboardPlugin);
 
+const i18n = new VueI18n({
+  lazy: true,
+  locale: "en",
+  fallbackLocale: "",
+  messages: locales,
+});
+
 new Vue({
   router,
   store,
   vuetify,
+  i18n,
   render: (h) => h(App),
 }).$mount("#app");

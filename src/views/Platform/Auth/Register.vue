@@ -1,19 +1,28 @@
 <template>
   <v-row class="align-center d-flex h-100">
     <v-col lg="4" md="7" class="mx-auto">
-      <v-card class="card-shadow border-radius-xl py-1">
+      <v-card
+        class="
+          card-shadow
+          bg-gradient-default
+          border-radius-xl
+          py-1
+          elevation-20
+        "
+      >
         <div
           class="
             card-padding
             text-center
             mt-n7
-            bg-gradient-success
-            shadow-success
+            bg-gradient-default
+            shadow-default
             border-radius-lg
             mx-4
+            elevation-20
           "
         >
-          <h4 class="text-h4 text-white font-weight-bold">Register with</h4>
+          <h4 class="text-h4 text-warning font-weight-bold">Bro World</h4>
           <v-row class="mt-3">
             <v-col cols="2" class="ms-auto d-flex justify-center">
               <v-btn
@@ -23,7 +32,7 @@
                 color="transparent"
                 class="text-center border-radius-md"
               >
-                <i class="fab fa-facebook-f text-white text-lg"></i>
+                <i class="fab fa-facebook-f text-warning text-lg"></i>
               </v-btn>
             </v-col>
             <v-col cols="2" class="d-flex justify-center">
@@ -34,7 +43,7 @@
                 color="transparent"
                 class="text-center border-radius-md"
               >
-                <i class="fab fa-github text-white text-lg"></i>
+                <i class="fab fa-github text-warning text-lg"></i>
               </v-btn>
             </v-col>
             <v-col cols="2" class="me-auto d-flex justify-center">
@@ -45,7 +54,7 @@
                 color="transparent"
                 class="text-center border-radius-md"
               >
-                <i class="fab fa-google text-white text-lg"></i>
+                <i class="fab fa-google text-warning text-lg"></i>
               </v-btn>
             </v-col>
           </v-row>
@@ -56,7 +65,7 @@
               text-sm
               font-weight-bold
               mb-2
-              text-secondary text-border
+              text-warning text-border
               d-inline
               z-index-2
               bg-white
@@ -71,9 +80,9 @@
             <v-text-field
               label="Name"
               placeholder="Name"
-              color="#e91e63"
+              color="orange"
               required
-              class="font-size-input input-style"
+              class="font-size-input input-style text-warning"
               v-model="user.username"
               type="text"
               name="username"
@@ -82,9 +91,9 @@
             <v-text-field
               label="Email"
               placeholder="Email"
-              color="#e91e63"
+              color="orange"
               required
-              class="font-size-input input-style"
+              class="font-size-input input-style text-warning"
               v-model="user.email"
               type="email"
               name="username"
@@ -93,17 +102,17 @@
             <v-text-field
               label="Password"
               placeholder="Password"
-              color="#e91e63"
+              color="orange"
               required
               type="password"
-              class="font-size-input input-style"
+              class="font-size-input input-style text-warning"
               v-model="user.password"
               name="password"
             ></v-text-field>
 
             <v-checkbox
               v-model="checkbox"
-              color="#141727"
+              color="orange"
               :ripple="false"
               class="ma-0 checkbox-custom checkbox-thinner"
               hide-details
@@ -113,7 +122,7 @@
                   >I agree the
                   <a
                     href="javascript:;"
-                    class="text-dark font-weight-bolder text-decoration-none"
+                    class="text-warning font-weight-bolder text-decoration-none"
                     >Terms and Conditions</a
                   ></span
                 >
@@ -123,8 +132,8 @@
             <button
               class="
                 font-weight-bold
-                text-uppercase
-                btn-default
+                text-uppercase text-warning
+                btn-warning
                 bg-gradient-default
                 py-2
                 px-6
@@ -133,7 +142,7 @@
                 mb-2
                 w-100
                 rounded
-                evaluation-0
+                evaluation-20
                 height-43
               "
               :disabled="loading"
@@ -144,11 +153,11 @@
               ></span>
               <span>Sign Up</span>
             </button>
-            <p class="text-sm text-body mt-3 mb-0">
+            <p class="text-sm text-body text-warning mt-3 mb-0">
               Already have an account?
               <a
                 href="/#/login"
-                class="text-dark text-decoration-none font-weight-bolder"
+                class="text-warning text-decoration-none font-weight-bolder"
                 >Sign in</a
               >
             </p>

@@ -119,14 +119,14 @@
                   © {{ new Date().getFullYear() }}, made with
                   <i class="fa fa-heart" aria-hidden="true"></i> by
                   <a
-                    href="https://www.creative-tim.com"
+                    href="https://www.linkedin.com/in/rami-aouinti-78998a59/"
                     class="
                       text-decoration-none text-typo text-body-2
                       ls-0
                       font-weight-bold
                     "
                     target="_blank"
-                    >Creative Tim</a
+                    >Mohamed Rami Aouinti</a
                   >
                   for a better web.
                 </div>

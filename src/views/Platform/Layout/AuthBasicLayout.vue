@@ -3,9 +3,9 @@
     <v-main class="auth-pages">
       <div
         class="position-relative min-vh-100"
-        :style="`background-image:  url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1650&q=80'); background-size: cover; background-position: 50%;`"
+        :style="`background-image:  url('https://zomra.de/img/world.webp'); background-size: cover; background-position: 100%;`"
       >
-        <span class="mask bg-gradient-default opacity-6"></span>
+        <span class="mask bg-gradient-default opacity-25"></span>
         <v-container class="my-auto">
           <v-row class="min-vh-100">
             <app-bar-auth background="transparent" has-bg linkColor="white">
@@ -30,6 +30,7 @@
 import AppBarAuth from "./../Layout/Auth/AppBarAuth.vue";
 import { FadeTransition } from "vue2-transitions";
 import ContentFooter from "./../Layout/Component/Footer.vue";
+import { background } from "quill/ui/icons";
 
 export default {
   name: "page-layout",
@@ -45,6 +46,7 @@ export default {
     };
   },
   methods: {
+    background,
     headerTitle() {
       switch (this.$route.name) {
         case "SignUpBasic":

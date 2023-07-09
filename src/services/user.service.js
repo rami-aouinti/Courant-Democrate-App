@@ -24,6 +24,10 @@ class UserService {
     return axios.get(API_URL + "admin", { headers: authHeader() });
   }
 
+  getPlaces() {
+    return axios.get(API_URL + "place", { headers: authHeader() });
+  }
+
   getProfile() {
     return axios.get(API_URL + "profile", { headers: authHeader() });
   }
@@ -45,6 +49,22 @@ class UserService {
       API_URL + "user/password/update",
       { item },
       { headers: authHeader() }
+    );
+  }
+
+  updateSetting(item) {
+    return axios.post(
+      API_URL + "user/setting",
+      { item },
+      { headers: authHeader() }
+    );
+  }
+
+  updateLocale(item) {
+    return axios.post(
+        API_URL + "user/locale",
+        { item },
+        { headers: authHeader() }
     );
   }
 

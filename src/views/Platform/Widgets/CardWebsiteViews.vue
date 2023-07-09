@@ -1,12 +1,13 @@
 <template>
   <v-card
     class="card-shadow border-radius-xl px-4 py-5"
-    :class="$route.name == 'VrDefault' ? 'bg-gradient-default' : ''"
+    :class="$route.name === 'VrDefault' ? 'bg-gradient-default' : ''"
+    dark
   >
     <div
       class="
-        bg-gradient-primary
-        shadow-primary
+        bg-gradient-warning
+        shadow-warning
         border-radius-lg
         py-3
         pe-1
@@ -16,7 +17,7 @@
     >
       <div class="chart-area">
         <canvas
-          :height="$route.name == 'VrDefault' ? '370' : '170'"
+          :height="$route.name === 'VrDefault' ? '370' : '170'"
           :id="websiteViewsID"
         >
         </canvas>
@@ -24,7 +25,7 @@
     </div>
     <h6
       class="ms-2 mt-6 mb-0 text-h6 font-weight-bold"
-      :class="$route.name == 'VrDefault' ? 'text-white' : 'text-typo'"
+      :class="$route.name === 'VrDefault' ? 'text-warning' : 'text-warning'"
     >
       Website Views
     </h6>

@@ -1,11 +1,9 @@
 <template>
-  <div class="fixed-plugin" :class="showSettingsDrawer == true ? 'show' : ''">
+  <div class="fixed-plugin" :class="showSettingsDrawer === true ? 'show' : ''">
     <v-card class="shadow-lg">
       <div class="card-padding mb-16">
         <div class="float-start">
-          <h5 class="text-h5 text-dark font-weight-bold mt-3 mb-0">
-            Setting
-          </h5>
+          <h5 class="text-h5 text-dark font-weight-bold mt-3 mb-0">Setting</h5>
           <p class="text-body font-weight-light">See our dashboard options.</p>
         </div>
         <div class="float-end mt-4">

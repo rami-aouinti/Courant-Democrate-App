@@ -32,16 +32,48 @@ const ProfileOverview = () =>
     /* webpackChunkName: "pages" */ "@/views/Pages/Profile/ProfileOverview.vue"
   );
 
+const Post = () =>
+  import(
+    /* webpackChunkName: "pages" */ "@/views/Platform/Article/Article.vue"
+  );
+
 const Profile = () =>
   import(
     /* webpackChunkName: "pages" */ "@/views/Platform/Profile/ProfileOverview.vue"
   );
+
+const BureauPolitic = () =>
+    import(
+        /* webpackChunkName: "pages" */ "@/views/Platform/Office/Department/BureauPolitic.vue"
+        );
+
+const BureauExectif = () =>
+    import(
+        /* webpackChunkName: "pages" */ "@/views/Platform/Office/Department/BureauExectuif.vue"
+        );
+const BureauRegional = () =>
+    import(
+        /* webpackChunkName: "pages" */ "@/views/Platform/Office/Department/BureauRegional.vue"
+        );
+
+const BureauLocal = () =>
+    import(
+        /* webpackChunkName: "pages" */ "@/views/Platform/Office/Department/BureauLocal.vue"
+        );
+
+const ConseilNational = () =>
+    import(
+        /* webpackChunkName: "pages" */ "@/views/Platform/Office/Department/ConseilNational.vue"
+        );
 
 const UserManagement = () =>
   import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/User.vue");
 
 const GroupManagement = () =>
   import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/Group.vue");
+
+const OfficeManagement = () =>
+    import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/Office.vue");
 
 const ProfileSetting = () =>
   import(
@@ -190,7 +222,7 @@ let admin = {
       name: "user",
       component: UserManagement,
       meta: {
-        groupName: "Users Management",
+        groupName: "UserManagement",
       },
     },
     {
@@ -198,7 +230,15 @@ let admin = {
       name: "group",
       component: GroupManagement,
       meta: {
-        groupName: "Users Management",
+        groupName: "GroupManagement",
+      },
+    },
+    {
+      path: "/admin/offices",
+      name: "office",
+      component: OfficeManagement,
+      meta: {
+        groupName: "OfficeManagement",
       },
     },
   ],
@@ -223,6 +263,70 @@ let profile = {
       component: ProfileSetting,
       meta: {
         groupName: "Profile",
+      },
+    },
+  ],
+};
+
+let office = {
+  path: "/",
+  component: HomeLayout,
+  name: "Office",
+  children: [
+    {
+      path: "/bureau/politics",
+      name: "BureauPolitique",
+      component: BureauPolitic,
+      meta: {
+        groupName: "Office",
+      },
+    },
+    {
+      path: "/bureau/executives",
+      name: "BureauExecutive",
+      component: BureauExectif,
+      meta: {
+        groupName: "Office",
+      },
+    },
+    {
+      path: "/bureau/regionals",
+      name: "BureauRegional",
+      component: BureauRegional,
+      meta: {
+        groupName: "Office",
+      },
+    },
+    {
+      path: "/bureau/locales",
+      name: "BureauLocal",
+      component: BureauLocal,
+      meta: {
+        groupName: "Office",
+      },
+    },
+    {
+      path: "/conseil/national",
+      name: "ConseilNational",
+      component: ConseilNational,
+      meta: {
+        groupName: "Office",
+      },
+    },
+  ],
+};
+
+let article = {
+  path: "/",
+  component: HomeLayout,
+  name: "Article",
+  children: [
+    {
+      path: "/article",
+      name: "Article",
+      component: Post,
+      meta: {
+        groupName: "Article",
       },
     },
   ],
@@ -576,6 +680,8 @@ const routes = [
   register,
   profile,
   admin,
+  article,
+  office,
 ];
 
 const router = new VueRouter({

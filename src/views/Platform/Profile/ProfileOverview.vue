@@ -11,10 +11,19 @@
       "
       :style="`background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'); background-position: 50%; background-size: cover;`"
     >
-      <span class="mask bg-gradient-primary opacity-6"></span>
+      <span class="mask bg-gradient-warning opacity-25"></span>
     </div>
     <v-card
-      class="shadow px-4 py-4 mx-9 overflow-hidden border-radius-xl mt-n16"
+      class="
+        card-shadow
+        bg-gradient-default
+        px-4
+        py-4
+        mx-9
+        overflow-hidden
+        border-radius-xl
+        mt-n16
+      "
     >
       <v-row>
         <v-col cols="auto">
@@ -177,12 +186,15 @@
       </v-row>
       <v-row>
         <v-col lg="4" md="6" cols="12" class="position-relative">
-          <v-card class="h-100">
+          <v-card class="h-100" dark>
             <div class="px-4 pt-4">
               <h6 class="mb-0 text-h6 text-typo">Profile Information</h6>
             </div>
             <div class="px-4 py-4">
-              <p class="text-sm font-weight-light text-body" v-html="this.userProfile.description">
+              <p
+                class="text-sm font-weight-light text-body"
+                v-html="this.userProfile.description"
+              >
                 {{ this.userProfile.description }}
               </p>
               <hr class="horizontal dark mt-6 mb-3" />
@@ -245,7 +257,7 @@
           <hr class="vertical dark" />
         </v-col>
         <v-col lg="4" md="6" cols="12" class="position-relative">
-          <v-card class="h-100">
+          <v-card class="h-100" dark>
             <div class="px-4 pt-4">
               <h6 class="mb-0 text-h6 text-typo">Platform Settings</h6>
             </div>
@@ -259,6 +271,7 @@
                     :ripple="false"
                     v-for="setting in accountSettings"
                     :key="setting.text"
+                    @click="saveSettings(setting.text, setting.switchState)"
                     class="pe-2 ps-0 border-radius-sm mb-3"
                   >
                     <v-switch
@@ -307,7 +320,7 @@
           <hr class="vertical dark" />
         </v-col>
         <v-col lg="4" cols="12" class="position-relative">
-          <v-card class="h-100">
+          <v-card class="h-100" dark>
             <div class="px-4 pt-4">
               <h6 class="mb-0 text-h6 text-typo">Conversations</h6>
             </div>
@@ -375,7 +388,7 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-card>
+          <v-card dark>
             <div class="px-4 pt-4">
               <h6 class="mb-1 text-typo text-h6 font-weight-bold">Projects</h6>
               <p class="text-sm text-body">Architects design houses</p>
@@ -448,6 +461,7 @@
 </template>
 <script>
 import UserService from "@/services/user.service";
+import SettingService from "@/services/setting.service";
 
 export default {
   name: "Profile-Overview",
@@ -613,6 +627,7 @@ export default {
       userProfile: [],
       userRoles: [],
       userGroups: [],
+      settings: {},
     };
   },
   methods: {
@@ -625,11 +640,27 @@ export default {
       }
       return initials;
     },
+    saveSettings(text, state) {
+      this.settings.settingName = text;
+      this.settings.settingValue = state;
+      UserService.updateSetting(this.settings).then(
+        (response) => {
+          console.log(response.data);
+        },
+        (error) => {
+          this.content =
+            (error.response && error.response.data) ||
+            error.message ||
+            error.toString();
+        }
+      );
+    },
   },
   mounted() {
     UserService.getProfile().then(
       (response) => {
         this.userProfile = response.data;
+        console.log(this.userProfile);
       },
       (error) => {
         this.content =
@@ -652,6 +683,17 @@ export default {
     UserService.getGroups().then(
       (response) => {
         this.userGroups = response.data;
+      },
+      (error) => {
+        this.content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    );
+    SettingService.getSettings().then(
+      (response) => {
+        console.log(response.data);
       },
       (error) => {
         this.content =

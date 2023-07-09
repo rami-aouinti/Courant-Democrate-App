@@ -1,10 +1,8 @@
 <template>
   <div>
-    <v-card class="card-shadow border-radius-xl">
+    <v-card class="card-shadow border-radius-xl" dark>
       <div class="card-header-padding">
-        <h5 class="font-weight-bold text-h5 text-typo mb-0">
-          Groups
-        </h5>
+        <h5 class="font-weight-bold text-h5 text-typo mb-0">Groups</h5>
         <p class="text-sm text-body font-weight-light mb-0">
           Features include sorting, searching, pagination, content-editing, and
           row selection.
@@ -68,9 +66,9 @@
                     height="43"
                     class="
                       font-weight-normal
-                      text-capitalize
-                      btn-primary
-                      bg-gradient-primary
+                      text-capitalize text-dark
+                      btn-warning
+                      bg-gradient-warning
                       py-3
                       px-6
                       ms-3
@@ -78,15 +76,34 @@
                     >New Item</v-btn
                   >
                 </template>
-                <v-card class="card-shadow border-radius-xl">
+                <v-card class="card-shadow border-radius-xl" dark>
                   <div class="card-header-padding card-border-bottom">
-                    <span class="font-weight-bold text-h5 text-typo mb-0">{{
+                    <span class="font-weight-bold text-h5 text-warning mb-0">{{
                       formTitle
                     }}</span>
                   </div>
                   <v-card-text class="card-padding">
                     <v-container class="px-0">
                       <v-row>
+                        <v-col cols="6">
+                          <v-text-field
+                            v-model="editedItem.role"
+                            hide-details
+                            class="
+                              input-style
+                              font-size-input
+                              text-light-input
+                              placeholder-light
+                              input-icon
+                            "
+                            dense
+                            flat
+                            filled
+                            solo
+                            height="43"
+                            placeholder="Role"
+                          ></v-text-field>
+                        </v-col>
                         <v-col cols="6">
                           <v-text-field
                             v-model="editedItem.name"
@@ -104,63 +121,6 @@
                             solo
                             height="43"
                             placeholder="Name"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col cols="6">
-                          <v-text-field
-                            v-model="editedItem.email"
-                            hide-details
-                            class="
-                              input-style
-                              font-size-input
-                              text-light-input
-                              placeholder-light
-                              input-icon
-                            "
-                            dense
-                            flat
-                            filled
-                            solo
-                            height="43"
-                            placeholder="Email"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col cols="6">
-                          <v-text-field
-                            v-model="editedItem.age"
-                            hide-details
-                            class="
-                              input-style
-                              font-size-input
-                              text-light-input
-                              placeholder-light
-                              input-icon
-                            "
-                            dense
-                            flat
-                            filled
-                            solo
-                            height="43"
-                            placeholder="Age"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col cols="6">
-                          <v-text-field
-                            v-model="editedItem.salary"
-                            hide-details
-                            class="
-                              input-style
-                              font-size-input
-                              text-light-input
-                              placeholder-light
-                              input-icon
-                            "
-                            dense
-                            flat
-                            filled
-                            solo
-                            height="43"
-                            placeholder="Salary"
                           ></v-text-field>
                         </v-col>
                       </v-row>
@@ -192,8 +152,8 @@
                       class="
                         font-weight-normal
                         text-capitalize
-                        btn-ls btn-primary
-                        bg-gradient-primary
+                        btn-ls btn-warning
+                        bg-gradient-warning
                         py-3
                         px-6
                       "
@@ -235,8 +195,8 @@
                       class="
                         font-weight-normal
                         text-capitalize
-                        btn-ls btn-primary
-                        bg-gradient-primary
+                        btn-ls btn-warning
+                        bg-gradient-warning
                         py-3
                         px-6
                       "
@@ -252,26 +212,14 @@
           <template v-slot:item.name="{ item }">
             <div class="d-flex align-center ms-2">
               <span class="text-sm font-weight-normal text-body">
-                {{ item.name }}
+                {{ item.role }}
               </span>
             </div>
           </template>
 
           <template v-slot:item.email="{ item }">
             <span class="text-sm font-weight-normal text-body">
-              {{ item.email }}
-            </span>
-          </template>
-
-          <template v-slot:item.age="{ item }">
-            <span class="text-sm font-weight-normal text-body">
-              {{ item.age }}
-            </span>
-          </template>
-
-          <template v-slot:item.salary="{ item }">
-            <span class="text-sm font-weight-normal text-body">
-              {{ item.salary }}
+              {{ item.name }}
             </span>
           </template>
 
@@ -365,47 +313,32 @@ export default {
       search: "",
       editedIndex: -1,
       editedItem: {
+        role: "",
         name: "",
-        email: "",
-        age: "",
-        salary: "",
       },
       defaultItem: {
+        role: "",
         name: "",
-        email: "",
-        age: "",
-        salary: "",
       },
       headers: [
         {
-          text: "Name",
+          text: "Role",
           align: "start",
           cellClass: "border-bottom",
           sortable: false,
+          value: "role",
+          class: "text-warning font-weight-bolder opacity-7 border-bottom ps-6",
+        },
+        {
+          text: "Name",
           value: "name",
-          class:
-            "text-secondary font-weight-bolder opacity-7 border-bottom ps-6",
-        },
-        {
-          text: "Email",
-          value: "email",
-          class: "text-secondary font-weight-bolder opacity-7",
-        },
-        {
-          text: "Age",
-          value: "age",
-          class: "text-secondary font-weight-bolder opacity-7",
-        },
-        {
-          text: "Salary",
-          value: "salary",
-          class: "text-secondary font-weight-bolder opacity-7",
+          class: "text-warning font-weight-bolder opacity-7",
         },
         {
           text: "Actions",
           value: "actions",
           sortable: false,
-          class: "text-secondary font-weight-bolder opacity-7",
+          class: "text-warning font-weight-bolder opacity-7",
         },
       ],
       items: [],
@@ -447,9 +380,32 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
+        AdminService.editItem(this.editedItem, "user_group").then(
+          (response) => {
+            Object.assign(this.items[this.editedIndex], response);
+          },
+          (error) => {
+            this.content =
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString();
+          }
+        );
         Object.assign(this.users[this.editedIndex], this.editedItem);
       } else {
-        this.users.push(this.editedItem);
+        console.log(this.editedItem);
+        AdminService.addItem(this.editedItem, "user_group").then(
+          (response) => {
+            this.items.push(response);
+          },
+          (error) => {
+            this.content =
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString();
+          }
+        );
+        this.items.push(this.editedItem);
       }
       this.close();
     },

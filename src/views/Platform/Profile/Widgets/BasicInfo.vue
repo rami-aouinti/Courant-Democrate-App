@@ -307,6 +307,11 @@ export default {
     UserService.getProfile().then(
       (response) => {
         this.userProfile = response.data;
+        var birthday = new Date(this.userProfile.birthday);
+        const month = birthday.toLocaleString("default", { month: "long" });
+        this.userProfile.day = birthday.getDate().toString();
+        this.userProfile.month = month;
+        this.userProfile.year = birthday.getFullYear().toString();
       },
       (error) => {
         this.content =

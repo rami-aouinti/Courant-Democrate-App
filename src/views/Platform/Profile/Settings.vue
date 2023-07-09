@@ -11,10 +11,11 @@
       "
       :style="`background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'); background-position: 50%; background-size: cover;`"
     >
-      <span class="mask bg-gradient-primary opacity-6"></span>
+      <span class="mask bg-gradient-warning opacity-25"></span>
     </div>
     <v-card
       class="shadow px-4 py-4 mx-9 overflow-hidden border-radius-xl mt-n16"
+      dark
     >
       <v-row>
         <v-col lg="4" sm="8">
@@ -42,7 +43,14 @@
       <v-row class="px-4">
         <v-col lg="12">
           <v-card
-            class="card-shadow px-4 py-4 overflow-hidden border-radius-xl elevation-10"
+            class="
+              card-shadow
+              px-4
+              py-4
+              overflow-hidden
+              border-radius-xl
+              elevation-10
+            "
           >
             <v-row>
               <v-col cols="auto">
@@ -110,8 +118,6 @@
 <script>
 import BasicInfo from "./Widgets/BasicInfo.vue";
 import ChangePassword from "./Widgets/ChangePassword.vue";
-import TwoFactor from "./Widgets/TwoFactor.vue";
-import Accounts from "./Widgets/Accounts.vue";
 import Notifications from "./Widgets/Notifications.vue";
 import Sessions from "./Widgets/Sessions.vue";
 import DeleteAccount from "./Widgets/DeleteAccount.vue";
@@ -122,8 +128,6 @@ export default {
   components: {
     BasicInfo,
     ChangePassword,
-    TwoFactor,
-    Accounts,
     Notifications,
     Sessions,
     DeleteAccount,
