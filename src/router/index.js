@@ -42,38 +42,56 @@ const Profile = () =>
     /* webpackChunkName: "pages" */ "@/views/Platform/Profile/ProfileOverview.vue"
   );
 
+const Quiz = () =>
+  import(/* webpackChunkName: "pages" */ "@/views/Platform/Quiz/Index.vue");
+
+const Courant = () =>
+  import(/* webpackChunkName: "pages" */ "@/views/Platform/Courant/Index.vue");
+const Library = () =>
+  import(/* webpackChunkName: "pages" */ "@/views/Platform/Library/Index.vue");
+
 const BureauPolitic = () =>
-    import(
-        /* webpackChunkName: "pages" */ "@/views/Platform/Office/Department/BureauPolitic.vue"
-        );
+  import(
+    /* webpackChunkName: "pages" */ "@/views/Platform/Office/Department/BureauPolitic.vue"
+  );
 
 const BureauExectif = () =>
-    import(
-        /* webpackChunkName: "pages" */ "@/views/Platform/Office/Department/BureauExectuif.vue"
-        );
+  import(
+    /* webpackChunkName: "pages" */ "@/views/Platform/Office/Department/BureauExectuif.vue"
+  );
 const BureauRegional = () =>
-    import(
-        /* webpackChunkName: "pages" */ "@/views/Platform/Office/Department/BureauRegional.vue"
-        );
+  import(
+    /* webpackChunkName: "pages" */ "@/views/Platform/Office/Department/BureauRegional.vue"
+  );
 
 const BureauLocal = () =>
-    import(
-        /* webpackChunkName: "pages" */ "@/views/Platform/Office/Department/BureauLocal.vue"
-        );
+  import(
+    /* webpackChunkName: "pages" */ "@/views/Platform/Office/Department/BureauLocal.vue"
+  );
 
 const ConseilNational = () =>
-    import(
-        /* webpackChunkName: "pages" */ "@/views/Platform/Office/Department/ConseilNational.vue"
-        );
+  import(
+    /* webpackChunkName: "pages" */ "@/views/Platform/Office/Department/ConseilNational.vue"
+  );
+
+const CourantManagement = () =>
+    import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/Courant.vue");
+
 
 const UserManagement = () =>
   import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/User.vue");
+
+const CombineUser = () =>
+    import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/CombineUser.vue");
+
+const CombineOffice = () =>
+    import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/CombineOffice.vue");
 
 const GroupManagement = () =>
   import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/Group.vue");
 
 const OfficeManagement = () =>
-    import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/Office.vue");
+  import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/Office.vue");
 
 const ProfileSetting = () =>
   import(
@@ -215,14 +233,38 @@ let profilePages = {
 let admin = {
   path: "/",
   component: HomeLayout,
-  name: "Profile",
+  name: "Admin",
   children: [
+    {
+      path: "/admin/courant",
+      name: "courant",
+      component: CourantManagement,
+      meta: {
+        groupName: "CourantManagement",
+      },
+    },
     {
       path: "/admin/users",
       name: "user",
       component: UserManagement,
       meta: {
         groupName: "UserManagement",
+      },
+    },
+    {
+      path: "/admin/combineUsers",
+      name: "combineUser",
+      component: CombineUser,
+      meta: {
+        groupName: "CombineUser",
+      },
+    },
+    {
+      path: "/admin/combineOffices",
+      name: "combineOffice",
+      component: CombineOffice,
+      meta: {
+        groupName: "CombineOffice",
       },
     },
     {
@@ -327,6 +369,52 @@ let article = {
       component: Post,
       meta: {
         groupName: "Article",
+      },
+    },
+  ],
+};
+let courant = {
+  path: "/",
+  component: HomeLayout,
+  name: "Courant",
+  children: [
+    {
+      path: "/courant",
+      name: "Courant",
+      component: Courant,
+      meta: {
+        groupName: "Courant",
+      },
+    },
+  ],
+};
+let library = {
+  path: "/",
+  component: HomeLayout,
+  name: "Library",
+  children: [
+    {
+      path: "/library",
+      name: "Library",
+      component: Library,
+      meta: {
+        groupName: "Library",
+      },
+    },
+  ],
+};
+
+let quiz = {
+  path: "/",
+  component: HomeLayout,
+  name: "Quiz",
+  children: [
+    {
+      path: "/quiz",
+      name: "Quiz",
+      component: Quiz,
+      meta: {
+        groupName: "Quiz",
       },
     },
   ],
@@ -680,8 +768,11 @@ const routes = [
   register,
   profile,
   admin,
+  courant,
   article,
   office,
+  library,
+  quiz,
 ];
 
 const router = new VueRouter({

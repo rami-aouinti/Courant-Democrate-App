@@ -21,7 +21,13 @@
           @page-count="pageCount = $event"
           :items-per-page="itemsPerPage"
           mobile-breakpoint="0"
+          hide-default-header
         >
+          <template v-slot:header="{ props }">
+            <th v-for="head in props.headers" class="text-warning">
+              {{ $t(head.text) }}
+            </th>
+          </template>
           <template v-slot:top>
             <v-toolbar flat height="80">
               <v-row>
@@ -368,19 +374,8 @@
             <v-row>
               <v-col cols="12">
                 <div class="py-4 d-flex">
-                  <v-col
-                    v-for="avatar in item.users"
-                    :key="avatar.user"
-                    lg="1"
-                    md="2"
-                    sm="3"
-                    cols="4"
-                    class="text-center"
-                  >
-                    <v-avatar class="border border-warning px-1 py-1">
-                      <v-img :src="avatar.photo" width="35" height="35">
-                      </v-img>
-                    </v-avatar>
+                  <v-col lg="3" md="2" sm="3" cols="4" class="text-center">
+                    {{ item.officeUser.length }}
                   </v-col>
                 </div>
               </v-col>
@@ -431,7 +426,9 @@
       <v-card-actions class="card-padding">
         <v-row>
           <v-col cols="6" lg="3" class="d-flex align-center">
-            <span class="text-body me-3 text-sm">Items per page:</span>
+            <span class="text-body me-3 text-sm"
+              >{{ $t("ItemsPerPage") }}:</span
+            >
             <v-text-field
               hide-details
               type="number"
@@ -501,7 +498,7 @@ export default {
       },
       headers: [
         {
-          text: "Name",
+          text: "OfficeName",
           align: "start",
           cellClass: "border-bottom",
           sortable: false,
@@ -509,22 +506,22 @@ export default {
           class: "text-warning font-weight-bolder opacity-7 border-bottom ps-6",
         },
         {
-          text: "Type",
+          text: "OfficeType",
           value: "type",
           class: "text-warning font-weight-bolder opacity-7",
         },
         {
-          text: "Participants",
+          text: "OfficeParticipants",
           value: "users",
           class: "text-warning font-weight-bolder opacity-7",
         },
         {
-          text: "Active",
+          text: "OfficeActive",
           value: "active",
           class: "text-warning font-weight-bolder opacity-7",
         },
         {
-          text: "Actions",
+          text: "OfficeAction",
           value: "actions",
           sortable: false,
           class: "text-warning font-weight-bolder opacity-7",
@@ -532,6 +529,9 @@ export default {
       ],
       items: [],
       participants: [],
+      enabled: null,
+      slots: ["مكتب جهوي", "مكتب محلي"],
+      ex4: null,
     };
   },
   methods: {
@@ -622,6 +622,10 @@ export default {
       //const index = this.participants.indexOf(item.firstName);
       if (result >= 0) this.participants.splice(result, 1);
     },
+
+    isEnabled(slot) {
+      return this.enabled === slot;
+    },
   },
   watch: {
     dialog(val) {
@@ -629,6 +633,55 @@ export default {
     },
     dialogDelete(val) {
       val || this.closeDelete();
+    },
+
+    enabled(slot) {
+      if (slot === "no-data") {
+        this.items = [];
+      } else if (slot === "no-results") {
+        this.search = "...";
+      } else {
+        this.search = null;
+        AdminService.findItem(slot, "office/type").then(
+          (response) => {
+            this.items = response.data;
+          },
+          (error) => {
+            this.content =
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString();
+          }
+        );
+      }
+    },
+
+    ex4() {
+      if (this.ex4 === "all") {
+        AdminService.findItem(false, "office/active").then(
+          (response) => {
+            this.items = response.data;
+          },
+          (error) => {
+            this.content =
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString();
+          }
+        );
+      } else {
+        AdminService.getItems("office").then(
+          (response) => {
+            this.items = response.data;
+          },
+          (error) => {
+            this.content =
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString();
+          }
+        );
+      }
     },
   },
 

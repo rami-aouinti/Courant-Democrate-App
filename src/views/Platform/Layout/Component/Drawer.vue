@@ -26,15 +26,15 @@
             "
           >
             <v-img
-              src="@/assets/img/logo-world.webp"
-              class="navbar-brand-img ms-3"
+              src="@/assets/img/courant.png"
+              class="navbar-brand-img ms-3 rounded-3 elevation-20"
               width="50"
               v-if="sidebarTheme === 'dark'"
             >
             </v-img>
             <v-img
-              src="@/assets/img/logo-world.webp"
-              class="navbar-brand-img ms-3"
+              src="@/assets/img/courant.png"
+              class="navbar-brand-img ms-3 rounded-3 evaluation-20"
               width="50"
               v-else
             >
@@ -60,7 +60,7 @@
         active-class="item-active"
       >
         <template v-slot:activator>
-          <v-avatar size="50" class="my-3 ms-2">
+          <v-avatar size="50" class="my-3 ms-2 elevation-20">
             <span v-if="userProfile.photo === null" class="text-h5">{{
               getInitials(userProfile.firstName + " " + userProfile.lastName)
             }}</span>
@@ -151,7 +151,142 @@
     />
 
     <v-list-item-group>
+      <div v-for="(item, i) in itemCourant" :key="i">
+        <v-list-item
+          link
+          :to="item.link"
+          class="pb-1 mx-2 no-default-hover py-2"
+          :ripple="false"
+          active-class="item-active"
+          v-if="!item.external"
+        >
+          <v-list-item-icon class="me-2 align-center">
+            <i class="material-icons-round text-warning opacity-10">{{
+              item.action
+            }}</i>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title
+              v-text="$t(item.title)"
+              class="ms-1 text-warning"
+            ></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          link
+          :href="item.link"
+          class="pb-1 mx-2 no-default-hover py-2"
+          :ripple="false"
+          active-class="item-active"
+          v-if="item.external"
+          target="_blank"
+        >
+          <v-list-item-icon class="me-2 align-center">
+            <i class="material-icons-round opacity-10">{{ item.action }}</i>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title
+              v-text="$t(item.title)"
+              class="ms-1 text-warning"
+            ></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </div>
+    </v-list-item-group>
+
+    <v-list-item-group>
       <div v-for="(item, i) in itemPosts" :key="i">
+        <v-list-item
+          link
+          :to="item.link"
+          class="pb-1 mx-2 no-default-hover py-2"
+          :ripple="false"
+          active-class="item-active"
+          v-if="!item.external"
+        >
+          <v-list-item-icon class="me-2 align-center">
+            <i class="material-icons-round text-warning opacity-10">{{
+              item.action
+            }}</i>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title
+              v-text="$t(item.title)"
+              class="ms-1 text-warning"
+            ></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          link
+          :href="item.link"
+          class="pb-1 mx-2 no-default-hover py-2"
+          :ripple="false"
+          active-class="item-active"
+          v-if="item.external"
+          target="_blank"
+        >
+          <v-list-item-icon class="me-2 align-center">
+            <i class="material-icons-round opacity-10">{{ item.action }}</i>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title
+              v-text="$t(item.title)"
+              class="ms-1 text-warning"
+            ></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </div>
+    </v-list-item-group>
+
+    <v-list-item-group>
+      <div v-for="(item, i) in itemQuiz" :key="i">
+        <v-list-item
+          link
+          :to="item.link"
+          class="pb-1 mx-2 no-default-hover py-2"
+          :ripple="false"
+          active-class="item-active"
+          v-if="!item.external"
+        >
+          <v-list-item-icon class="me-2 align-center">
+            <i class="material-icons-round text-warning opacity-10">{{
+              item.action
+            }}</i>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title
+              v-text="$t(item.title)"
+              class="ms-1 text-warning"
+            ></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item
+          link
+          :href="item.link"
+          class="pb-1 mx-2 no-default-hover py-2"
+          :ripple="false"
+          active-class="item-active"
+          v-if="item.external"
+          target="_blank"
+        >
+          <v-list-item-icon class="me-2 align-center">
+            <i class="material-icons-round opacity-10">{{ item.action }}</i>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title
+              v-text="$t(item.title)"
+              class="ms-1 text-warning"
+            ></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </div>
+    </v-list-item-group>
+
+    <v-list-item-group>
+      <div v-for="(item, i) in itemLibrary" :key="i">
         <v-list-item
           link
           :to="item.link"
@@ -216,7 +351,7 @@
         "
         :class="sidebarTheme === 'dark' ? 'text-warning' : 'text-default'"
       >
-        Administration
+        {{ $t("Administration") }}
       </h5>
       <v-list-group
         :ripple="false"
@@ -407,7 +542,7 @@
         "
         :class="sidebarTheme === 'dark' ? 'text-warning' : 'text-default'"
       >
-        Pages
+        {{ $t("Pages") }}
       </h5>
 
       <v-list-group
@@ -532,7 +667,7 @@
         "
         :class="sidebarTheme === 'dark' ? 'text-warning' : 'text-default'"
       >
-        Docs
+          {{ $t("Docs") }}
       </h5>
       <v-list-item-group>
         <div v-for="(item, i) in itemsDocs" :key="i">
@@ -634,6 +769,14 @@ export default {
       },
     ],
     itemsDocs: [],
+    itemCourant: [
+      {
+        action: "public",
+        link: "/courant",
+        title: "Courant",
+        external: false,
+      },
+    ],
     itemPosts: [
       {
         action: "article",
@@ -642,17 +785,48 @@ export default {
         external: false,
       },
     ],
+    itemLibrary: [
+      {
+        action: "book",
+        link: "/library",
+        title: "Library",
+        external: false,
+      },
+    ],
+    itemQuiz: [
+      {
+        action: "quiz",
+        link: "/quiz",
+        title: "Quiz",
+        external: false,
+      },
+    ],
     items: [],
     admin: [
       {
         action: "admin",
         active: false,
-        title: "Admin Management",
+        title: "Administration",
         items: [
+          {
+            title: "Courant",
+            prefix: "C",
+            link: "/admin/courant",
+          },
           {
             title: "Users",
             prefix: "U",
             link: "/admin/users",
+          },
+          {
+            title: "CombineUsers",
+            prefix: "C",
+            link: "/admin/combineUsers",
+          },
+          {
+            title: "CombineOffices",
+            prefix: "C",
+            link: "/admin/combineOffices",
           },
           {
             title: "Groups",

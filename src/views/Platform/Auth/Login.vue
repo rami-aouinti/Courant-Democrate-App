@@ -23,7 +23,7 @@
             elevation-20
           "
         >
-          <h4 class="text-h4 text-warning font-weight-bold">Bro World</h4>
+          <h4 class="text-h4 text-warning font-weight-bold">التيار الديمقراطي</h4>
           <v-row class="mt-3">
             <v-col cols="2" class="ms-auto d-flex justify-center">
               <v-btn
