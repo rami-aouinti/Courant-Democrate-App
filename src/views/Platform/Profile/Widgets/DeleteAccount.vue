@@ -4,11 +4,12 @@
       <v-col lg="6">
         <div class="px-6 py-6">
           <h5 class="text-h5 font-weight-bold text-typo mb-2">
-            Delete Account
+            {{ $t("DeleteAccount") }}
           </h5>
           <p class="text-sm text-body font-weight-light">
-            Once you delete your account, there is no going back. Please be
-            certain.
+            {{
+              $t("OnceYouDeleteYourAccountThereIsNoGoingBackPleaseBeCertain")
+            }}
           </p>
         </div>
       </v-col>
@@ -22,7 +23,7 @@
               class="font-weight-bolder btn-outline-secondary py-5 px-6 ms-auto"
               small
             >
-              Deactivate
+              {{ $t("Deactivate") }}
             </v-btn>
             <v-btn
               :ripple="false"
@@ -38,7 +39,7 @@
               "
               small
             >
-              Delete Account
+              {{ $t("DeleteAccount") }}
             </v-btn>
           </div>
         </div>

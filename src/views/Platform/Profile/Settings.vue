@@ -17,29 +17,6 @@
       class="shadow px-4 py-4 mx-9 overflow-hidden border-radius-xl mt-n16"
       dark
     >
-      <v-row>
-        <v-col lg="4" sm="8">
-          <v-tabs background-color="transparent" class="text-left">
-            <v-tabs-slider></v-tabs-slider>
-
-            <v-tab :ripple="false" href="#tab-1">
-              <span class="ms-1">Messages</span>
-            </v-tab>
-
-            <v-tab :ripple="false" href="#tab-2">
-              <span class="ms-1">Social</span>
-            </v-tab>
-
-            <v-tab :ripple="false" href="#tab-3">
-              <span class="ms-1">Notifications</span>
-            </v-tab>
-
-            <v-tab :ripple="false" href="#tab-4">
-              <span class="ms-1">Backup</span>
-            </v-tab>
-          </v-tabs>
-        </v-col>
-      </v-row>
       <v-row class="px-4">
         <v-col lg="12">
           <v-card
@@ -70,7 +47,7 @@
               </v-col>
               <v-col cols="auto" class="my-auto">
                 <div class="h-100">
-                  <h5 class="mb-1 text-h5 text-typo font-weight-bold">
+                  <h5 class="mb-1 text-h5 text-warning font-weight-bold">
                     {{ this.userProfile.firstName }}
                     {{ this.userProfile.lastName }}
                   </h5>
@@ -86,13 +63,13 @@
                     class="mb-0 text-body text-xs ms-auto"
                     v-if="switche === true"
                   >
-                    Switch to invisible
+                    {{ $t("SwitchToInVisible") }}
                   </p>
                   <p
                     class="mb-0 text-body text-xs ms-auto"
                     v-if="switche === false"
                   >
-                    Switch to visible
+                    {{ $t("SwitchToVisible") }}
                   </p>
                   <v-switch
                     :ripple="false"

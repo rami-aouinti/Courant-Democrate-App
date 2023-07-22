@@ -1,13 +1,15 @@
 <template>
   <v-card class="card-shadow border-radius-xl mt-6" id="change">
     <div class="px-6 py-6">
-      <h5 class="text-h5 font-weight-bold text-typo">Change Password</h5>
+      <h5 class="text-h5 font-weight-bold text-warning">
+        {{ $t("ChangePassword") }}
+      </h5>
     </div>
     <div class="px-6 pb-6 pt-0">
       <v-row>
         <v-col cols="12">
           <v-text-field
-            label="Current password"
+            :label="$t('CurrentPassword')"
             color="#e91e63"
             outlined
             dense
@@ -16,7 +18,7 @@
             v-model="oldPassword"
           ></v-text-field>
           <v-text-field
-            label="New password"
+            :label="$t('NewPassword')"
             color="#e91e63"
             outlined
             dense
@@ -25,7 +27,7 @@
             v-model="newPassword"
           ></v-text-field>
           <v-text-field
-            label="Confirm new password"
+            :label="$t('ConfirmNewPassword')"
             color="#e91e63"
             outlined
             dense
@@ -36,25 +38,33 @@
         </v-col>
       </v-row>
 
-      <h5 class="mt-5 mb-2 text-h5 font-weight-bold text-typo">
-        Password requirements
+      <h5 class="mt-5 mb-2 text-h5 font-weight-bold text-warning">
+        {{ $t("PasswordRequirements") }}
       </h5>
       <p class="text-muted font-weight-light mb-2">
-        Please follow this guide for a strong password:
+        {{ $t("PleaseFollowThisGuideForAStrongPassword") }}
       </p>
       <div class="d-sm-flex">
         <ul class="text-muted ps-6 mb-0">
           <li>
-            <span class="text-sm">One special characters</span>
+            <span class="text-sm">
+              {{ $t("OneSpecialCharacters") }}
+            </span>
           </li>
           <li>
-            <span class="text-sm">Min 6 characters</span>
+            <span class="text-sm">
+              {{ $t("MinCharacters") }}
+            </span>
           </li>
           <li>
-            <span class="text-sm">One number (2 are recommended)</span>
+            <span class="text-sm">
+              {{ $t("OneNumberAreRecommended") }}
+            </span>
           </li>
           <li>
-            <span class="text-sm">Change it often</span>
+            <span class="text-sm">
+              {{ $t("ChangeItOften") }}
+            </span>
           </li>
         </ul>
         <v-btn
@@ -71,7 +81,7 @@
           small
           @click="save"
         >
-          Update password
+          {{ $t("UpdatePassword") }}
         </v-btn>
       </div>
     </div>

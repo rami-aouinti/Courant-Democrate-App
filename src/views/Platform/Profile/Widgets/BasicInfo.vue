@@ -1,34 +1,38 @@
 <template>
   <v-card class="card-shadow border-radius-xl mt-6" id="basic">
     <div class="px-6 py-6">
-      <h5 class="text-h5 font-weight-bold text-typo">Basic Info</h5>
+      <h5 class="text-h5 font-weight-bold text-warning">
+        {{ $t("BasicInfo") }}
+      </h5>
     </div>
     <div class="px-6 pb-6 pt-0">
       <v-row>
         <v-col md="4" cols="12">
-          <label class="text-sm text-body ms-1">Image Profile</label>
+          <label class="text-sm text-body ms-1">{{ $t("ImageProfile") }}</label>
           <dropzone v-model="fileSingle"></dropzone>
         </v-col>
         <v-col md="8" cols="12">
-          <label class="text-sm text-body ms-1">Description Profile</label>
+          <label class="text-sm text-body ms-1">{{
+            $t("DescriptionProfile")
+          }}</label>
           <html-editor :value="this.userProfile.description"></html-editor>
         </v-col>
         <v-col cols="12">
           <v-select
             :items="gender"
-            label="Male"
+            :label="$t('Male')"
             color="#e91e63"
             class="font-size-input input-style"
             single-line
             height="36"
-            v-model="userProfile.gender"
+            :v-model="$t(userProfile.gender)"
           >
           </v-select>
         </v-col>
         <v-col cols="6">
           <v-text-field
             color="#e91e63"
-            label="First Name"
+            :label="$t('FirstName')"
             placeholder="Alex"
             v-model="userProfile.firstName"
             class="font-size-input input-style"
@@ -38,7 +42,7 @@
         <v-col cols="6">
           <v-text-field
             color="#e91e63"
-            label="Last Name"
+            :label="$t('LastName')"
             placeholder="Thompson"
             class="font-size-input input-style"
             v-model="userProfile.lastName"
@@ -50,10 +54,10 @@
         <v-col sm="12">
           <v-row>
             <v-col cols="5">
-              <label class="text-sm text-body">Birth Date</label>
+              <label class="text-sm text-body">{{ $t("BirthDate") }}</label>
               <v-select
                 :items="months"
-                label="February"
+                :label="$t('February')"
                 color="#e91e63"
                 class="font-size-input input-style"
                 single-line
@@ -93,7 +97,7 @@
         <v-col cols="6" class="py-0">
           <v-text-field
             color="#e91e63"
-            label="Email"
+            :label="$t('Email')"
             placeholder="example@email.com"
             class="font-size-input input-style"
             v-model="userProfile.email"
@@ -103,7 +107,7 @@
         <v-col cols="6" class="py-0">
           <v-text-field
             color="#e91e63"
-            label="Confirmation Email"
+            :label="$t('ConfirmationEmail')"
             placeholder="example@email.com"
             class="font-size-input input-style"
             v-model="userProfile.confirm"
@@ -115,7 +119,7 @@
         <v-col cols="6" class="py-0">
           <v-text-field
             color="#e91e63"
-            label="Your Location"
+            :label="$t('YourLocation')"
             placeholder="Sydney, A"
             class="font-size-input input-style"
             v-model="userProfile.location"
@@ -125,7 +129,7 @@
         <v-col cols="6" class="py-0">
           <v-text-field
             color="#e91e63"
-            label="Phone Number"
+            :label="$t('PhoneNumber')"
             placeholder="+40 735 631 620"
             class="font-size-input input-style"
             v-model="userProfile.phone"
@@ -150,7 +154,7 @@
               mt-sm-auto mt-4
             "
             small
-            >Update Information</v-btn
+            >{{ $t("UpdateInformation") }}</v-btn
           >
         </div>
       </v-row>

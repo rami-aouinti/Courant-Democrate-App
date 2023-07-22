@@ -1,10 +1,9 @@
 <template>
   <v-card class="card-shadow border-radius-xl mt-6" id="sessions">
     <div class="px-6 py-6">
-      <h5 class="text-h5 font-weight-bold text-typo">Sessions</h5>
+      <h5 class="text-h5 font-weight-bold text-typo">{{ $t("Sessions") }}</h5>
       <p class="text-sm text-body font-weight-light">
-        This is a list of devices that have logged into your account. Remove
-        those that you do not recognize.
+          {{ $t("ThisIsAlListOfDevicesThatHaveLoggedIntoYourAccountRemoveThoseThatYouDoNotRecognize") }}
       </p>
     </div>
     <div class="px-6 pb-6 pt-0 overflow-scroll">
@@ -78,7 +77,7 @@
             </v-icon>
           </v-btn>
         </div>
-        <hr class="horizontal dark my-4" v-if="i != sessions.length - 1" />
+        <hr class="horizontal dark my-4" v-if="i !== sessions.length - 1" />
       </div>
     </div>
   </v-card>
