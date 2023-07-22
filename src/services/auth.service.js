@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "@/services/auth-header";
 
-const API_URL = "https://zomra.de/api/v1/auth/";
+const API_URL = "http://localhost/api/v1/auth/";
 
 class AuthService {
   login(user) {

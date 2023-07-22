@@ -5,7 +5,8 @@ const ar = {
   Library: "مكتبة",
   Pages: "الصفحات",
   Docs: "معلومات",
-  Dashboards: "لوحة القيادة",
+  Dashboards: "المجموعة الرسمية",
+  Home: "عام",
   Structures: "الهياكل",
   ListOfOffices: "جميع الهياكل",
   ListOfUsers: "قائمة المنخرطين",
@@ -75,6 +76,24 @@ const ar = {
   ConseilNational: "المجلس الوطني",
   BureauRegional: "المكتب الجهوي",
   BureauLocal: "المكتب المحلي",
+
+  ProfileInformation: "معلومات شخصية",
+  FullName: "الاسم الكامل",
+  Mobile: "الجوال",
+  Location: "العنوان",
+  Social: "الحسابات",
+  PlatformSettings: "إعدادات النظام الأساسي",
+  Account: "الحساب الشخصي",
+  EmailMeWhenNewEvent: "أرسل لي بريدًا إلكترونيًا عند حدوث حدث جديد",
+  EmailMeWhenSomeoneAnswersOnMyPost:
+    "أرسل لي بريدًا إلكترونيًا عندما يجيب شخص ما على رسالتي",
+  EmailMeWhenSomeoneMentionsMeInPost:
+    "أرسل لي بريدًا إلكترونيًا عندما يذكرني شخص ما في البريد",
+  EmailMeWhenSomeoneStartANewConversation:
+    "أرسل لي بريدًا إلكترونيًا عندما يبدأ شخص ما محادثة جديدة",
+  Conversations: "المحادثات",
+  Reply: "رد",
+  Projects: "المشاريع",
 };
 
 export default ar;

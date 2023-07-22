@@ -26,7 +26,7 @@
                           :key="chat.title"
                           class="pt-2 pb-1 px-1"
                           :class="{
-                            'border-bottom': index != countries.length - 1,
+                            'border-bottom': index !== countries.length - 1,
                           }"
                         >
                           <v-img
@@ -359,7 +359,7 @@
               </v-row>
             </div>
             <div>
-              <div style="height: 470px; width: 100%">
+              <div style="height: 670px; width: 100%">
                 <l-map
                   v-if="showMap"
                   :zoom="zoom"
@@ -369,6 +369,21 @@
                   @update:zoom="zoomUpdate"
                 >
                   <l-tile-layer :url="url" :attribution="attribution" />
+                  <l-layer-group ref="features">
+                    <l-popup>
+                        <h1> </h1>
+                      <span> مكتب جهوي {{ caller }}</span>
+                    </l-popup>
+                  </l-layer-group>
+                  <l-circle
+                    v-for="item in items"
+                    :key="item.username"
+                    :lat-lng="{ lng: item.regionalLng, lat: item.regionalLat }"
+                    :radius="circle.radius"
+                    :color="circle.color"
+                    :weight="circle.weight"
+                    @click="openPopUp([item.regionalLat, item.regionalLng], item.regional)"
+                  />
                 </l-map>
               </div>
             </div>
@@ -495,28 +510,42 @@
 
 <script>
 import { latLng } from "leaflet";
-import { LMap, LTileLayer } from "vue2-leaflet";
+import { LMap, LTileLayer, LLayerGroup, LPopup, LCircle } from "vue2-leaflet";
 import "leaflet/dist/leaflet.css";
+import AdminService from "@/services/admin.service";
 
 export default {
   name: "Automotive",
   components: {
     LMap,
     LTileLayer,
+    LLayerGroup,
+    LPopup,
+    LCircle,
   },
   data() {
     return {
+      items: [],
       slider: "",
-      zoom: 11,
-      center: latLng(38.89, -77.03),
+      zoom: 5,
+      center: latLng(36.7333193, 7.1843676),
       url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      withPopup: latLng(47.41322, -1.219482),
-      withTooltip: latLng(47.41422, -1.250482),
+      withPopup: latLng(36.7333193, 7.4843676),
+      withTooltip: latLng(36.7333193, 7.4843676),
       currentZoom: 11.5,
-      currentCenter: latLng(47.41322, -1.219482),
-      showParagraph: false,
+      currentCenter: latLng(36.7333193, 7.4843676),
+      showParagraph: true,
+      bounds: null,
+      markerLatLng: [36.7333193, 9.1843676],
+      circle: {
+        center: [36.7333193, 9.1843676],
+        radius: 2,
+        color: "orange",
+        weight: 14,
+      },
+      caller: null,
       mapOptions: {
         zoomSnap: 0.5,
       },
@@ -544,6 +573,10 @@ export default {
     };
   },
   methods: {
+    openPopUp(latLng, caller) {
+      this.caller = caller;
+      this.$refs.features.mapObject.openPopup(latLng);
+    },
     zoomUpdate(zoom) {
       this.currentZoom = zoom;
     },
@@ -556,6 +589,20 @@ export default {
     innerClick() {
       alert("Click!");
     },
+  },
+  mounted() {
+    AdminService.getItems("user/all").then(
+      (response) => {
+        this.items = response.data;
+        console.log(this.items);
+      },
+      (error) => {
+        this.content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    );
   },
 };
 </script>

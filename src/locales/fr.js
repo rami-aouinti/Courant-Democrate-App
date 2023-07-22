@@ -6,8 +6,8 @@ const fr = {
   Pages: "Pages",
   Docs: "Docs",
   Structures: "Structures",
-  ListOfOffices: "Toutes structures",
-  ListOfUsers: "List of adherents",
+  ListOfOffices: "Toutes les structures",
+  ListOfUsers: "Liste des adherents",
   Article: "Article",
   Administration: "Administration",
   Users: "Utilisateurs",
@@ -74,6 +74,22 @@ const fr = {
   ConseilNational: "Conseil National",
   BureauRegional: "Bureau Regional",
   BureauLocal: "Bureau Local",
+  ProfileInformation: "Profile Information",
+  FullName: "Full Name",
+  Mobile: "Mobile",
+  Location: "Location",
+  Social: "Social",
+  PlatformSettings: "Social",
+  Account: "Account",
+  EmailMeWhenNewEvent: "Email me when new event",
+  EmailMeWhenSomeoneAnswersOnMyPost: "Email me when someone answers on my post",
+  EmailMeWhenSomeoneMentionsMeInPost:
+    "Email me when someone mentions me in post",
+  EmailMeWhenSomeoneStartANewConversation:
+    "Email me when someone start a new conversation",
+  Conversations: "Conversations",
+  Reply: "Reply",
+  Projects: "Projects",
 };
 
 export default fr;

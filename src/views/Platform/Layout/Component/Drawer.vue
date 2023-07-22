@@ -99,47 +99,10 @@
           >
             <v-list-item-title v-text="$t(child.title)"></v-list-item-title>
           </v-list-item-content>
-
-          <v-list-item-content class="ms-1 ps-1 py-0" v-if="child.items">
-            <v-list-group
-              prepend-icon=""
-              :ripple="false"
-              sub-group
-              no-action
-              v-model="child.active"
-            >
-              <template v-slot:activator>
-                <v-list nav dense class="pa-0">
-                  <v-list-group
-                    :ripple="false"
-                    append-icon="fas fa-angle-down me-auto ms-1"
-                    active-class="item-active"
-                    class="mb-0 text-warning"
-                  >
-                    <template v-slot:activator class="mb-0">
-                      <v-list-item-content class="py-0">
-                        <v-list-item-title
-                          v-text="$t(child.title)"
-                        ></v-list-item-title>
-                      </v-list-item-content>
-                    </template>
-                  </v-list-group>
-                </v-list>
-              </template>
-
-              <v-list-item
-                v-for="child2 in child.items"
-                :ripple="false"
-                :key="child2.title"
-                :to="child2.link"
-                @click="listClose($event)"
-              >
-                <span class="v-list-item-mini" v-text="child2.prefix"></span>
-                <v-list-item-content>
-                  <v-list-item-title v-text="child2.title"></v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list-group>
+        </v-list-item>
+        <v-list-item @click="logout">
+          <v-list-item-content class="ms-2 ps-1 text-warning">
+            <v-list-item-title> Logout </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list-group>
@@ -667,7 +630,7 @@
         "
         :class="sidebarTheme === 'dark' ? 'text-warning' : 'text-default'"
       >
-          {{ $t("Docs") }}
+        {{ $t("Docs") }}
       </h5>
       <v-list-item-group>
         <div v-for="(item, i) in itemsDocs" :key="i">
@@ -844,6 +807,10 @@ export default {
     itemsPages: [],
   }),
   methods: {
+    logout() {
+      this.$store.dispatch("auth/logout");
+      this.$router.push("/login");
+    },
     listClose(event) {
       let items;
       let headers;

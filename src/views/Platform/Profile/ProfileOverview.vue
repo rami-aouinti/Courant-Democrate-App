@@ -41,7 +41,7 @@
         </v-col>
         <v-col cols="auto" class="my-auto">
           <div class="h-100">
-            <h5 class="mb-1 text-h5 text-typo font-weight-bold">
+            <h5 class="mb-1 text-h5 text-warning font-weight-bold">
               {{ this.userProfile.firstName }} {{ this.userProfile.lastName }}
             </h5>
           </div>
@@ -188,7 +188,7 @@
         <v-col lg="4" md="6" cols="12" class="position-relative">
           <v-card class="h-100" dark>
             <div class="px-4 pt-4">
-              <h6 class="mb-0 text-h6 text-typo">Profile Information</h6>
+              <h6 class="mb-0 text-h6 text-warning">{{ $t("ProfileInformation") }}</h6>
             </div>
             <div class="px-4 py-4">
               <p
@@ -203,7 +203,7 @@
                   <v-list-item :ripple="false" class="px-0 border-radius-sm">
                     <v-list-item-content class="py-0">
                       <div class="text-body text-sm">
-                        <strong class="text-dark">Full Name:</strong>
+                        <strong class="text-dark">{{ $t("FullName") }}</strong>
                         &nbsp; {{ this.userProfile.firstName }}
                         {{ this.userProfile.lastName }}
                       </div>
@@ -212,15 +212,15 @@
                   <v-list-item :ripple="false" class="px-0 border-radius-sm">
                     <v-list-item-content class="py-0">
                       <div class="text-body text-sm">
-                        <strong class="text-dark">Mobile:</strong>
-                        &nbsp; (44) 123 1234 123
+                        <strong class="text-dark">{{ $t("Mobile") }}:</strong>
+                        &nbsp; {{ this.userProfile.phone }}
                       </div>
                     </v-list-item-content>
                   </v-list-item>
                   <v-list-item :ripple="false" class="px-0 border-radius-sm">
                     <v-list-item-content class="py-0">
                       <div class="text-body text-sm">
-                        <strong class="text-dark">Email:</strong>
+                        <strong class="text-dark">{{ $t("Email") }}:</strong>
                         &nbsp; {{ this.userProfile.email }}
                       </div>
                     </v-list-item-content>
@@ -228,7 +228,7 @@
                   <v-list-item :ripple="false" class="px-0 border-radius-sm">
                     <v-list-item-content class="py-0">
                       <div class="text-body text-sm">
-                        <strong class="text-dark">Location:</strong>
+                        <strong class="text-dark">{{ $t("Location") }}:</strong>
                         &nbsp; {{ this.userProfile.location }}
                       </div>
                     </v-list-item-content>
@@ -236,7 +236,7 @@
                   <v-list-item :ripple="false" class="px-0 border-radius-sm">
                     <v-list-item-content class="py-0">
                       <div class="text-body text-sm">
-                        <strong class="text-dark">Social:</strong>
+                        <strong class="text-dark">{{ $t("Social") }}:</strong>
                         &nbsp;
                         <v-icon color="#344e86" class="mt-n1 ps-1 pe-2"
                           >fab fa-facebook fa-lg</v-icon
@@ -259,11 +259,13 @@
         <v-col lg="4" md="6" cols="12" class="position-relative">
           <v-card class="h-100" dark>
             <div class="px-4 pt-4">
-              <h6 class="mb-0 text-h6 text-typo">Platform Settings</h6>
+              <h6 class="mb-0 text-h6 text-warning">
+                {{ $t("PlatformSettings") }}
+              </h6>
             </div>
             <div class="px-4 py-4">
               <h6 class="text-uppercase text-body text-xs font-weight-bolder">
-                Account
+                {{ $t("Account") }}
               </h6>
               <v-list>
                 <v-list-item-group class="border-radius-sm">
@@ -272,7 +274,7 @@
                     v-for="setting in accountSettings"
                     :key="setting.text"
                     @click="saveSettings(setting.text, setting.switchState)"
-                    class="pe-2 ps-0 border-radius-sm mb-3"
+                    class="pe-2 ps-0 border-radius-sm mb-3 warning"
                   >
                     <v-switch
                       :ripple="false"
@@ -282,34 +284,7 @@
                     ></v-switch>
                     <v-list-item-content class="py-0">
                       <div class="ms-4 text-body text-sm">
-                        {{ setting.text }}
-                      </div>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list-item-group>
-              </v-list>
-              <h6
-                class="text-uppercase text-body text-xs font-weight-bolder mt-4"
-              >
-                Application
-              </h6>
-              <v-list>
-                <v-list-item-group class="border-radius-sm">
-                  <v-list-item
-                    :ripple="false"
-                    v-for="setting in applicationSettings"
-                    :key="setting.text"
-                    class="px-0 border-radius-sm mb-3"
-                  >
-                    <v-switch
-                      :ripple="false"
-                      class="d-inline-flex mt-0 pt-0 switch ms-auto"
-                      v-model="setting.switchState"
-                      hide-details
-                    ></v-switch>
-                    <v-list-item-content class="py-0">
-                      <div class="ms-4 text-body text-sm">
-                        {{ setting.text }}
+                        {{ $t(setting.text) }}
                       </div>
                     </v-list-item-content>
                   </v-list-item>
@@ -322,7 +297,7 @@
         <v-col lg="4" cols="12" class="position-relative">
           <v-card class="h-100" dark>
             <div class="px-4 pt-4">
-              <h6 class="mb-0 text-h6 text-typo">Conversations</h6>
+              <h6 class="mb-0 text-h6 text-warning">{{ $t("Conversations") }}</h6>
             </div>
             <div class="px-4 py-4">
               <v-list>
@@ -370,11 +345,11 @@
                               pe-4
                               ps-0
                               mb-0
-                              text-primary
+                              text-warning
                               font-weight-bolder
                             "
                           >
-                            Reply
+                            {{ $t("Reply") }}
                           </v-btn>
                         </div>
                       </div>
@@ -390,7 +365,9 @@
         <v-col cols="12">
           <v-card dark>
             <div class="px-4 pt-4">
-              <h6 class="mb-1 text-typo text-h6 font-weight-bold">Projects</h6>
+              <h6 class="mb-1 text-typo text-h6 font-weight-bold">
+                {{ $t("Projects") }}
+              </h6>
               <p class="text-sm text-body">Architects design houses</p>
             </div>
             <div class="px-4 py-4">
@@ -470,42 +447,22 @@ export default {
       accountSettings: [
         {
           switchState: true,
-          text: "Email me when someone follows me",
+          text: "EmailMeWhenNewEvent",
         },
         {
           switchState: false,
-          text: "Email me when someone answers on...",
+          text: "EmailMeWhenSomeoneAnswersOnMyPost",
         },
         {
           switchState: true,
-          text: "Email me when someone mentions me...",
-        },
-      ],
-      applicationSettings: [
-        {
-          switchState: false,
-          text: "New launches and projects",
+          text: "EmailMeWhenSomeoneMentionsMeInPost",
         },
         {
           switchState: true,
-          text: "Monthly product updates",
-        },
-        {
-          switchState: false,
-          text: "Subscribe to newsletter",
+          text: "EmailMeWhenSomeoneStartANewConversation",
         },
       ],
       conversations: [
-        {
-          avatar: require("@/assets/img/kal-visuals-square.jpg"),
-          user: "Sophie B.",
-          message: "Hi! I need more information..",
-        },
-        {
-          avatar: require("@/assets/img/marie.jpg"),
-          user: "Anne Marie",
-          message: "Awesome work, can you..",
-        },
         {
           avatar: require("@/assets/img/ivana-square.jpg"),
           user: "Ivanna",

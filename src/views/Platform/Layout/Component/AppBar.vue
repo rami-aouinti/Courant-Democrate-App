@@ -33,6 +33,7 @@
                 width="12px"
                 height="12px"
                 class="mb-1"
+                color="orange"
                 viewBox="0 0 45 40"
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -76,12 +77,12 @@
               class="no-default-hover text-warning"
             >
               <template v-if="$route.name === 'Dashboard'">Default</template>
-              <template v-else>{{ $route.name }}</template>
+              <template v-else>{{ $t($route.name) }}</template>
             </v-breadcrumbs-item>
           </v-breadcrumbs>
 
           <h6 class="text-h6 font-weight-bolder text-warning mb-0">
-            {{ $route.name }}
+            {{ $t($route.name) }}
           </h6>
         </div>
         <div
