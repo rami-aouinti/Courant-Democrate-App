@@ -42,7 +42,12 @@ const fr = {
   OfficeActive: "Active",
   OfficeAction: "Action",
   ItemsPerPage: "Items par page",
-  user: {
+  NewUser: "New User",
+  EditUser: "Edit User",
+  Save: "Enregistrer",
+  Cancel: "Retourner",
+  user: "Membre",
+  userForm: {
     login: {
       login: "Connexion",
       stayConnected: "Rester connecté",

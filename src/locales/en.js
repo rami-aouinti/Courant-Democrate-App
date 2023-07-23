@@ -44,7 +44,11 @@ const en = {
   Function: "Function",
   Action: "Action",
   ItemsPerPage: "Items per page",
-  user: {
+  NewUser: "New User",
+  EditUser: "Edit User",
+  Save: "Save",
+  Cancel: "Cancel",
+  userForm: {
     login: {
       login: "Connexion",
       stayConnected: "Rester connecté",

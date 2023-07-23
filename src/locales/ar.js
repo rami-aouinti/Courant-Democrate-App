@@ -44,7 +44,12 @@ const ar = {
   OfficeActive: "موجود",
   OfficeAction: "تعديل",
   ItemsPerPage: "عدد العناصر في كل صفحة",
-  user: {
+  user: "المنخرطين",
+  NewUser: "منخرط جديد",
+  EditUser: "تحديث بيانات المنخرط",
+  Save: "تسجيل",
+  Cancel: "إلغاء",
+  userForm: {
     login: {
       login: "Connexion",
       stayConnected: "Rester connecté",

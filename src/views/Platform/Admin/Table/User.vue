@@ -88,8 +88,8 @@
                 </template>
                 <v-card class="card-shadow border-radius-xl" dark>
                   <div class="card-header-padding card-border-bottom">
-                    <span class="font-weight-bold text-h5 text-typo mb-0">{{
-                      formTitle
+                    <span class="font-weight-bold text-h5 text-warning mb-0">{{
+                      $t(formTitle)
                     }}</span>
                   </div>
                   <v-card-text class="card-padding">
@@ -111,7 +111,7 @@
                             filled
                             solo
                             height="43"
-                            placeholder="Username"
+                            :placeholder="$t('Username')"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="6">
@@ -130,7 +130,7 @@
                             filled
                             solo
                             height="43"
-                            placeholder="Email"
+                            :placeholder="$t('Email')"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="6">
@@ -149,7 +149,7 @@
                             filled
                             solo
                             height="43"
-                            placeholder="First Name"
+                            :placeholder="$t('FirstName')"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="6">
@@ -168,7 +168,7 @@
                             filled
                             solo
                             height="43"
-                            placeholder="Last Name"
+                            :placeholder="$t('LastName')"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="6">
@@ -187,18 +187,18 @@
                             filled
                             solo
                             height="43"
-                            placeholder="Phone"
+                            :placeholder="$t('Phone')"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="6">
                           <v-select
-                            :items="gender"
-                            label="Male"
+                            :items="$t(gender)"
+                            :label="$t('Male')"
                             color="#e91e63"
                             class="font-size-input input-style"
                             single-line
                             height="36"
-                            v-model="editedItem.gender"
+                            :v-model="$t(editedItem.gender)"
                           >
                           </v-select>
                         </v-col>
@@ -215,7 +215,7 @@
                               'Coding',
                               'Basejump',
                             ]"
-                            label="Interests"
+                            :label="$t('Offices')"
                             multiple
                           ></v-autocomplete>
                         </v-col>
@@ -237,7 +237,7 @@
                         py-3
                         px-6
                       "
-                      >Cancel</v-btn
+                      >{{ $t("Cancel") }}</v-btn
                     >
 
                     <v-btn
@@ -253,7 +253,7 @@
                         py-3
                         px-6
                       "
-                      >Save</v-btn
+                      >{{ $t("Save") }}</v-btn
                     >
                   </v-card-actions>
                 </v-card>
@@ -756,7 +756,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New User" : "Edit User";
+      return this.editedIndex === -1 ? "NewUser" : "EditUser";
     },
     pages() {
       return this.pagination.rowsPerPage

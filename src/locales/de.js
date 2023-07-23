@@ -44,7 +44,11 @@ const de = {
   OfficeActive: "Aktiv",
   OfficeAction: "Aktion",
   ItemsPerPage: "Items pro seite",
-  user: {
+  NewUser: "New User",
+  EditUser: "Edit User",
+  Save: "Speichern",
+  Cancel: "Zurück",
+  userForm: {
     login: {
       login: "Connexion",
       stayConnected: "Rester connecté",
