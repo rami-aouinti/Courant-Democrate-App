@@ -173,6 +173,8 @@ export default {
         }
       },
       (error) => {
+        this.$store.dispatch("auth/logout");
+        this.$router.push("/login");
         this.content =
           (error.response && error.response.data) ||
           error.message ||
