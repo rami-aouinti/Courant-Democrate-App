@@ -101,8 +101,18 @@
           </v-list-item-content>
         </v-list-item>
         <v-list-item @click="logout">
+          <span
+            class="
+              v-list-item-mini
+              ms-0
+              font-weight-light
+              text-center text-warning
+              w-20
+            "
+            >L</span
+          >
           <v-list-item-content class="ms-2 ps-1 text-warning">
-            <v-list-item-title> Logout </v-list-item-title>
+            <v-list-item-title> {{ $t("Logout") }} </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list-group>
@@ -725,10 +735,6 @@ export default {
         title: "Setting",
         prefix: "S",
         path: "/profile/settings",
-      },
-      {
-        title: "Logout",
-        prefix: "L",
       },
     ],
     itemsDocs: [],
