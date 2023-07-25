@@ -13,16 +13,13 @@
                 <div class="copyright text-body-2 ls-0 text-white">
                   © {{ new Date().getFullYear() }}, made with
                   <i class="fa fa-heart" aria-hidden="true"></i> by
-                  <a
-                    href="https://www.creative-tim.com"
-                    class="
+                  <a  href="#"  target="_blank"  class="
                       text-decoration-none text-white text-body-2
                       ls-0
                       font-weight-bold
                     "
-                    target="_blank"
-                    >Creative Tim</a
-                  >
+                                       
+                    >xxxx</a>
                   for a better web.
                 </div>
               </v-col>
@@ -170,20 +167,20 @@ export default {
     return {
       footer: [
         {
-          linkName: "Creative Tim",
-          link: "https://www.creative-tim.com/",
+          linkName: "Courant democarte",
+          link: "#",
         },
         {
           linkName: "About Us",
-          link: "https://www.creative-tim.com/presentation",
+          link: "#",
         },
         {
           linkName: "Blog",
-          link: "http://blog.creative-tim.com/",
+          link: "#",
         },
         {
           linkName: "License",
-          link: "https://www.creative-tim.com/license",
+          link: "#",
         },
       ],
       icons: [

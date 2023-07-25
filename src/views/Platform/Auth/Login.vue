@@ -10,22 +10,16 @@
           elevation-20
         "
       >
-        <div
-          class="
-            card-padding
-            text-center
-            mt-n7
-            bg-gradient-default
-            opacity-150
-            shadow-warning
-            border-radius-lg
-            mx-4
-            elevation-20
-          "
-        >
-          <h4 class="text-h4 text-warning font-weight-bold">التيار الديمقراطي</h4>
+        <div class="" >
+        <v-img
+          src="@/assets/img/courant.png"
+          class="navbar-brand-img  rounded-3 elevation-20 mx-auto mt-n13"
+          width="130"
+        ></v-img>
+
+          <h4 class="text-h4 text-warning font-weight-bold"></h4>
           <v-row class="mt-3">
-            <v-col cols="2" class="ms-auto d-flex justify-center">
+            <!---<v-col cols="2" class="ms-auto d-flex justify-center">
               <v-btn
                 icon
                 outlined
@@ -57,13 +51,14 @@
               >
                 <i class="fab fa-google text-warning text-lg"></i>
               </v-btn>
-            </v-col>
+            </v-col>-->
           </v-row>
         </div>
-        <div class="mt-2 position-relative text-center">
+        <div class="mt-6 position-relative text-center">
           <p
             class="
-              text-sm
+             
+              text-lg
               font-weight-bold
               mb-2
               text-warning text-border
@@ -72,15 +67,13 @@
               bg-white
               px-3
             "
-          >
-            or
-          </p>
+          >وعي - إرادة - إنجاز</p>
         </div>
         <div class="card-padding">
           <form name="form" @submit.prevent="handleLogin">
             <v-text-field
-              label="Name"
-              placeholder="Name"
+              label="البريد الإلكتروني"
+              placeholder="البريد الإلكتروني"
               color="orange"
               required
               class="font-size-input input-style text-warning"
@@ -90,8 +83,8 @@
             ></v-text-field>
 
             <v-text-field
-              label="Password"
-              placeholder="Password"
+              label="كلمة المرور"
+              placeholder="كلمة المرور"
               color="orange"
               required
               type="password"
@@ -122,16 +115,16 @@
                 v-show="loading"
                 class="spinner-border spinner-border-sm text-warning"
               ></span>
-              <span>Sign Up</span>
+              <span>تسجيل الدخول</span>
             </button>
-            <p class="text-sm text-body mt-3 mb-0">
+            <!--<p class="text-sm text-body mt-3 mb-0">
               Already have an account?
               <a
                 href="/#/register"
                 class="text-warning text-decoration-none font-weight-bolder"
                 >Sign up</a
               >
-            </p>
+            </p>-->
             <div class="form-group">
               <div v-if="message" class="alert alert-danger" role="alert">
                 {{ message }}
