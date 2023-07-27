@@ -203,8 +203,9 @@
                 my-1
                 border-radius-md
               "
+              :to="item.path"
             >
-              <v-icon class="material-icons-round text-body" size="20">{{
+              <v-icon class="material-icons-round text-warning" size="20">{{
                 item.icon
               }}</v-icon>
 
@@ -215,10 +216,41 @@
                   <v-row>
                     <v-col :to="item.path">
                       <h6
-                        class="text-sm font-weight-normal ms-2 text-typo"
+                        class="text-sm font-weight-normal ms-2 text-warning"
                         v-html="$t(item.title)"
                       >
                         {{ $t(item.title) }}
+                      </h6>
+                    </v-col>
+                  </v-row>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item
+              class="
+                pa-4
+                list-item-hover-active
+                d-flex
+                align-items-center
+                py-1
+                my-1
+                border-radius-md
+              "
+              @click="logout"
+            >
+              <v-icon class="material-icons-round text-warning" size="20"
+                >logout</v-icon
+              >
+
+              <v-list-item-content>
+                <v-list-item-title>
+                  <v-row>
+                    <v-col>
+                      <h6
+                        class="text-sm font-weight-normal ms-2 text-warning"
+                        v-html="$t('Logout')"
+                      >
+                        {{ $t("Logout") }}
                       </h6>
                     </v-col>
                   </v-row>
@@ -356,17 +388,12 @@ export default {
         {
           icon: "account_circle",
           title: "MyProfile",
-          path: "/profile",
+          path: "/profile/overview",
         },
         {
-          icon: "podcasts",
+          icon: "settings",
           title: "Setting",
-          path: "/setting",
-        },
-        {
-          icon: "shopping_cart",
-          title: "Logout",
-          path: "/logout",
+          path: "/profile/settings",
         },
       ],
       dropdown: [
@@ -420,6 +447,10 @@ export default {
     },
   },
   methods: {
+    logout() {
+      this.$store.dispatch("auth/logout");
+      this.$router.push("/login");
+    },
     changeDirection(language) {
       if (language === "ar") {
         this.$vuetify.rtl = true;

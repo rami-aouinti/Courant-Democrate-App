@@ -8,6 +8,7 @@ const ar = {
   Dashboards: "المجموعة الرسمية",
   Home: "عام",
   Structures: "الهياكل",
+  Structure: "الهياكل",
   ListOfOffices: "جميع الهياكل",
   ListOfUsers: "قائمة المنخرطين",
   Article: "منشور",
@@ -155,6 +156,18 @@ const ar = {
   dark: "مظلم",
   transparent: "شفاف",
   navbarFixed: "شريط التنقل ثابت",
+  January: "جانفي",
+  February: "فيفري",
+  March: "مارس",
+  April: "افريل",
+  May: "ماي",
+  June: "جوان",
+  July: "جويلية",
+  August: "أوت",
+  September: "سبتمبر",
+  October: "أكتوبر",
+  November: "نوفمبر",
+  December: "ديسمبر",
 };
 
 export default ar;
