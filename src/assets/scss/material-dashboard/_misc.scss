@@ -519,9 +519,15 @@ svg.text-dark {
 }
 
 // Fixed Plugin
-.fixed-plugin-button{
+.fixed-plugin-button-right{
   bottom: $fixed-plugin-bottom;
   right: $fixed-plugin-right;
+  z-index: $fixed-plugin-z-index;
+}
+
+.fixed-plugin-button-left{
+  bottom: $fixed-plugin-bottom;
+  left: $fixed-plugin-right;
   z-index: $fixed-plugin-z-index;
 }
 

@@ -25,7 +25,7 @@
         <v-col lg="4" v-for="(plan, i) in plans" :key="plan.title">
           <v-card
             class="shadow-lg border-radius-xl"
-            :class="i == 1 ? 'bg-gradient-default' : ''"
+            :class="i === 1 ? 'bg-gradient-default' : ''"
           >
             <div class="px-6 pb-4 text-center">
               <v-btn

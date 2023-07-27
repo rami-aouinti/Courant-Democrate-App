@@ -63,13 +63,10 @@
           color="#fff"
           width="52px"
           height="52px"
-          class="
-            fixed-plugin-button
-            position-fixed
-            btn-light
-            bg-dark
-            text-warning
-            z-index-9999
+          :class="
+            $vuetify.rtl
+              ? 'fixed-plugin-button-left position-fixed btn-light bg-dark text-warning z-index-9999'
+              : 'fixed-plugin-button-right position-fixed btn-light bg-dark text-warning z-index-9999'
           "
           @click="showSettingsDrawer = true"
         >

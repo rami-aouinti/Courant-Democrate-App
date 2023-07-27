@@ -83,7 +83,7 @@
                 <span
                   class="text-xs font-weight-bold"
                   :class="
-                    $route.name == 'VrDefault' ? 'text-white' : 'text-body'
+                    $route.name === 'VrDefault' ? 'text-white' : 'text-body'
                   "
                 >
                   Value:
@@ -92,7 +92,7 @@
                   v-text="chat.value"
                   class="text-sm mb-0"
                   :class="
-                    $route.name == 'VrDefault'
+                    $route.name === 'VrDefault'
                       ? 'text-white opacity-6'
                       : 'text-typo'
                   "
@@ -103,7 +103,7 @@
                 <span
                   class="text-xs font-weight-bold"
                   :class="
-                    $route.name == 'VrDefault' ? 'text-white' : 'text-body'
+                    $route.name === 'VrDefault' ? 'text-white' : 'text-body'
                   "
                 >
                   Bounce:

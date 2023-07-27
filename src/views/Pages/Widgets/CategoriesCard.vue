@@ -11,7 +11,7 @@
         <v-list-item-group class="border-radius-sm">
           <v-list-item
             class="px-0 border-radius-sm"
-            :class="i != categories.length - 1 ? ' mb-7' : ''"
+            :class="i !== categories.length - 1 ? ' mb-7' : ''"
             v-for="(item, i) in categories"
             :key="item.icon"
           >

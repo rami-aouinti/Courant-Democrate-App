@@ -3,7 +3,7 @@
     <div class="px-4 pt-4">
       <h6
         class="text-h6 font-weight-bold text-typo"
-        v-if="$route.name != 'RTL'"
+        v-if="$route.name !== 'RTL'"
       >
         Categories
       </h6>

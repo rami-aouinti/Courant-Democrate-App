@@ -37,7 +37,7 @@
           v-for="(item, i) in real"
           :key="item.country"
           class="px-0 py-4"
-          :class="{ 'border-bottom': i != real.length - 1 }"
+          :class="{ 'border-bottom': i !== real.length - 1 }"
         >
           <v-list-item-avatar
             width="23"

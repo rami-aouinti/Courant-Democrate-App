@@ -122,7 +122,8 @@ const ar = {
   ChangeItOften: "قم بتغييره كثيرًا",
   UpdatePassword: "تحديث كلمة المرور",
   PasswordRequirements: "متطلبات كلمة المرور",
-  PleaseFollowThisGuideForAStrongPassword: "الرجاء اتباع هذا الدليل للحصول على كلمة مرور قوية:",
+  PleaseFollowThisGuideForAStrongPassword:
+    "الرجاء اتباع هذا الدليل للحصول على كلمة مرور قوية:",
   Notifications: "الإخطارات",
   ChooseHowYouReceiveNotificationsTheseNotificationSettingsApplyToTheThingsYouAreWatching:
     "اختر كيفية تلقي الإخطارات. تنطبق إعدادات الإشعارات هذه على الأشياء التي تشاهدها.",
@@ -143,6 +144,17 @@ const ar = {
   OnceYouDeleteYourAccountThereIsNoGoingBackPleaseBeCertain:
     "بمجرد حذف حسابك ، لن يكون هناك عودة. من فضلك كن متأكدا.",
   Deactivate: "إستراحة",
+  SeeOurDashboardOptions: "انظر خيارات لوحة القيادة لدينا",
+  SidebarColors: "ألوان الشريط الجانبي",
+  SideNavigatorType: "نوع التنقل الجانبي",
+  ChooseBetweenDifferentSideNavigatorTypes:
+    "اختر من بين 3 أنواع مختلفة للتنقل الجانبية.",
+  YouCanChangeTheSidenavTypeJustOnDesktopView:
+    "يمكنك تغيير نوع التنقل الجانبي فقط في عرض سطح المكتب.",
+  white: "أبيض",
+  dark: "مظلم",
+  transparent: "شفاف",
+  navbarFixed: "شريط التنقل ثابت",
 };
 
 export default ar;

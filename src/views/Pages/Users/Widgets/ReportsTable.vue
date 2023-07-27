@@ -103,13 +103,13 @@
                 </div>
               </td>
               <td
-                :class="{ 'border-bottom': i != users.length - 1 }"
+                :class="{ 'border-bottom': i !== users.length - 1 }"
                 class="text-center"
               >
                 <p class="text-secondary mb-0 text-sm">{{ item.email }}</p>
               </td>
               <td
-                :class="{ 'border-bottom': i != users.length - 1 }"
+                :class="{ 'border-bottom': i !== users.length - 1 }"
                 class="text-center"
               >
                 <span class="text-secondary text-sm">{{ item.employed }}</span>

@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="card-shadow border-radius-xl px-4 py-5"
-    :class="$route.name == 'VrDefault' ? 'bg-gradient-default' : ''"
+    :class="$route.name === 'VrDefault' ? 'bg-gradient-default' : ''"
   >
     <div
       class="
