@@ -16,9 +16,51 @@
   </div>
 </template>
 <script>
+import UserService from "@/services/user.service";
+
 export default {
   data: () => ({
-    power: 78,
+    userProfile: [],
+    power: 30,
   }),
+  mounted() {
+    UserService.getProfile().then(
+      (response) => {
+        this.userProfile = response.data;
+        if (this.userProfile.gender) {
+          this.power = this.power + 5;
+        }
+        if (this.userProfile.description) {
+          this.power = this.power + 5;
+        }
+        if (this.userProfile.phone) {
+          this.power = this.power + 5;
+        }
+        if (this.userProfile.birthday) {
+          this.power = this.power + 5;
+        }
+        if (this.userProfile.job) {
+          this.power = this.power + 5;
+        }
+        if (this.userProfile.adhesionId) {
+          this.power = this.power + 5;
+        }
+        if (this.userProfile.adhesion2023) {
+          this.power = this.power + 5;
+        }
+        if (this.userProfile.adhesionDate) {
+          this.power = this.power + 5;
+        }
+      },
+      (error) => {
+        this.$store.dispatch("auth/logout");
+        this.$router.push("/login");
+        this.content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    );
+  },
 };
 </script>
