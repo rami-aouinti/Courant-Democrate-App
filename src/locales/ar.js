@@ -211,6 +211,9 @@ const ar = {
   NumberParticipants: "عدد الاعضاء",
   NumberEvents: "عدد الاجتماعات",
   NumberMeetings: "عدد الانشطة",
+  AddUser: "إضافة أعضاء للمجموعة",
+  SearchUsersOffice: "ابحث عن منخرطين...",
+  CompleteYourProfile: "أكمل تسجيل معطياتك",
 };
 
 export default ar;

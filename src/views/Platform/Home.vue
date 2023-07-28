@@ -12,6 +12,13 @@
           elevation-20
         "
       >
+        <v-row>
+          <div class="d-flex align-center ms-0">
+            <h4 class="elevation-10 text-light">
+              {{ $t("CompleteYourProfile") }}
+            </h4>
+          </div>
+        </v-row>
         <v-row class="mb-12">
           <v-col md="1">
             <v-avatar

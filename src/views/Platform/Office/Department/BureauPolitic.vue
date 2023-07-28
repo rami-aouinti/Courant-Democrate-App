@@ -166,8 +166,7 @@
                           <v-icon class="material-icons-round" size="24">
                             add
                           </v-icon>
-                          Was machst du gerade
-                          {{ userProfile.username }}
+                          {{ $t("AddPost") }}
                         </v-btn>
                       </template>
                       <v-card>
@@ -225,505 +224,6 @@
             <div class="px-8 pt-6">
               <v-row class="position-relative">
                 <v-col md="12">
-                  <v-card class="card-shadow border-radius-xl px-4 py-4" dark>
-                    <v-row>
-                      <v-col cols="9">
-                        <h6 class="mb-0 text-h6 text-warning font-weight-bold">
-                          {{ $t("Members") }}
-                        </h6>
-                      </v-col>
-                      <v-col cols="3">
-                        <v-dialog v-model="dialogMember" max-width="500px">
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-btn
-                              v-bind="attrs"
-                              v-on="on"
-                              elevation="0"
-                              :ripple="false"
-                              height="43"
-                              class="
-                                font-weight-normal
-                                text-capitalize text-dark
-                                btn-warning
-                                bg-gradient-warning
-                                py-3
-                                px-6
-                                ms-3
-                                rounded-5
-                              "
-                            >
-                              <v-icon size="20" class="material-icons-round"
-                                >add</v-icon
-                              >
-                            </v-btn>
-                          </template>
-                          <v-card class="card-shadow border-radius-xl" dark>
-                              <v-dialog v-model="dialogMember" max-width="500px">
-                                  <template v-slot:activator="{ on, attrs }">
-                                      <v-btn
-                                              v-bind="attrs"
-                                              v-on="on"
-                                              elevation="0"
-                                              :ripple="false"
-                                              height="43"
-                                              class="
-                      font-weight-normal
-                      text-capitalize text-dark
-                      btn-warning
-                      bg-gradient-warning
-                      py-3
-                      px-6
-                      ms-3
-                      rounded-5
-                    "
-                                      >
-                                          <v-icon size="20" class="material-icons-round">add</v-icon>
-                                      </v-btn>
-                                  </template>
-                                  <v-card class="card-shadow border-radius-xl" dark>
-                                      <div class="card-header-padding card-border-bottom">
-                    <span class="font-weight-bold text-h5 text-warning mb-0">{{
-                        $t(formTitle)
-                        }}</span>
-                                      </div>
-                                      <v-card-text class="card-padding">
-                                          <v-container class="px-0">
-                                              <v-row>
-                                                  <v-col cols="6">
-                                                      <v-text-field
-                                                              v-model="editedItem.name"
-                                                              hide-details
-                                                              class="
-                              input-style
-                              font-size-input
-                              text-light-input
-                              placeholder-light
-                              input-icon
-                            "
-                                                              dense
-                                                              flat
-                                                              filled
-                                                              solo
-                                                              height="43"
-                                                              :placeholder="$t('PoliticOfficeName')"
-                                                      ></v-text-field>
-                                                  </v-col>
-                                                  <v-col cols="6">
-                                                      <v-checkbox
-                                                              v-model="editedItem.active"
-                                                              hide-details
-                                                              class="
-                              input-style
-                              font-size-input
-                              text-light-input
-                              placeholder-light
-                              input-icon
-                            "
-                                                              dense
-                                                              flat
-                                                              filled
-                                                              solo
-                                                              height="43"
-                                                              :placeholder="$t('Active')"
-                                                      ></v-checkbox>
-                                                  </v-col>
-                                                  <v-col cols="6">
-                                                      <v-text-field
-                                                              v-model="editedItem.start"
-                                                              hide-details
-                                                              class="
-                              input-style
-                              font-size-input
-                              text-light-input
-                              placeholder-light
-                              input-icon
-                            "
-                                                              dense
-                                                              flat
-                                                              filled
-                                                              solo
-                                                              height="43"
-                                                              placeholder="Start"
-                                                              type="datetime-local"
-                                                      ></v-text-field>
-                                                  </v-col>
-                                                  <v-col cols="6">
-                                                      <v-text-field
-                                                              v-model="editedItem.end"
-                                                              hide-details
-                                                              class="
-                              input-style
-                              font-size-input
-                              text-light-input
-                              placeholder-light
-                              input-icon
-                            "
-                                                              dense
-                                                              flat
-                                                              filled
-                                                              solo
-                                                              height="43"
-                                                              placeholder="Last Name"
-                                                              type="datetime-local"
-                                                      ></v-text-field>
-                                                  </v-col>
-                                                  <v-col cols="6">
-                                                      <v-autocomplete
-                                                              v-model="participants"
-                                                              :items="users"
-                                                              :label="$t('Members')"
-                                                              multiple
-                                                      >
-                                                          <template v-slot:selection="data">
-                                                              <v-chip
-                                                                      v-bind="data.attrs"
-                                                                      :input-value="data.selected"
-                                                                      close
-                                                                      @click="data.select"
-                                                                      @click:close="remove(data.item)"
-                                                              >
-                                                                  <v-avatar left>
-                                                                      <v-img :src="data.item.photo"></v-img>
-                                                                  </v-avatar>
-                                                                  {{ data.item.firstName }}
-                                                                  {{ data.item.lastName }}
-                                                              </v-chip>
-                                                          </template>
-                                                          <template v-slot:item="data">
-                                                              <template v-if="typeof data.item !== 'object'">
-                                                                  <v-list-item-content
-                                                                          v-text="data.item"
-                                                                  ></v-list-item-content>
-                                                              </template>
-                                                              <template v-else>
-                                                                  <v-list-item-avatar>
-                                                                      <img :src="data.item.photo" />
-                                                                  </v-list-item-avatar>
-                                                                  <v-list-item-content>
-                                                                      <v-list-item-title>
-                                                                          {{ data.item.firstName }}
-                                                                          {{ data.item.lastName }}</v-list-item-title
-                                                                      >
-                                                                  </v-list-item-content>
-                                                              </template>
-                                                          </template>
-                                                      </v-autocomplete>
-                                                  </v-col>
-                                              </v-row>
-                                          </v-container>
-                                      </v-card-text>
-
-                                      <v-card-actions class="card-padding d-flex justify-end">
-                                          <v-btn
-                                                  @click="close"
-                                                  elevation="0"
-                                                  :ripple="false"
-                                                  height="43"
-                                                  class="
-                        font-weight-normal
-                        text-capitalize
-                        btn-ls btn-outline-secondary
-                        bg-transparent
-                        py-3
-                        px-6
-                      "
-                                          >{{ $t("Cancel") }}</v-btn
-                                          >
-
-                                          <v-btn
-                                                  @click="save"
-                                                  elevation="0"
-                                                  :ripple="false"
-                                                  height="43"
-                                                  class="
-                        font-weight-normal
-                        text-capitalize
-                        btn-ls btn-warning
-                        bg-gradient-warning
-                        py-3
-                        px-6
-                      "
-                                          >{{ $t("Save") }}</v-btn
-                                          >
-                                      </v-card-actions>
-                                  </v-card>
-                              </v-dialog>
-                          </v-card>
-                        </v-dialog>
-                      </v-col>
-                    </v-row>
-
-                    <v-card-text class="pt-3 pb-0 px-0">
-                      <v-list class="py-0">
-                        <v-list-item
-                          v-for="(chat, index) in countries"
-                          :key="chat.title"
-                          class="pt-2 pb-1 px-1"
-                          :class="{
-                            'border-bottom': index !== countries.length - 1,
-                          }"
-                        >
-                          <v-img
-                            :alt="`${chat.title} avatar`"
-                            :src="chat.avatar"
-                            max-width="20px"
-                            class="me-6"
-                          ></v-img>
-
-                          <v-list-item-content>
-                            <span class="text-xs font-weight-bold text-body">
-                              {{ $t("Name") }}:
-                            </span>
-                            <v-list-item-title
-                              v-text="chat.country"
-                              class="text-typo text-sm mb-0"
-                            ></v-list-item-title>
-                          </v-list-item-content>
-
-                          <v-list-item-content class="text-center">
-                            <span class="text-xs font-weight-bold text-body">
-                              {{ $t("Position") }}:
-                            </span>
-                            <v-list-item-title
-                              v-text="chat.sales"
-                              class="text-typo text-sm mb-0"
-                            ></v-list-item-title>
-                          </v-list-item-content>
-
-                          <v-list-item-content class="text-center">
-                            <span class="text-xs font-weight-bold text-body">
-                              {{ $t("Since") }}:
-                            </span>
-                            <v-list-item-title
-                              v-text="chat.bounce"
-                              class="text-typo text-sm mb-0"
-                            ></v-list-item-title>
-                          </v-list-item-content>
-                        </v-list-item>
-                      </v-list>
-                    </v-card-text>
-                  </v-card>
-                  <v-divider></v-divider>
-                  <v-card class="card-shadow border-radius-xl px-4 py-4" dark>
-                    <h6 class="mb-0 text-h6 text-warning font-weight-bold">
-                      {{ $t("Rapports") }}
-                    </h6>
-                    <v-card-text class="pt-3 pb-0 px-0">
-                      <v-list class="py-0">
-                        <v-list-item
-                          v-for="(chat, index) in countries"
-                          :key="chat.title"
-                          class="pt-2 pb-1 px-1"
-                          :class="{
-                            'border-bottom': index !== countries.length - 1,
-                          }"
-                        >
-                          <v-img
-                            :alt="`${chat.title} avatar`"
-                            :src="chat.avatar"
-                            max-width="20px"
-                            class="me-6"
-                          ></v-img>
-
-                          <v-list-item-content>
-                            <span class="text-xs font-weight-bold text-body">
-                              {{ $t("Name") }}:
-                            </span>
-                            <v-list-item-title
-                              v-text="chat.country"
-                              class="text-typo text-sm mb-0"
-                            ></v-list-item-title>
-                          </v-list-item-content>
-
-                          <v-list-item-content class="text-center">
-                            <span class="text-xs font-weight-bold text-body">
-                              {{ $t("Position") }}:
-                            </span>
-                            <v-list-item-title
-                              v-text="chat.sales"
-                              class="text-typo text-sm mb-0"
-                            ></v-list-item-title>
-                          </v-list-item-content>
-
-                          <v-list-item-content class="text-center">
-                            <span class="text-xs font-weight-bold text-body">
-                              {{ $t("Since") }}:
-                            </span>
-                            <v-list-item-title
-                              v-text="chat.bounce"
-                              class="text-typo text-sm mb-0"
-                            ></v-list-item-title>
-                          </v-list-item-content>
-                        </v-list-item>
-                      </v-list>
-                    </v-card-text>
-                  </v-card>
-                  <v-divider></v-divider>
-                  <v-card class="card-shadow border-radius-xl px-4 py-4" dark>
-                    <h6 class="mb-0 text-h6 text-warning font-weight-bold">
-                      {{ $t("Events") }}
-                    </h6>
-                    <v-card-text class="pt-3 pb-0 px-0">
-                      <v-list class="py-0">
-                        <v-list-item
-                          v-for="(chat, index) in countries"
-                          :key="chat.title"
-                          class="pt-2 pb-1 px-1"
-                          :class="{
-                            'border-bottom': index !== countries.length - 1,
-                          }"
-                        >
-                          <v-img
-                            :alt="`${chat.title} avatar`"
-                            :src="chat.avatar"
-                            max-width="20px"
-                            class="me-6"
-                          ></v-img>
-
-                          <v-list-item-content>
-                            <span class="text-xs font-weight-bold text-body">
-                              {{ $t("Name") }}:
-                            </span>
-                            <v-list-item-title
-                              v-text="chat.country"
-                              class="text-typo text-sm mb-0"
-                            ></v-list-item-title>
-                          </v-list-item-content>
-
-                          <v-list-item-content class="text-center">
-                            <span class="text-xs font-weight-bold text-body">
-                              {{ $t("Position") }}:
-                            </span>
-                            <v-list-item-title
-                              v-text="chat.sales"
-                              class="text-typo text-sm mb-0"
-                            ></v-list-item-title>
-                          </v-list-item-content>
-
-                          <v-list-item-content class="text-center">
-                            <span class="text-xs font-weight-bold text-body">
-                              {{ $t("Since") }}:
-                            </span>
-                            <v-list-item-title
-                              v-text="chat.bounce"
-                              class="text-typo text-sm mb-0"
-                            ></v-list-item-title>
-                          </v-list-item-content>
-                        </v-list-item>
-                      </v-list>
-                    </v-card-text>
-                  </v-card>
-                  <v-divider></v-divider>
-                  <v-card class="card-shadow border-radius-xl px-4 py-4" dark>
-                    <h6 class="mb-0 text-h6 text-warning font-weight-bold">
-                      {{ $t("Statements") }}
-                    </h6>
-                    <v-card-text class="pt-3 pb-0 px-0">
-                      <v-list class="py-0">
-                        <v-list-item
-                          v-for="(chat, index) in countries"
-                          :key="chat.title"
-                          class="pt-2 pb-1 px-1"
-                          :class="{
-                            'border-bottom': index !== countries.length - 1,
-                          }"
-                        >
-                          <v-img
-                            :alt="`${chat.title} avatar`"
-                            :src="chat.avatar"
-                            max-width="20px"
-                            class="me-6"
-                          ></v-img>
-
-                          <v-list-item-content>
-                            <span class="text-xs font-weight-bold text-body">
-                              {{ $t("Name") }}:
-                            </span>
-                            <v-list-item-title
-                              v-text="chat.country"
-                              class="text-typo text-sm mb-0"
-                            ></v-list-item-title>
-                          </v-list-item-content>
-
-                          <v-list-item-content class="text-center">
-                            <span class="text-xs font-weight-bold text-body">
-                              {{ $t("Position") }}:
-                            </span>
-                            <v-list-item-title
-                              v-text="chat.sales"
-                              class="text-typo text-sm mb-0"
-                            ></v-list-item-title>
-                          </v-list-item-content>
-
-                          <v-list-item-content class="text-center">
-                            <span class="text-xs font-weight-bold text-body">
-                              {{ $t("Since") }}:
-                            </span>
-                            <v-list-item-title
-                              v-text="chat.bounce"
-                              class="text-typo text-sm mb-0"
-                            ></v-list-item-title>
-                          </v-list-item-content>
-                        </v-list-item>
-                      </v-list>
-                    </v-card-text>
-                  </v-card>
-                  <v-divider></v-divider>
-                  <v-card class="card-shadow border-radius-xl px-4 py-4" dark>
-                    <h6 class="mb-0 text-h6 text-warning font-weight-bold">
-                      {{ $t("FinancialRapports") }}
-                    </h6>
-                    <v-card-text class="pt-3 pb-0 px-0">
-                      <v-list class="py-0">
-                        <v-list-item
-                          v-for="(chat, index) in countries"
-                          :key="chat.title"
-                          class="pt-2 pb-1 px-1"
-                          :class="{
-                            'border-bottom': index !== countries.length - 1,
-                          }"
-                        >
-                          <v-img
-                            :alt="`${chat.title} avatar`"
-                            :src="chat.avatar"
-                            max-width="20px"
-                            class="me-6"
-                          ></v-img>
-
-                          <v-list-item-content>
-                            <span class="text-xs font-weight-bold text-body">
-                              {{ $t("Name") }}:
-                            </span>
-                            <v-list-item-title
-                              v-text="chat.country"
-                              class="text-typo text-sm mb-0"
-                            ></v-list-item-title>
-                          </v-list-item-content>
-
-                          <v-list-item-content class="text-center">
-                            <span class="text-xs font-weight-bold text-body">
-                              {{ $t("Position") }}:
-                            </span>
-                            <v-list-item-title
-                              v-text="chat.sales"
-                              class="text-typo text-sm mb-0"
-                            ></v-list-item-title>
-                          </v-list-item-content>
-
-                          <v-list-item-content class="text-center">
-                            <span class="text-xs font-weight-bold text-body">
-                              {{ $t("Since") }}:
-                            </span>
-                            <v-list-item-title
-                              v-text="chat.bounce"
-                              class="text-typo text-sm mb-0"
-                            ></v-list-item-title>
-                          </v-list-item-content>
-                        </v-list-item>
-                      </v-list>
-                    </v-card-text>
-                  </v-card>
-                  <v-divider></v-divider>
                   <v-card class="card-shadow border-radius-xl" dark>
                     <div class="px-4 py-4">
                       <full-calendar
@@ -732,6 +232,16 @@
                       ></full-calendar>
                     </div>
                   </v-card>
+                  <v-divider></v-divider>
+                  <Members></Members>
+                  <v-divider></v-divider>
+                  <Rapport></Rapport>
+                  <v-divider></v-divider>
+                  <Event></Event>
+                  <v-divider></v-divider>
+                  <Statement></Statement>
+                  <v-divider></v-divider>
+                  <FinancialRapport></FinancialRapport>
                   <v-divider></v-divider>
                 </v-col>
               </v-row>
@@ -756,56 +266,48 @@ import interactionPlugin from "@fullcalendar/interaction";
 import Post from "@/views/Platform/Article/Post.vue";
 import UserService from "@/services/user.service";
 import ArticleService from "@/services/article.service";
+import Members from "@/views/Platform/Office/Department/components/Member.vue";
+import Rapport from "@/views/Platform/Office/Department/components/Rapport.vue";
+import FinancialRapport from "@/views/Platform/Office/Department/components/FinanciealRapport.vue";
+import Event from "@/views/Platform/Office/Department/components/Event.vue";
+import Statement from "@/views/Platform/Office/Department/components/Statement.vue";
+
 export default {
-  name: "Automotive",
+  name: "BureauPolitique",
   components: {
     Post,
+    Members,
+    Event,
+    FinancialRapport,
+    Rapport,
+    Statement,
     FullCalendar,
   },
   data() {
     return {
-        editedIndex: -1,
-        editedItem: {
-            name: "",
-            start: "",
-            end: "",
-            active: "",
-            type: "",
-        },
-        defaultItem: {
-            name: "",
-            start: "",
-            end: "",
-            active: "",
-            type: "",
-        },
+      editedIndex: -1,
+      editedItem: {
+        name: "",
+        start: "",
+        end: "",
+        active: "",
+        type: "",
+      },
+      defaultItem: {
+        name: "",
+        start: "",
+        end: "",
+        active: "",
+        type: "",
+      },
       slider: "",
-      countries: [
-        {
-          avatar: require("@/assets/img/team-1.jpg"),
-          country: "Jon Doe 1",
-          sales: "President",
-          bounce: "April 2023",
-        },
-        {
-          avatar: require("@/assets/img/team-2.jpg"),
-          country: "Jon Doe 1",
-          sales: "Vice President",
-          bounce: "April 2023",
-        },
-        {
-          avatar: require("@/assets/img/team-3.jpg"),
-          country: "Jon Doe 3",
-          sales: "Treasurer",
-          bounce: "April 2023",
-        },
-      ],
       calendarOptions: {
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
         contentHeight: "auto",
         initialView: "dayGridMonth",
         selectable: true,
-        initialDate: "2021-11-08",
+        initialDate: new Date(),
+        locale: "ar-tn",
         editable: true,
         headerToolbar: {
           start: "title", // will normally be on the left. if RTL, will be on the right
@@ -885,7 +387,6 @@ export default {
         ],
       },
       dialog: false,
-      dialogMember: false,
       userProfile: [],
       userRoles: [],
       userGroups: [],
@@ -893,18 +394,6 @@ export default {
     };
   },
   methods: {
-    zoomUpdate(zoom) {
-      this.currentZoom = zoom;
-    },
-    centerUpdate(center) {
-      this.currentCenter = center;
-    },
-    showLongText() {
-      this.showParagraph = !this.showParagraph;
-    },
-    innerClick() {
-      alert("Click!");
-    },
     savePost() {
       ArticleService.addPost(this.post).then(
         (response) => {
@@ -926,17 +415,16 @@ export default {
       );
     },
   },
-    computed: {
-        formTitle() {
-            return this.editedIndex === -1 ? "NewOffice" : "EditOffice";
-        },
+  computed: {
+    formTitle() {
+      return this.editedIndex === -1 ? "NewOffice" : "EditOffice";
     },
+  },
   mounted() {
     window.scrollTo({ top: 0, behavior: "smooth" });
     UserService.getProfile().then(
       (response) => {
         this.userProfile = response.data;
-        console.log(this.userProfile);
       },
       (error) => {
         this.content =
