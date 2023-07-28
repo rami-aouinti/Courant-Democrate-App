@@ -14,7 +14,11 @@
       >
         <v-row class="mb-12">
           <v-col md="1">
-            <v-avatar width="74" height="74" class="shadow border-radius-lg">
+            <v-avatar
+              width="74"
+              height="74"
+              class="border border-warning shadow border-radius-lg"
+            >
               <span v-if="userProfile.photo === null" class="text-h5">{{
                 getInitials(userProfile.firstName + " " + userProfile.lastName)
               }}</span>

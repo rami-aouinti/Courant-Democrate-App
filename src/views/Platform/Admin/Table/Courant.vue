@@ -47,7 +47,7 @@
                     solo
                     height="43"
                     v-model="search"
-                    placeholder="Search"
+                    :placeholder="$t('Search')"
                   >
                     <template slot="prepend-inner">
                       <v-icon
@@ -110,7 +110,7 @@
                             filled
                             solo
                             height="43"
-                            placeholder="Name"
+                            :placeholder="$t('Name')"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="6">
@@ -129,7 +129,7 @@
                             filled
                             solo
                             height="43"
-                            placeholder="Description"
+                            :placeholder="$t('Description')"
                           ></v-text-field>
                         </v-col>
                       </v-row>
@@ -150,7 +150,7 @@
                         py-3
                         px-6
                       "
-                      >Cancel</v-btn
+                      >{{ $t("Cancel") }}</v-btn
                     >
 
                     <v-btn
@@ -166,7 +166,7 @@
                         py-3
                         px-6
                       "
-                      >Save</v-btn
+                      >{{ $t("Save") }}</v-btn
                     >
                   </v-card-actions>
                 </v-card>
@@ -305,7 +305,7 @@
       <v-card-actions class="card-padding">
         <v-row>
           <v-col cols="6" lg="3" class="d-flex align-center">
-            <span class="text-body me-3 text-sm">Items per page:</span>
+            <span class="text-body me-3 text-sm">{{ $t("ItemsPerPage") }}</span>
             <v-text-field
               hide-details
               type="number"
@@ -317,7 +317,7 @@
               light
               :value="itemsPerPage"
               @input="itemsPerPage = parseInt($event, 10)"
-              placeholder="Items per page"
+              :placeholder="$t('ItemsPerPage')"
               class="
                 font-size-input
                 placeholder-lighter
@@ -370,14 +370,6 @@ export default {
         description: "",
       },
       headers: [
-        {
-          text: "Id",
-          align: "start",
-          cellClass: "border-bottom",
-          sortable: true,
-          value: "id",
-          class: "text-warning font-weight-bolder opacity-7 border-bottom ps-6",
-        },
         {
           text: "Name",
           value: "name",
@@ -448,8 +440,7 @@ export default {
         );
         Object.assign(this.items[this.editedIndex], this.editedItem);
       } else {
-        console.log(this.editedItem);
-        AdminService.addItem(this.editedItem, "courant").then(
+        AdminService.addItem(this.editedItem, "data/courant/new").then(
           (response) => {
             this.items.push(response);
           },
@@ -503,7 +494,6 @@ export default {
   mounted() {
     AdminService.getItems("data/courant").then(
       (response) => {
-        this.items = response.data;
         console.log(this.items);
       },
       (error) => {

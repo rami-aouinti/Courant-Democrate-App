@@ -17,17 +17,6 @@
             <small class="d-block text-muted">3 days ago</small>
           </div>
         </div>
-        <div class="text-end ms-auto">
-          <v-btn
-            outlined
-            color="#fff"
-            class="font-weight-bolder bg-gradient-warning py-4 px-7"
-            small
-          >
-            <v-icon size="8" class="material-icons-round pe-2">add</v-icon>
-            Follow
-          </v-btn>
-        </div>
       </div>
       <div class="px-4 py-4">
         <p class="mb-6 text-body font-weight-light">
@@ -57,14 +46,6 @@
                 >
                 <span class="text-sm text-body me-4">36</span>
               </div>
-              <div class="d-flex align-center">
-                <v-icon
-                  size="14"
-                  class="material-icons-round me-1 text-body cursor-pointer"
-                  >forward</v-icon
-                >
-                <span class="text-sm text-body me-4">12</span>
-              </div>
             </div>
           </v-col>
           <v-col sm="6">
@@ -81,7 +62,7 @@
                 </v-avatar>
               </div>
               <small class="ps-2 font-weight-bold text-body text-sm"
-                >and 30+ more</small
+                >{{ $t("and") }} 30+ {{ $t("more") }}</small
               >
             </div>
           </v-col>

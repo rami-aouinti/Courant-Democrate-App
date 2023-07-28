@@ -19,13 +19,7 @@
             class="material-icons-round me-1 text-body cursor-pointer"
             >thumb_up</v-icon
           >
-          <span class="text-sm me-2 text-body">10 likes</span>
-          <v-icon
-            size="14"
-            class="material-icons-round me-1 text-body cursor-pointer"
-            >share</v-icon
-          >
-          <span class="text-sm me-2 text-body">1 share</span>
+          <span class="text-sm me-2 text-body">10 {{ $t("likes") }}</span>
         </div>
       </div>
     </div>
@@ -40,7 +34,7 @@
         <v-row>
           <v-col cols="10">
             <v-textarea
-              placeholder="Write your comment"
+              :placeholder="$t('WriteYourComment')"
               class="input-style mt-0 pt-0"
               color="#e91e63"
               rows="1"

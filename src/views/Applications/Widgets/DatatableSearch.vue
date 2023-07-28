@@ -311,7 +311,7 @@
       <v-card-actions class="card-padding">
         <v-row>
           <v-col cols="6" lg="3" class="d-flex align-center">
-            <span class="text-body me-3 text-sm">Items per page:</span>
+            <span class="text-body me-3 text-sm">{{ $t("ItemsPerPage") }}</span>
             <v-text-field
               hide-details
               type="number"
@@ -323,7 +323,7 @@
               light
               :value="itemsPerPage"
               @input="itemsPerPage = parseInt($event, 10)"
-              placeholder="Items per page"
+              :placeholder="$t('ItemsPerPage')"
               class="
                 font-size-input
                 placeholder-lighter

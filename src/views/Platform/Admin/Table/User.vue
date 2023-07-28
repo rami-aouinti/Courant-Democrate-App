@@ -568,7 +568,7 @@
               light
               :value="itemsPerPage"
               @input="itemsPerPage = parseInt($event, 10)"
-              placeholder="Items per page"
+              :placeholder="$t('ItemsPerPage')"
               class="
                 font-size-input
                 placeholder-lighter

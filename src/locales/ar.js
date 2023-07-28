@@ -16,6 +16,7 @@ const ar = {
   Users: "الأعضاء",
   Groups: "المجموعات",
   SearchHere: "ابحث هنا",
+  Search: "ابحث",
   MyProfile: "الصفحة الشخصية",
   Setting: "تعديل",
   Logout: "خروج",
@@ -50,6 +51,7 @@ const ar = {
   EditUser: "تحديث بيانات المنخرط",
   Save: "تسجيل",
   Cancel: "إلغاء",
+  Close: "غلق",
   userForm: {
     login: {
       login: "Connexion",
@@ -107,6 +109,9 @@ const ar = {
   ImageProfile: "الصورة",
   BirthDate: "تاريخ الميلاد",
   DescriptionProfile: "تقديم لشخصي",
+  Description: "تعريف",
+  Name: "الإسم",
+  Actions: "الإجراءات",
   Male: "ذكر",
   Female: "أنثى",
   ConfirmationEmail: "تأكيد البريد الاكتروني",
@@ -168,6 +173,22 @@ const ar = {
   October: "أكتوبر",
   November: "نوفمبر",
   December: "ديسمبر",
+  ListOfParameters: "قائمة المعلمات",
+  Categories: "الاقسام",
+  HighScores: "أفضل الدرجات",
+  ChoiceLevel: "مستوى الاختبار",
+  Level: "مستوى",
+  AddPost: "إظافة منشور",
+  postTitle: "النص",
+  postDescription: "تعبير",
+  NewPost: "منشور جديد",
+  likes: "إعجاب",
+  and: "و",
+  more: "آخرون",
+  WriteYourComment: "اكتب تعليقك هنا",
+  Members: "الأعضاء",
+  Position: "المسؤولية",
+  Since: "منذ",
 };
 
 export default ar;
