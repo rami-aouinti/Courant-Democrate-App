@@ -40,7 +40,7 @@
                     solo
                     height="43"
                     v-model="search"
-                    placeholder="Search"
+                    :placeholder="$t('Search')"
                   >
                     <template slot="prepend-inner">
                       <v-icon
