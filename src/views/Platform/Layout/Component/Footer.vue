@@ -1,6 +1,7 @@
 <template>
   <div>
     <template v-if="auth">
+
       <v-footer
         color="transparent"
         class="px-6 position-absolute w-100 bottom-0"
@@ -11,41 +12,8 @@
             <v-row>
               <v-col cols="12" md="6">
                 <div class="copyright text-body-2 ls-0 text-white">
-                  © {{ new Date().getFullYear() }}, made with
-                  <i class="fa fa-heart" aria-hidden="true"></i> by
-                  <a
-                    href=""
-                    class="
-                      text-decoration-none text-white text-body-2
-                      ls-0
-                      font-weight-bold
-                    "
-                    target="_blank"
-                    >Rami Aouinti</a
-                  >
-                  for a better web.
+                  © {{ new Date().getFullYear() }}, devlopped by ATTAYAR
                 </div>
-              </v-col>
-
-              <v-col cols="10" md="6" class="d-flex justify-end">
-                <ul
-                  v-for="item in footer"
-                  :key="item.linkName"
-                  class="d-flex list-style-none"
-                >
-                  <li>
-                    <a
-                      :href="item.link"
-                      class="
-                        text-decoration-none text-white text-body-2
-                        ls-0
-                        no-default-hover
-                      "
-                      target="_blank"
-                      >{{ item.linkName }}</a
-                    >
-                  </li>
-                </ul>
               </v-col>
             </v-row>
           </v-card-text>
@@ -107,6 +75,7 @@
           </v-card-text>
         </v-card>
       </v-footer>
+
     </template>
 
     <template v-else>
@@ -116,23 +85,11 @@
             <v-row>
               <v-col cols="12" md="6">
                 <div class="copyright text-body-2 ls-0 text-muted">
-                  © {{ new Date().getFullYear() }}, made with
-                  <i class="fa fa-heart" aria-hidden="true"></i> by
-                  <a
-                    href="https://www.linkedin.com/in/rami-aouinti-78998a59/"
-                    class="
-                      text-decoration-none text-typo text-body-2
-                      ls-0
-                      font-weight-bold
-                    "
-                    target="_blank"
-                    >Mohamed Rami Aouinti</a
-                  >
-                  for a better web.
+                  © {{ new Date().getFullYear() }}, devlopped by ATTAYAR
                 </div>
               </v-col>
 
-              <v-col cols="10" md="6" class="d-flex justify-end">
+              <!--<v-col cols="10" md="6" class="d-flex justify-end">
                 <ul
                   v-for="item in footer"
                   :key="item.linkName"
@@ -152,7 +109,7 @@
                     >
                   </li>
                 </ul>
-              </v-col>
+              </v-col>-->
             </v-row>
           </v-card-text>
         </v-card>

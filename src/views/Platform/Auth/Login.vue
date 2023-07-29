@@ -101,7 +101,7 @@
                 bg-gradient-default
                 py-2
                 px-6
-                me-2
+                
                 mt-6
                 mb-2
                 w-100
@@ -111,11 +111,12 @@
               "
               :disabled="loading"
             >
-              <span
-                v-show="loading"
-                class="spinner-border spinner-border-sm text-warning"
-              ></span>
-              <span>تسجيل الدخول</span>
+            <span>تسجيل الدخول</span>
+            <span
+              v-show="loading"
+              class="spinner-border spinner-border-sm text-warning pr-2"
+            ></span>
+
             </button>
             <!--<p class="text-sm text-body mt-3 mb-0">
               Already have an account?
@@ -127,7 +128,7 @@
             </p>-->
             <div class="form-group">
               <div v-if="message" class="alert alert-danger" role="alert">
-                {{ message }}
+                بيانات الدخول غير صحيحة
               </div>
             </div>
           </form>

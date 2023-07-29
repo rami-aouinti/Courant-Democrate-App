@@ -39,6 +39,7 @@
     </div>
   </v-card>
 </template>
+
 <script>
 import Chart from "chart.js/auto";
 

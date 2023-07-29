@@ -8,7 +8,7 @@
     opacity: 0;
   }
 
-  &.v-navigation-drawer--is-mouseover .d-none-mini, {
+  &.v-navigation-drawer--is-mouseover .d-none-mini {
     opacity: 1;
   }
 
@@ -407,7 +407,7 @@
 
   .v-application--is-rtl .v-main{
     padding-left: 0;
-    padding-right: $v-main-margin-left !important;
+    //padding-right: $v-main-margin-left !important;
   }
 
   .drawer-mini {
@@ -615,4 +615,19 @@
 
     }
   }
+}
+
+
+/**** CSS OMAR CHAARI ***/
+input, select, textarea{
+  color: #fff !important;
+}
+
+textarea:focus, input:focus,textarea:hover, input:hover {
+  color: #fff !important;
+}
+
+
+input::placeholder,textarea::placeholder{
+  color: #fff !important;
 }

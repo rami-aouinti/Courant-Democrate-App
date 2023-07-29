@@ -13,13 +13,11 @@
                 <div class="copyright text-body-2 ls-0 text-white">
                   © {{ new Date().getFullYear() }}, made with
                   <i class="fa fa-heart" aria-hidden="true"></i> by
-                  <a  href="#"  target="_blank"  class="
+                  <a  href="#" target="_blank" class="
                       text-decoration-none text-white text-body-2
                       ls-0
                       font-weight-bold
-                    "
-                                       
-                    >xxxx</a>
+                    ">xxxx</a>
                   for a better web.
                 </div>
               </v-col>
