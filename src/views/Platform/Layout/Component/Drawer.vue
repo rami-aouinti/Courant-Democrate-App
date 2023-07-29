@@ -60,7 +60,10 @@
         active-class="item-active"
       >
         <template v-slot:activator>
-          <v-avatar size="50" class="my-3 ms-2 elevation-20">
+          <v-avatar
+            size="50"
+            class="border border-warning my-3 ms-2 elevation-20"
+          >
             <span v-if="userProfile.photo === null" class="text-h5">{{
               getInitials(userProfile.firstName + " " + userProfile.lastName)
             }}</span>
@@ -806,6 +809,26 @@ export default {
             title: "Offices",
             prefix: "O",
             link: "/admin/offices",
+          },
+          {
+            title: "PoliticOffices",
+            prefix: "P",
+            link: "/admin/politicOffices",
+          },
+          {
+            title: "ExecutifOffices",
+            prefix: "E",
+            link: "/admin/executifOffices",
+          },
+          {
+            title: "NationalCouncil",
+            prefix: "O",
+            link: "/admin/nationalCouncil",
+          },
+          {
+            title: "Comittee",
+            prefix: "O",
+            link: "/admin/comittee",
           },
         ],
       },

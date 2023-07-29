@@ -147,7 +147,7 @@
             color="#fff"
             small
             :class="
-              sidebarTheme == 'white'
+              sidebarTheme === 'white'
                 ? 'bg-gradient-default'
                 : 'btn-outline-default'
             "

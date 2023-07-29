@@ -12,6 +12,35 @@
           elevation-20
         "
       >
+        <v-row>
+          <div class="d-flex align-center ms-0">
+            <h4 class="elevation-10 text-light">
+              {{ $t("CompleteYourProfile") }}
+            </h4>
+          </div>
+        </v-row>
+        <v-row class="mb-12">
+          <v-col md="1">
+            <v-avatar
+              width="74"
+              height="74"
+              class="border border-warning shadow border-radius-lg"
+            >
+              <span v-if="userProfile.photo === null" class="text-h5">{{
+                getInitials(userProfile.firstName + " " + userProfile.lastName)
+              }}</span>
+              <img
+                v-else
+                :src="userProfile.photo"
+                alt="Avatar"
+                class="border-radius-lg"
+              />
+            </v-avatar>
+          </v-col>
+          <v-col md="11">
+            <ProgressProfile></ProgressProfile>
+          </v-col>
+        </v-row>
         <v-row class="mb-12">
           <v-col md="12">
             <sales-country></sales-country>
@@ -320,6 +349,8 @@ import SalesCountry from "./Widgets/SalesCountry.vue";
 import CardWebsiteViews from "./Widgets/CardWebsiteViews.vue";
 import CardDailySales from "./Widgets/CardDailySales.vue";
 import CardCompletedTasks from "./Widgets/CardCompletedTasks.vue";
+import ProgressProfile from "@/views/Platform/Widgets/ProgressProfile.vue";
+import UserService from "@/services/user.service";
 
 export default {
   name: "Dashboard",
@@ -328,6 +359,18 @@ export default {
     CardWebsiteViews,
     CardDailySales,
     CardCompletedTasks,
+    ProgressProfile,
+  },
+  methods: {
+    getInitials(string) {
+      var names = string.split(" "),
+        initials = names[0].substring(0, 1).toUpperCase();
+
+      if (names.length > 1) {
+        initials += names[names.length - 1].substring(0, 1).toUpperCase();
+      }
+      return initials;
+    },
   },
   data() {
     return {
@@ -373,7 +416,22 @@ export default {
           path: "/bureau/locales",
         },
       ],
+      userProfile: [],
     };
+  },
+  mounted() {
+    UserService.getProfile().then(
+      (response) => {
+        this.userProfile = response.data;
+        console.log(this.userProfile);
+      },
+      (error) => {
+        this.content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    );
   },
 };
 </script>

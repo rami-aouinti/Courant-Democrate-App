@@ -127,6 +127,16 @@ const fr = {
   DeleteAccount: "Supprimer le compte",
   OnceYouDeleteYourAccountThereIsNoGoingBackPleaseBeCertain: "",
   Deactivate: "Deactivate",
+  SeeOurDashboardOptions: "See our dashboard options",
+  SidebarColors: "Sidebar Colors",
+  SideNavigatorType: "Side navigator Type",
+  ChooseBetweenDifferentSideNavigatorTypes:
+    "Choose between 3 different side navigator types.",
+  YouCanChangeTheSidenavTypeJustOnDesktopView:
+    "You can change the sidenav type just on desktop view.",
+  white: "white",
+  dark: "dark",
+  transparent: "transparent",
 };
 
 export default fr;

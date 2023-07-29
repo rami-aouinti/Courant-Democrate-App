@@ -14,14 +14,14 @@
     </div>
     <v-card class="shadow px-4 py-4 mx-9 border-radius-xl mt-n16" dark>
       <div class="d-flex justify-content-center">
-        <h1 class="text-warning">Quiz</h1>
+        <h1 class="text-warning">{{ $t("Quiz") }}</h1>
       </div>
       <v-divider></v-divider>
       <v-row>
         <v-col lg="3" cols="12">
           <v-card class="h-100">
             <div class="px-4 pt-4">
-              <h6 class="mb-0 text-h6 text-warning">Categories</h6>
+              <h6 class="mb-0 text-h6 text-warning">{{ $t("Categories") }}</h6>
             </div>
             <div class="px-4 py-4">
               <v-list>
@@ -38,7 +38,9 @@
                       height="48"
                       class="shadow border-radius-lg me-4"
                     >
-                      <v-icon class="material-icons-round text-warning" size="36"
+                      <v-icon
+                        class="material-icons-round text-warning"
+                        size="36"
                         >insights</v-icon
                       >
                     </v-avatar>
@@ -70,17 +72,8 @@
           </div>
           <div v-else>
             <span v-if="!startQuiz">
-              <v-card-text class="text-warning">
-                This is an simple OnePage Application Written in Vue2. You can
-                integrate it anywhere in your vueJS application. It has a simple
-                timer with loading animations. Since it is open source feel free
-                to contribute to this simple quiz Application here:
-                <a
-                  target="_blank"
-                  href="https://github.com/arpan45/simple-quiz-vue"
-                >
-                  Github Repo
-                </a>
+              <v-card-text>
+                يجب عليك اختيار القسم ثم الظعط على الزر لاختيار مستوى الاسئلة
               </v-card-text>
             </span>
             <span v-else>
@@ -99,7 +92,7 @@
                             font-weight-bold
                             text-uppercase
                             btn-primary
-                            bg-gradient-primary
+                            bg-gradient-warning
                             py-2
                             px-6
                             me-2
@@ -107,7 +100,7 @@
                           "
                           @click="startQuizFunc(i)"
                         >
-                          Level {{ i }}</v-btn
+                          {{ $t("Level") }} {{ i }}</v-btn
                         >
                       </v-card>
                     </v-col>
@@ -159,7 +152,7 @@
         <v-col lg="3" cols="12">
           <v-card class="h-100">
             <div class="px-4 pt-4">
-              <h6 class="mb-0 text-h6 text-typo">High Scores</h6>
+              <h6 class="mb-0 text-h6 text-warning">{{ $t("HighScores") }}</h6>
             </div>
             <div class="px-4 py-4">
               <v-list>
@@ -225,7 +218,7 @@
       </v-row>
       <v-divider></v-divider>
       <div class="d-flex justify-content-center" v-if="!startQuiz">
-        <v-btn @click="choiceLevel()">Choice Level</v-btn>
+        <v-btn @click="choiceLevel()">{{ $t("ChoiceLevel") }}</v-btn>
       </div>
     </v-card>
   </v-container>

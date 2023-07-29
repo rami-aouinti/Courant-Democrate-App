@@ -573,7 +573,7 @@
 
 // Fixed Plugin
 
-.fixed-plugin{
+.fixed-plugin-right{
   .v-card{
     position: fixed!important;
     right: -360px;
@@ -590,6 +590,28 @@
   &.show{
     .v-card{
       right: 0;
+
+    }
+  }
+}
+
+.fixed-plugin-left{
+  .v-card{
+    position: fixed!important;
+    left: -360px;
+    top: 0;
+    height: 100%;
+    right: auto!important;
+    transform: unset!important;
+    width: 300px;
+    border-radius: 0;
+    padding: 0 10px;
+    transition: .9s ease;
+    z-index: 1020;
+  }
+  &.show{
+    .v-card{
+      left: 0;
 
     }
   }

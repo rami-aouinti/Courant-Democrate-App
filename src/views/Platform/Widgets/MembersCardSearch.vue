@@ -12,7 +12,7 @@
         filled
         solo
         height="43"
-        placeholder="Search"
+        :placeholder="$t('Search')"
       >
         <template slot="prepend-inner">
           <v-icon color="#adb5bd" size=".875rem">fas fa-search</v-icon>

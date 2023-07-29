@@ -123,7 +123,8 @@ const en = {
   ChangeItOften: "Change it often",
   UpdatePassword: "Update Password",
   PasswordRequirements: "Password Requirements",
-  PleaseFollowThisGuideForAStrongPassword: "Please follow this guide for a strong password:",
+  PleaseFollowThisGuideForAStrongPassword:
+    "Please follow this guide for a strong password:",
   Notifications: "Notifications",
   ChooseHowYouReceiveNotificationsTheseNotificationSettingsApplyToTheThingsYouAreWatching:
     "Choose how you receive notifications. These notification settings apply to the things you’re watching.",
@@ -144,6 +145,16 @@ const en = {
   OnceYouDeleteYourAccountThereIsNoGoingBackPleaseBeCertain:
     "Once you delete your account there is no going back. please Be certain.",
   Deactivate: "Deactivate",
+  SeeOurDashboardOptions: "See our dashboard options",
+  SidebarColors: "Sidebar Colors",
+  SideNavigatorType: "Side navigator Type",
+  ChooseBetweenDifferentSideNavigatorTypes:
+    "Choose between 3 different side navigator types.",
+  YouCanChangeTheSidenavTypeJustOnDesktopView:
+    "You can change the sidenav type just on desktop view.",
+  white: "white",
+  dark: "dark",
+  transparent: "transparent",
 };
 
 export default en;

@@ -2,11 +2,11 @@
   <div>
     <v-card class="card-shadow border-radius-xl elevation-20" dark>
       <div class="card-header-padding">
-        <h5 class="font-weight-bold text-h5 text-warning mb-0">
-          {{ $t("Users") }}
+        <h5 class="font-weight-bold text-h5 text-typo mb-0">
+          {{ $t("Structures") }}
         </h5>
         <p class="text-sm text-body font-weight-light mb-0">
-          {{ $t("ListOfUsers") }}
+          {{ $t("ListOfPoliticOffices") }}
         </p>
       </div>
 
@@ -21,8 +21,8 @@
           @page-count="pageCount = $event"
           :items-per-page="itemsPerPage"
           mobile-breakpoint="0"
-          show-expand
           hide-default-header
+          show-expand
         >
           <template v-slot:header="{ props }">
             <th v-for="head in props.headers" class="text-warning">
@@ -97,7 +97,7 @@
                       <v-row>
                         <v-col cols="6">
                           <v-text-field
-                            v-model="editedItem.username"
+                            v-model="editedItem.name"
                             hide-details
                             class="
                               input-style
@@ -111,12 +111,51 @@
                             filled
                             solo
                             height="43"
-                            :placeholder="$t('Username')"
+                            :placeholder="$t('PoliticOfficeName')"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="6">
+                          <v-checkbox
+                            v-model="editedItem.active"
+                            hide-details
+                            class="
+                              input-style
+                              font-size-input
+                              text-light-input
+                              placeholder-light
+                              input-icon
+                            "
+                            dense
+                            flat
+                            filled
+                            solo
+                            height="43"
+                            :placeholder="$t('Active')"
+                          ></v-checkbox>
+                        </v-col>
+                        <v-col cols="6">
+                          <v-text-field
+                            v-model="editedItem.start"
+                            hide-details
+                            class="
+                              input-style
+                              font-size-input
+                              text-light-input
+                              placeholder-light
+                              input-icon
+                            "
+                            dense
+                            flat
+                            filled
+                            solo
+                            height="43"
+                            placeholder="Start"
+                            type="datetime-local"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="6">
                           <v-text-field
-                            v-model="editedItem.email"
+                            v-model="editedItem.end"
                             hide-details
                             class="
                               input-style
@@ -130,94 +169,51 @@
                             filled
                             solo
                             height="43"
-                            :placeholder="$t('Email')"
+                            placeholder="Last Name"
+                            type="datetime-local"
                           ></v-text-field>
-                        </v-col>
-                        <v-col cols="6">
-                          <v-text-field
-                            v-model="editedItem.firstName"
-                            hide-details
-                            class="
-                              input-style
-                              font-size-input
-                              text-light-input
-                              placeholder-light
-                              input-icon
-                            "
-                            dense
-                            flat
-                            filled
-                            solo
-                            height="43"
-                            :placeholder="$t('FirstName')"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col cols="6">
-                          <v-text-field
-                            v-model="editedItem.lastName"
-                            hide-details
-                            class="
-                              input-style
-                              font-size-input
-                              text-light-input
-                              placeholder-light
-                              input-icon
-                            "
-                            dense
-                            flat
-                            filled
-                            solo
-                            height="43"
-                            :placeholder="$t('LastName')"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col cols="6">
-                          <v-text-field
-                            v-model="editedItem.phone"
-                            hide-details
-                            class="
-                              input-style
-                              font-size-input
-                              text-light-input
-                              placeholder-light
-                              input-icon
-                            "
-                            dense
-                            flat
-                            filled
-                            solo
-                            height="43"
-                            :placeholder="$t('Phone')"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col cols="6">
-                          <v-select
-                            :items="$t(gender)"
-                            :label="$t('Male')"
-                            color="#e91e63"
-                            class="font-size-input input-style"
-                            single-line
-                            height="36"
-                            :v-model="$t(editedItem.gender)"
-                          >
-                          </v-select>
                         </v-col>
                         <v-col cols="6">
                           <v-autocomplete
-                            :items="[
-                              'Skiing',
-                              'Ice hockey',
-                              'Soccer',
-                              'Basketball',
-                              'Hockey',
-                              'Reading',
-                              'Writing',
-                              'Coding',
-                              'Basejump',
-                            ]"
-                            :label="$t('Offices')"
+                            v-model="participants"
+                            :items="users"
+                            :label="$t('Members')"
                             multiple
-                          ></v-autocomplete>
+                          >
+                            <template v-slot:selection="data">
+                              <v-chip
+                                v-bind="data.attrs"
+                                :input-value="data.selected"
+                                close
+                                @click="data.select"
+                                @click:close="remove(data.item)"
+                              >
+                                <v-avatar left>
+                                  <v-img :src="data.item.photo"></v-img>
+                                </v-avatar>
+                                {{ data.item.firstName }}
+                                {{ data.item.lastName }}
+                              </v-chip>
+                            </template>
+                            <template v-slot:item="data">
+                              <template v-if="typeof data.item !== 'object'">
+                                <v-list-item-content
+                                  v-text="data.item"
+                                ></v-list-item-content>
+                              </template>
+                              <template v-else>
+                                <v-list-item-avatar>
+                                  <img :src="data.item.photo" />
+                                </v-list-item-avatar>
+                                <v-list-item-content>
+                                  <v-list-item-title>
+                                    {{ data.item.firstName }}
+                                    {{ data.item.lastName }}</v-list-item-title
+                                  >
+                                </v-list-item-content>
+                              </template>
+                            </template>
+                          </v-autocomplete>
                         </v-col>
                       </v-row>
                     </v-container>
@@ -317,7 +313,7 @@
                         py-3
                         px-6
                       "
-                      >Cancel</v-btn
+                      >{{ $t("Cancel") }}</v-btn
                     >
 
                     <v-btn
@@ -333,7 +329,7 @@
                         py-3
                         px-6
                       "
-                      >OK</v-btn
+                      >{{ $t("Ok") }}</v-btn
                     >
                     <v-spacer></v-spacer>
                   </v-card-actions>
@@ -342,30 +338,38 @@
             </v-toolbar>
           </template>
 
-          <template v-slot:item.username="{ item }">
+          <template v-slot:item.name="{ item }">
             <div class="d-flex align-center ms-2">
               <span class="text-sm font-weight-normal text-body text-warning">
-                {{ item.username.replace(/\d+/g, "") }}
+                {{ item.name }}
               </span>
             </div>
           </template>
 
-          <template v-slot:item.email="{ item }">
+          <template v-slot:item.type="{ item }">
             <span class="text-sm font-weight-normal text-body text-warning">
-              {{ item.email }}
+              {{ item.type }}
             </span>
           </template>
 
-          <template v-slot:item.regional="{ item }">
-            <span class="text-sm font-weight-normal text-body text-warning">
-              {{ item.regional }}
-            </span>
+          <template v-slot:item.users="{ item }">
+            <v-row>
+              <v-col cols="12">
+                <div class="py-4 d-flex">
+                  <v-col lg="3" md="2" sm="3" cols="4" class="text-center">
+                    {{ item.officeUser.length }}
+                  </v-col>
+                </div>
+              </v-col>
+            </v-row>
           </template>
 
-          <template v-slot:item.local="{ item }">
-            <span class="text-sm font-weight-normal text-body text-warning">
-              {{ item.local }}
-            </span>
+          <template v-slot:item.active="{ item }">
+            <v-checkbox
+              :ripple="false"
+              v-model="item.active"
+              color="orange"
+            ></v-checkbox>
           </template>
 
           <template v-slot:item.actions="{ item }">
@@ -405,143 +409,52 @@
                 <v-card class="card-shadow border-radius-xl elevation-20" dark>
                   <br />
                   <v-row>
-                    <v-col cols="3">
-                      <v-avatar
-                        width="220"
-                        height="250"
-                        class="border-radius-lg me-4"
-                      >
-                        <img :src="item.photo" alt="Avatar" />
-                      </v-avatar>
+                    <v-col cols="4">
+                      <h5>{{ $t("Members") }}</h5>
+                      <v-row v-for="officeUser in item.officeUser">
+                        <v-col cols="2">
+                          <v-avatar
+                            width="20"
+                            height="20"
+                            class="border-radius-lg me-4"
+                          >
+                            <img :src="officeUser.user.photo" alt="Avatar" />
+                          </v-avatar>
+                        </v-col>
+                        <v-col cols="10">
+                          <h6>
+                            {{ officeUser.user.firstName }}
+                            {{ officeUser.user.lastName }} :
+                            {{ officeUser.position }}
+                          </h6>
+                        </v-col>
+                      </v-row>
+                      <v-divider></v-divider>
+                      <h5>{{ $t("NewMembers") }}</h5>
+                      <v-divider></v-divider>
+                      <h5>{{ $t("Quitters") }}</h5>
                     </v-col>
-                    <v-col cols="9">
-                      <h4>
-                        {{ $t("MoreInfoAbout") }} {{ item.firstName }}
-                        {{ item.lastName }}
-                      </h4>
-                      <v-list>
-                        <v-list-item-group class="border-radius-sm">
-                          <v-list-item
-                            :ripple="false"
-                            class="px-0 border-radius-sm"
-                          >
-                            <v-list-item-content class="py-0">
-                              <div class="text-body text-sm">
-                                <strong class="text-dark"
-                                  >{{ $t("FirstName") }}:</strong
-                                >
-                                {{ item.firstName }}
-                              </div>
-                            </v-list-item-content>
-                          </v-list-item>
-                          <v-list-item
-                            :ripple="false"
-                            class="px-0 border-radius-sm"
-                          >
-                            <v-list-item-content class="py-0">
-                              <div class="text-body text-sm">
-                                <strong class="text-dark"
-                                  >{{ $t("LastName") }}:</strong
-                                >
-                                {{ item.lastName }}
-                              </div>
-                            </v-list-item-content>
-                          </v-list-item>
-                          <v-list-item
-                            :ripple="false"
-                            class="px-0 border-radius-sm"
-                          >
-                            <v-list-item-content class="py-0">
-                              <div class="text-body text-sm">
-                                <strong class="text-dark"
-                                  >{{ $t("Gender") }}:</strong
-                                >
-                                {{ item.gender }}
-                              </div>
-                            </v-list-item-content>
-                          </v-list-item>
-                          <v-list-item
-                            :ripple="false"
-                            class="px-0 border-radius-sm"
-                          >
-                            <v-list-item-content class="py-0">
-                              <div class="text-body text-sm">
-                                <strong class="text-dark"
-                                  >{{ $t("Email") }}:</strong
-                                >
-                                {{ item.email }}
-                              </div>
-                            </v-list-item-content>
-                          </v-list-item>
-                          <v-list-item
-                            :ripple="false"
-                            class="px-0 border-radius-sm"
-                          >
-                            <v-list-item-content class="py-0">
-                              <div class="text-body text-sm">
-                                <strong class="text-dark"
-                                  >{{ $t("BureauRegional") }}:</strong
-                                >
-                                {{ item.regional }}
-                              </div>
-                            </v-list-item-content>
-                          </v-list-item>
-                          <v-list-item
-                            :ripple="false"
-                            class="px-0 border-radius-sm"
-                          >
-                            <v-list-item-content class="py-0">
-                              <div class="text-body text-sm">
-                                <strong class="text-dark"
-                                  >{{ $t("BureauLocal") }}:</strong
-                                >
-                                {{ item.local }}
-                              </div>
-                            </v-list-item-content>
-                          </v-list-item>
-                          <v-list-item
-                            :ripple="false"
-                            class="px-0 border-radius-sm"
-                          >
-                            <v-list-item-content class="py-0">
-                              <div class="text-body text-sm">
-                                <strong class="text-dark"
-                                  >{{ $t("Birthday") }}:</strong
-                                >
-                                {{ new Date(item.birthday).getFullYear() }}/{{
-                                  new Date(item.birthday).getMonth()
-                                }}/{{ new Date(item.birthday).getDay() }}
-                              </div>
-                            </v-list-item-content>
-                          </v-list-item>
-                          <v-list-item
-                            :ripple="false"
-                            class="px-0 border-radius-sm"
-                          >
-                            <v-list-item-content class="py-0">
-                              <div class="text-body text-sm">
-                                <strong class="text-dark"
-                                  >{{ $t("Phone") }}:</strong
-                                >
-                                {{ item.phone }}
-                              </div>
-                            </v-list-item-content>
-                          </v-list-item>
-                          <v-list-item
-                            :ripple="false"
-                            class="px-0 border-radius-sm"
-                          >
-                            <v-list-item-content class="py-0">
-                              <div class="text-body text-sm">
-                                <strong class="text-dark"
-                                  >{{ $t("Function") }}:</strong
-                                >
-                                {{ item.function }}
-                              </div>
-                            </v-list-item-content>
-                          </v-list-item>
-                        </v-list-item-group>
-                      </v-list>
+                    <v-col cols="4">
+                      <h5>
+                        {{ $t("Rapports") }}
+                      </h5>
+                      <v-divider></v-divider>
+                      <h5>
+                        {{ $t("Statements") }}
+                      </h5>
+                      <v-divider></v-divider>
+                      <h5>
+                        {{ $t("FinancialRapports") }}
+                      </h5>
+                    </v-col>
+                    <v-col cols="4">
+                      <h5>
+                        {{ $t("Reunions") }}
+                      </h5>
+                      <v-divider></v-divider>
+                      <h5>
+                        {{ $t("Events") }}
+                      </h5>
                     </v-col>
                   </v-row>
                   <br />
@@ -596,7 +509,6 @@
   </div>
 </template>
 <script>
-import users from "./Users";
 import AdminService from "@/services/admin.service";
 import PdfService from "@/services/pdf.service";
 export default {
@@ -608,60 +520,54 @@ export default {
       itemsPerPage: 10,
       dialog: false,
       dialogDelete: false,
-      users,
+      users: [],
       search: "",
-      gender: ["Female", "Male"],
       editedIndex: -1,
       editedItem: {
-        email: "",
-        username: "",
-        firstName: "",
-        lastName: "",
-        gender: "",
-        description: "",
-        phone: "",
-        photo: "",
+        name: "",
+        start: "",
+        end: "",
+        active: "",
+        type: "",
       },
       defaultItem: {
-        email: "",
-        username: "",
-        password: "",
-        firstName: "",
-        lastName: "",
+        name: "",
+        start: "",
+        end: "",
+        active: "",
+        type: "",
       },
       headers: [
         {
-          text: "Username",
+          text: "OfficeName",
           align: "start",
           cellClass: "border-bottom",
-          sortable: true,
-          value: "username",
+          sortable: false,
+          value: "name",
           class: "text-warning font-weight-bolder opacity-7 border-bottom ps-6",
         },
         {
-          text: "Email",
-          value: "email",
+          text: "PoliticOfficeParticipants",
+          value: "users",
           class: "text-warning font-weight-bolder opacity-7",
         },
         {
-          text: "BureauRegional",
-          value: "regional",
+          text: "OfficeActive",
+          value: "active",
           class: "text-warning font-weight-bolder opacity-7",
         },
         {
-          text: "BureauLocal",
-          value: "local",
-          class: "text-warning font-weight-bolder opacity-7",
-        },
-        {
-          text: "Actions",
+          text: "OfficeAction",
           value: "actions",
           sortable: false,
           class: "text-warning font-weight-bolder opacity-7",
         },
       ],
       items: [],
-      address: "",
+      participants: [],
+      enabled: null,
+      slots: ["مكتب جهوي", "مكتب محلي"],
+      ex4: null,
     };
   },
   methods: {
@@ -700,7 +606,7 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        AdminService.editItem(this.editedItem, "user").then(
+        AdminService.editItem(this.editedItem, "office").then(
           (response) => {
             Object.assign(this.items[this.editedIndex], response);
           },
@@ -713,12 +619,12 @@ export default {
         );
         Object.assign(this.items[this.editedIndex], this.editedItem);
       } else {
-        this.editedItem.description = "example description";
-        this.editedItem.photo = "https://zomra.de/img/user.png";
-        this.editedItem.password = "testtest";
-        AdminService.addItem(this.editedItem, "user").then(
+        this.editedItem.participants = this.participants;
+        AdminService.addItem(this.editedItem, "politic/office/new").then(
           (response) => {
-            this.items.push(response);
+            response.office.start = response.office.start.date;
+            response.office.end = response.office.end.date;
+            this.items.push(response.office);
           },
           (error) => {
             this.content =
@@ -732,7 +638,7 @@ export default {
     },
 
     generatePdf() {
-      PdfService.generatePdf(this.items, "List of Users").then(
+      PdfService.generatePdf(this.items, "List of Offices").then(
         (response) => {
           window.open(response, "_blank");
         },
@@ -744,6 +650,18 @@ export default {
         }
       );
     },
+
+    remove(item) {
+      const result = this.participants.find(
+        ({ firstName }) => firstName === item.firstName
+      );
+      //const index = this.participants.indexOf(item.firstName);
+      if (result >= 0) this.participants.splice(result, 1);
+    },
+
+    isEnabled(slot) {
+      return this.enabled === slot;
+    },
   },
   watch: {
     dialog(val) {
@@ -752,11 +670,60 @@ export default {
     dialogDelete(val) {
       val || this.closeDelete();
     },
+
+    enabled(slot) {
+      if (slot === "no-data") {
+        this.items = [];
+      } else if (slot === "no-results") {
+        this.search = "...";
+      } else {
+        this.search = null;
+        AdminService.findItem(slot, "office/type").then(
+          (response) => {
+            this.items = response.data;
+          },
+          (error) => {
+            this.content =
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString();
+          }
+        );
+      }
+    },
+
+    ex4() {
+      if (this.ex4 === "all") {
+        AdminService.findItem(false, "office/active").then(
+          (response) => {
+            this.items = response.data;
+          },
+          (error) => {
+            this.content =
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString();
+          }
+        );
+      } else {
+        AdminService.getItems("office").then(
+          (response) => {
+            this.items = response.data;
+          },
+          (error) => {
+            this.content =
+              (error.response && error.response.data) ||
+              error.message ||
+              error.toString();
+          }
+        );
+      }
+    },
   },
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "NewUser" : "EditUser";
+      return this.editedIndex === -1 ? "NewOffice" : "EditOffice";
     },
     pages() {
       return this.pagination.rowsPerPage
@@ -766,10 +733,21 @@ export default {
   },
 
   mounted() {
-    AdminService.getItems("user/all").then(
+    AdminService.getItems("politic/office").then(
       (response) => {
         this.items = response.data;
-        console.log(this.items);
+      },
+      (error) => {
+        this.content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    );
+
+    AdminService.getItems("user").then(
+      (response) => {
+        this.users = response.data;
       },
       (error) => {
         this.content =

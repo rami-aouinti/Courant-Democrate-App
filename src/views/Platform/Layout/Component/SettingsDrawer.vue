@@ -1,10 +1,17 @@
 <template>
-  <div class="fixed-plugin" :class="showSettingsDrawer === true ? 'show' : ''">
-    <v-card class="shadow-lg">
+  <div
+    class="fixed-plugin-left"
+    :class="showSettingsDrawer === true ? 'show' : ''"
+  >
+    <v-card class="shadow-lg elevation-10" dark>
       <div class="card-padding mb-16">
         <div class="float-start">
-          <h5 class="text-h5 text-dark font-weight-bold mt-3 mb-0">Setting</h5>
-          <p class="text-body font-weight-light">See our dashboard options.</p>
+          <h5 class="text-h5 text-warning font-weight-bold mt-3 mb-0">
+            {{ $t("Setting") }}
+          </h5>
+          <p class="text-body font-weight-light">
+            {{ $t("SeeOurDashboardOptions") }}
+          </p>
         </div>
         <div class="float-end mt-4">
           <v-btn
@@ -23,8 +30,8 @@
       <hr class="horizontal dark my-1" />
       <div class="card-padding">
         <div>
-          <h6 class="text-h6 text-typo font-weight-bold mb-2">
-            Sidebar Colors
+          <h6 class="text-h6 text-warning font-weight-bold mb-2">
+            {{ $t("SidebarColors") }}
           </h6>
           <v-btn-toggle
             tile
@@ -103,11 +110,11 @@
           </v-btn-toggle>
         </div>
 
-        <h6 class="text-h6 text-typo font-weight-bold mb-0 mt-4">
-          Sidenav Type
+        <h6 class="text-h6 text-warning font-weight-bold mb-0 mt-4">
+          {{ $t("SideNavigatorType") }}
         </h6>
         <p class="text-sm text-body font-weight-light">
-          Choose between 3 different sidenav types.
+          {{ $t("ChooseBetweenDifferentSideNavigatorTypes") }}
         </p>
         <div class="d-flex">
           <v-btn
@@ -117,12 +124,12 @@
             color="#fff"
             small
             :class="
-              sidebarTheme == 'dark'
+              sidebarTheme === 'dark'
                 ? 'bg-gradient-default'
                 : 'btn-outline-default'
             "
             @click="[$emit('updateSidebarTheme', 'dark'), active()]"
-            >Dark</v-btn
+            >{{ $t("dark") }}</v-btn
           >
           <v-btn
             elevation="0"
@@ -131,12 +138,12 @@
             color="#fff"
             small
             :class="
-              sidebarTheme == 'transparent'
+              sidebarTheme === 'transparent'
                 ? 'bg-gradient-default'
                 : 'btn-outline-default'
             "
             @click="[$emit('updateSidebarTheme', 'transparent'), active()]"
-            >Transparent</v-btn
+            >{{ $t("transparent") }}</v-btn
           >
           <v-btn
             elevation="0"
@@ -145,118 +152,27 @@
             color="#fff"
             small
             :class="
-              sidebarTheme == 'white'
+              sidebarTheme === 'white'
                 ? 'bg-gradient-default'
                 : 'btn-outline-default'
             "
             @click="[$emit('updateSidebarTheme', 'white'), active()]"
-            >White</v-btn
+            >{{ $t("white") }}</v-btn
           >
         </div>
         <p class="text-sm d-lg-none d-block mt-3 text-body">
-          You can change the sidenav type just on desktop view.
+          {{ $t("YouCanChangeTheSidenavTypeJustOnDesktopView") }}
         </p>
         <div class="mt-7 d-flex align-center justify-between">
-          <h6 class="text-h6 text-typo font-weight-bold mb-0">Navbar Fixed</h6>
+          <h6 class="text-h6 text-warning font-weight-bold mb-0">
+            {{ $t("navbarFixed") }}
+          </h6>
           <v-switch
             class="mt-0 ms-auto pt-0 switch"
             v-model="navbarFixedModel"
             hide-details
             @change="$emit('toggleNavbarPosition', navbarFixedModel)"
           ></v-switch>
-        </div>
-        <hr class="horizontal dark mb-3 mt-4" />
-        <v-btn
-          elevation="0"
-          height="43"
-          class="
-            font-weight-bold
-            text-uppercase
-            btn-info
-            bg-gradient-primary
-            py-2
-            px-6
-            me-2
-            w-100
-            mt-2
-            text-xs
-          "
-          href="https://www.creative-tim.com/product/vuetify-material-dashboard-pro"
-          color="#fff"
-          >Buy Now</v-btn
-        >
-        <v-btn
-          elevation="0"
-          height="43"
-          class="
-            font-weight-bold
-            text-uppercase
-            btn-default btn-outline-default
-            py-2
-            px-6
-            me-2
-            w-100
-            mt-4
-            text-xs
-            shadow-none
-          "
-          color="#fff"
-          href="https://vuetifyjs.com/en/components/alerts/"
-          target="_blank"
-          >View documentation</v-btn
-        >
-        <div class="text-center d-flex mt-5">
-          <gh-btns-star
-            slug="creativetimofficial/ct-vuetify-material-dashboard-pro"
-            class="mx-auto"
-            show-count
-          ></gh-btns-star>
-        </div>
-        <div class="text-center mt-6">
-          <h6 class="text-h6 text-typo font-weight-bold mt-9 mb-2">
-            Thank you for sharing!
-          </h6>
-          <div class="d-flex">
-            <v-btn
-              elevation="0"
-              height="43"
-              class="
-                font-weight-bold
-                text-uppercase
-                btn-default
-                py-2
-                px-6
-                mt-2
-                text-xs
-                me-2
-                ms-auto
-              "
-              href="https://twitter.com/intent/tweet?text=Check%20Vuetify%20Material%20Dashboard%202%20PRO%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5%20%23vuetify%20https%3A//www.creative-tim.com/product/vuetify-material-dashboard-pro"
-              color="#344767"
-            >
-              <v-icon size="12">fab fa-twitter me-2</v-icon>
-              Tweet
-            </v-btn>
-            <v-btn
-              elevation="0"
-              height="43"
-              class="
-                font-weight-bold
-                text-uppercase
-                btn-default
-                py-2
-                px-6
-                me-2 me-auto
-                mt-2
-                text-xs
-              "
-              href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/vuetify-material-dashboard-pro"
-              color="#344767"
-            >
-              <v-icon size="12">fab fa-facebook me-2</v-icon>
-              Share
-            </v-btn>
-          </div>
         </div>
       </div>
     </v-card>

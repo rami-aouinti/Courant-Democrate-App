@@ -75,20 +75,41 @@ const ConseilNational = () =>
   );
 
 const CourantManagement = () =>
-    import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/Courant.vue");
-
+  import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/Courant.vue");
 
 const UserManagement = () =>
   import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/User.vue");
 
 const CombineUser = () =>
-    import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/CombineUser.vue");
+  import(
+    /* webpackChunkName: "pages" */ "@/views/Platform/Admin/CombineUser.vue"
+  );
 
 const CombineOffice = () =>
-    import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/CombineOffice.vue");
+  import(
+    /* webpackChunkName: "pages" */ "@/views/Platform/Admin/CombineOffice.vue"
+  );
 
 const GroupManagement = () =>
   import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/Group.vue");
+
+const PoliticOfficeManagement = () =>
+  import(
+    /* webpackChunkName: "pages" */ "@/views/Platform/Admin/PoliticOffice.vue"
+  );
+
+const ExecutifOfficeManagement = () =>
+  import(
+    /* webpackChunkName: "pages" */ "@/views/Platform/Admin/ExecutifOffice.vue"
+  );
+
+const NationalCouncilManagement = () =>
+  import(
+    /* webpackChunkName: "pages" */ "@/views/Platform/Admin/NationalCouncil.vue"
+  );
+
+const ComitteeManagement = () =>
+  import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/Comittee.vue");
 
 const OfficeManagement = () =>
   import(/* webpackChunkName: "pages" */ "@/views/Platform/Admin/Office.vue");
@@ -281,6 +302,38 @@ let admin = {
       component: OfficeManagement,
       meta: {
         groupName: "OfficeManagement",
+      },
+    },
+    {
+      path: "/admin/politicOffices",
+      name: "politicOffices",
+      component: PoliticOfficeManagement,
+      meta: {
+        groupName: "PoliticOfficeManagement",
+      },
+    },
+    {
+      path: "/admin/executifOffices",
+      name: "executifOffices",
+      component: ExecutifOfficeManagement,
+      meta: {
+        groupName: "ExecutifOfficeManagement",
+      },
+    },
+    {
+      path: "/admin/nationalCouncil",
+      name: "nationalCouncil",
+      component: NationalCouncilManagement,
+      meta: {
+        groupName: "NationalCouncilManagement",
+      },
+    },
+    {
+      path: "/admin/comittee",
+      name: "comittee",
+      component: ComitteeManagement,
+      meta: {
+        groupName: "ComitteeManagement",
       },
     },
   ],
