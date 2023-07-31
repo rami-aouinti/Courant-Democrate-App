@@ -2,31 +2,41 @@
   <v-row>
     <div class="d-flex mt-5" v-for="comment in this.comments" :key="comment.id">
       <div class="flex-shrink-0">
-        <v-avatar>
+        <v-avatar
+          class="border border-warning border-radius-lg"
+          width="15"
+          height="30"
+        >
           <v-img :src="comment.author.photo"></v-img>
         </v-avatar>
       </div>
       <div class="flex-grow-1 ms-4">
-        <h5 class="text-h5 text-typo font-weight-bold mt-0 mb-2">
+        <p class="warning font-weight-bold mt-0 mb-2">
           {{ comment.author.firstName }} {{ comment.author.lastName }}
-        </h5>
-        <p class="text-sm font-weight-light text-body">
-          {{ comment.content }}
         </p>
-        <div class="d-flex align-center">
-          <v-icon
-            size="14"
-            class="material-icons-round me-1 text-body cursor-pointer"
-            >thumb_up</v-icon
-          >
-          <span class="text-sm me-2 text-body">10 {{ $t("likes") }}</span>
-        </div>
+        <v-card class="elevation-20" color="#232020">
+            <v-card-text>
+                {{ comment.content }}
+            </v-card-text>
+            <v-card-actions>
+                <v-icon
+                        size="14"
+                        class="material-icons-round me-1 text-body cursor-pointer"
+                >thumb_up</v-icon
+                >
+                <span class="text-sm me-2 text-body">10 {{ $t("likes") }}</span>
+            </v-card-actions>
+        </v-card>
       </div>
     </div>
 
     <div class="d-flex mt-6">
       <div class="flex-shrink-0">
-        <v-avatar>
+        <v-avatar
+          class="border border-warning border-radius-lg"
+          width="20"
+          height="40"
+        >
           <v-img :src="this.userProfile.photo"></v-img>
         </v-avatar>
       </div>

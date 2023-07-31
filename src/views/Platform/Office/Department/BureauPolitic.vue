@@ -140,90 +140,130 @@
         </v-col>
       </v-row>
       <v-row class="mt-6 mb-5">
-        <v-col lg="6" cols="12">
-          <v-form>
-            <v-container>
-              <v-row>
-                <v-col cols="12" sm="12" md="12">
-                  <v-row justify="center">
-                    <v-dialog
-                      v-model="dialog"
-                      persistent
-                      max-width="600px"
-                      dark
-                    >
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                          block
-                          elevation="24"
-                          large
-                          rounded
-                          text
-                          v-bind="attrs"
-                          v-on="on"
-                          color="orange"
-                        >
-                          <v-icon class="material-icons-round" size="24">
-                            add
-                          </v-icon>
-                          {{ $t("AddPost") }}
-                        </v-btn>
-                      </template>
-                      <v-card>
-                        <v-card-title>
-                          <span class="text-h5 text-warning">{{
-                            $t("NewPost")
-                          }}</span>
-                        </v-card-title>
-                        <v-card-text>
-                          <v-container>
-                            <v-row>
-                              <v-col cols="12">
-                                <v-text-field
-                                  :label="$t('Title')"
-                                  required
-                                  v-model="post.title"
-                                ></v-text-field>
-                              </v-col>
-                              <v-col cols="12">
-                                <v-text-field
-                                  label="Description"
-                                  hint="example of helper text only on focus"
-                                  v-model="post.content"
-                                ></v-text-field>
-                              </v-col>
-                            </v-row>
-                          </v-container>
-                        </v-card-text>
-                        <v-card-actions>
-                          <v-spacer></v-spacer>
-                          <v-btn color="orange" text @click="dialog = false">
-                            {{ $t("Close") }}
-                          </v-btn>
-                          <v-btn color="orange" text @click="savePost">
-                            {{ $t("Save") }}
-                          </v-btn>
-                        </v-card-actions>
-                      </v-card>
-                    </v-dialog>
-                  </v-row>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-form>
-          <v-divider></v-divider>
-          <Post></Post>
-        </v-col>
-        <v-col lg="6">
-          <v-card class="card-shadow bg-gradient-default border-radius-xl">
-            <v-img
-              src="@/assets/img/shapes/waves-white.svg"
-              class="position-absolute opacity-2 start-0 top-0 w-100 h-100"
-            ></v-img>
+        <v-row>
+          <v-col lg="12">
+            <v-tabs class="text-left rounded elevation-10" v-model="tabs" dark>
+              <v-tabs-slider></v-tabs-slider>
 
-            <div class="px-8 pt-6">
-              <v-row class="position-relative">
-                <v-col md="12">
+              <v-tab :ripple="false" href="#tab-1">
+                <span class="ms-1 text-warning">{{ $t("Dashboard") }}</span>
+              </v-tab>
+
+              <v-tab :ripple="false" href="#tab-2">
+                <span class="ms-1 text-warning">{{ $t("Members") }}</span>
+              </v-tab>
+
+              <v-tab :ripple="false" href="#tab-3">
+                <span class="ms-1 text-warning">{{ $t("Events") }}</span>
+              </v-tab>
+
+              <v-tab :ripple="false" href="#tab-4">
+                <span class="ms-1 text-warning">{{ $t("Statements") }}</span>
+              </v-tab>
+
+              <v-tab :ripple="false" href="#tab-5">
+                <span class="ms-1 text-warning">{{ $t("Meetings") }}</span>
+              </v-tab>
+
+              <v-tab :ripple="false" href="#tab-6">
+                <span class="ms-1 text-warning">{{ $t("Rapports") }}</span>
+              </v-tab>
+
+              <v-tab :ripple="false" href="#tab-7">
+                <span class="ms-1 text-warning">{{
+                  $t("FinancialRapports")
+                }}</span>
+              </v-tab>
+            </v-tabs>
+          </v-col>
+        </v-row>
+
+        <v-col cols="11">
+          <v-tabs-items v-model="tabs" dark>
+            <v-tab-item id="tab-1">
+              <v-row>
+                <v-col cols="7">
+                  <v-form>
+                    <v-container>
+                      <v-row>
+                        <v-col cols="12" sm="12" md="12">
+                          <v-row justify="center">
+                            <v-dialog
+                              v-model="dialog"
+                              persistent
+                              max-width="600px"
+                              dark
+                            >
+                              <template v-slot:activator="{ on, attrs }">
+                                <v-btn
+                                  block
+                                  elevation="24"
+                                  large
+                                  rounded
+                                  text
+                                  v-bind="attrs"
+                                  v-on="on"
+                                  color="orange"
+                                >
+                                  <v-icon
+                                    class="material-icons-round"
+                                    size="24"
+                                  >
+                                    add
+                                  </v-icon>
+                                  {{ $t("AddPost") }}
+                                </v-btn>
+                              </template>
+                              <v-card>
+                                <v-card-title>
+                                  <span class="text-h5 text-warning">{{
+                                    $t("NewPost")
+                                  }}</span>
+                                </v-card-title>
+                                <v-card-text>
+                                  <v-container>
+                                    <v-row>
+                                      <v-col cols="12">
+                                        <v-text-field
+                                          :label="$t('Title')"
+                                          required
+                                          v-model="post.title"
+                                        ></v-text-field>
+                                      </v-col>
+                                      <v-col cols="12">
+                                        <v-text-field
+                                          :label="$t('Description')"
+                                          hint="example of helper text only on focus"
+                                          v-model="post.content"
+                                        ></v-text-field>
+                                      </v-col>
+                                    </v-row>
+                                  </v-container>
+                                </v-card-text>
+                                <v-card-actions>
+                                  <v-spacer></v-spacer>
+                                  <v-btn
+                                    color="orange"
+                                    text
+                                    @click="dialog = false"
+                                  >
+                                    {{ $t("Close") }}
+                                  </v-btn>
+                                  <v-btn color="orange" text @click="savePost">
+                                    {{ $t("Save") }}
+                                  </v-btn>
+                                </v-card-actions>
+                              </v-card>
+                            </v-dialog>
+                          </v-row>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-form>
+                  <v-divider></v-divider>
+                  <Post></Post>
+                </v-col>
+                <v-col cols="5">
                   <v-card class="card-shadow border-radius-xl" dark>
                     <div class="px-4 py-4">
                       <full-calendar
@@ -232,26 +272,29 @@
                       ></full-calendar>
                     </div>
                   </v-card>
-                  <v-divider></v-divider>
-                  <Members></Members>
-                  <v-divider></v-divider>
-                  <Rapport></Rapport>
-                  <v-divider></v-divider>
-                  <Event></Event>
-                  <v-divider></v-divider>
-                  <Statement></Statement>
-                  <v-divider></v-divider>
-                  <FinancialRapport></FinancialRapport>
-                  <v-divider></v-divider>
                 </v-col>
               </v-row>
-            </div>
-          </v-card>
+            </v-tab-item>
+            <v-tab-item id="tab-2">
+              <Members></Members>
+            </v-tab-item>
+            <v-tab-item id="tab-3">
+              <Event></Event>
+            </v-tab-item>
+            <v-tab-item id="tab-4">
+              <Statement></Statement>
+            </v-tab-item>
+            <v-tab-item id="tab-5">
+              <Event></Event>
+            </v-tab-item>
+            <v-tab-item id="tab-6">
+              <Rapport :officeId="this.officeId"></Rapport>
+            </v-tab-item>
+            <v-tab-item id="tab-7">
+              <FinancialRapport></FinancialRapport>
+            </v-tab-item>
+          </v-tabs-items>
         </v-col>
-      </v-row>
-
-      <v-row>
-        <v-col> </v-col>
       </v-row>
     </v-container>
   </div>
@@ -271,6 +314,7 @@ import Rapport from "@/views/Platform/Office/Department/components/Rapport.vue";
 import FinancialRapport from "@/views/Platform/Office/Department/components/FinanciealRapport.vue";
 import Event from "@/views/Platform/Office/Department/components/Event.vue";
 import Statement from "@/views/Platform/Office/Department/components/Statement.vue";
+import PoliticOfficeService from "@/services/politicOffice.service";
 
 export default {
   name: "BureauPolitique",
@@ -285,6 +329,7 @@ export default {
   },
   data() {
     return {
+      tabs: null,
       editedIndex: -1,
       editedItem: {
         name: "",
@@ -391,10 +436,12 @@ export default {
       userRoles: [],
       userGroups: [],
       post: {},
+      officeId: null,
     };
   },
   methods: {
     savePost() {
+      this.post.summary = "test";
       ArticleService.addPost(this.post).then(
         (response) => {
           var author = {};
@@ -403,7 +450,7 @@ export default {
           author.photo = response.photo;
           this.post.author = author;
           console.log(this.post);
-          this.posts.push(this.post);
+          //this.posts.push(this.post);
           this.dialog = false;
         },
         (error) => {
@@ -447,6 +494,17 @@ export default {
     UserService.getGroups().then(
       (response) => {
         this.userGroups = response.data;
+      },
+      (error) => {
+        this.content =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+      }
+    );
+    PoliticOfficeService.getPoliticOffice().then(
+      (response) => {
+        this.officeId = response.data.id;
       },
       (error) => {
         this.content =
