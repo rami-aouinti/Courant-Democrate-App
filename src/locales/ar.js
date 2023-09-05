@@ -213,7 +213,15 @@ const ar = {
   NumberMeetings: "عدد الانشطة",
   AddUser: "إضافة أعضاء للمجموعة",
   SearchUsersOffice: "ابحث عن منخرطين...",
-  CompleteYourProfile: "أكمل تسجيل معطياتك",
+  YourProfileProgress: " حسابك غير محدث ",
+  CompleteYourProfile: "يرجى ملء البيانات الشخصية الخاصة بك",
+  wlcProfil:"مرحباً",
+  wlcProfilDesc1:"مرحبا بكم في تطبيقة التيار الديمقراطي،",
+  wlcProfilDesc2:"التطبيقة هي خطوة لارساء ثقافة رقمية و بناء اسس إدارة عصرية و لهذا فنحن نعول عليكم لانجاح المشروع.",
+  bureauNationaux:"المكاتب الوطنية",
+  bureauRegionaux:"المكاتب الجهوية",
+  membreTotal:"عدد الأعضاء",
+  membre:"عضو"
 };
 
 export default ar;

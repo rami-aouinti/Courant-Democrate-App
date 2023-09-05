@@ -80,10 +80,10 @@
 
     <template v-else>
       <v-footer color="transparent" class="px-6">
-        <v-card class="flex" color="transparent">
+        <v-card class="flex text-center" color="transparent">
           <v-card-text class="px-0">
             <v-row>
-              <v-col cols="12" md="6">
+              <v-col cols="12" md="12">
                 <div class="copyright text-body-2 ls-0 text-muted">
                   © {{ new Date().getFullYear() }}, devlopped by ATTAYAR
                 </div>

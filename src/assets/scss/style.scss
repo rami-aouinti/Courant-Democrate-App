@@ -1,0 +1,59 @@
+// devlopped by omar chaari //
+
+.theme--light.v-app-bar.v-toolbar.v-sheet{
+  background-color: #3e3e45 !important;
+}
+
+.chooseLng .v-text-field__details{
+  display: none;
+}
+
+.warningBox{
+  height: 70px;
+  border-radius: 5px !important;
+  border-color: #ffa438 !important;
+  color: #ffa438;
+  background-color: #fff6e8;
+  border: 1px solid;
+  padding: 22px;
+  margin: 0px;
+  position: relative;
+}
+
+.titleWarningBox{
+  float: left;
+  width: auto;
+  font-size: 21px;
+  margin-bottom: 0px !important;
+  font-weight: bold;
+}
+
+.btnWarningBox{
+  position: absolute;
+  left: 30px;
+  top: 10px;
+  width: 160px;
+  padding: 7px 30px 7px;
+  text-align: center;
+  background: #ffa438;
+  color: #fff;
+  border-radius: 4px;
+  height: 48px;
+  text-decoration: none;
+}
+
+.noDeco{
+  text-decoration: none;
+}
+
+hr.horizontal.dark.hard{
+  background-color: rgba(123, 128, 154, 0.8) !important;
+}
+
+.userLogoTop{
+  margin-top: -10px !important;
+}
+
+.v-navigation-drawer__content > .v-list-item{
+  height: 67px !important;
+}

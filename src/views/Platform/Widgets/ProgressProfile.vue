@@ -1,18 +1,46 @@
 <template>
   <div>
-    <v-progress-linear
-      class="mx-auto"
-      v-model="power"
-      color="orange"
-      height="70"
-      rounded
-    >
-      <template v-slot:default="{ value }">
-        <strong>{{ Math.ceil(value) }}%</strong>
-      </template>
-    </v-progress-linear>
+    <v-col md="12" >
+      <div class="row warningBox">
+        <h5 class="titleWarningBox">
+          {{$t("YourProfileProgress")}} , {{$t("CompleteYourProfile")}}
+        </h5>
 
-    <br />
+        <a href="#/profile/settings" class="btnWarningBox">
+          <h5 class="font-weight-normal text-h5 mb-0 ">
+              {{ $t('Setting') }} 
+            </h5>
+        </a>
+
+
+        <!--<v-col lg="8" class="pt-0 mb-lg-0 mb-10">
+          <v-progress-linear
+            class="mx-auto"
+            v-model="power"
+            color="orange"
+            height="30"
+            rounded
+          >
+            <template v-slot:default="{ value }">
+              <strong>{{ Math.ceil(value) }}%</strong>
+            </template>
+
+          </v-progress-linear>
+        </v-col>
+        <v-col lg="4" class="pt-0 mb-lg-0 mb-10">
+          <v-btn text link depressed
+          class="text-typo text-capitalize ls-0"
+          :to="'profile/settings'">
+            <h5 class="font-weight-normal text-warning text-h5 mt-7 mb-2 px-4">
+              {{ $t('Setting') }}
+            </h5>
+          </v-btn>
+        </v-col>-->
+      </div>
+      
+
+      
+    </v-col>
   </div>
 </template>
 <script>
@@ -24,7 +52,7 @@ export default {
     power: 30,
   }),
   mounted() {
-    UserService.getProfile().then(
+    UserService.getProfile().then( 
       (response) => {
         this.userProfile = response.data;
         if (this.userProfile.gender) {
