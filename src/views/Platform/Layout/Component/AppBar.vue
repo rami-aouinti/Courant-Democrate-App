@@ -3,6 +3,10 @@
   margin-top: 40px;
 }
 
+.chooseLng .v-text-field__details{
+  display: none;
+}
+
 .theme--light.v-list {
   background: #181414;
   color: rgba(0, 0, 0, 0.87);
@@ -12,20 +16,37 @@
   <v-app-bar
     :color="background"
     height="auto"
-    class="mt-6 py-2 px-0 mx-6 border-radius-xl toolbar-content-padding-y-none"
-    :class="
-      navbarFixed
-        ? 'position-sticky blur shadow-blur top-1 z-index-sticky py-2'
-        : ''
-    "
+    class="toolbar-content-padding-y-none position-sticky blur shadow-blur top-0 z-index-sticky py-2"
     flat
   >
-    <v-row class="py-2">
-      <v-col cols="12" sm="6" class="d-flex">
-        <div>
-          <v-breadcrumbs class="pb-0 pt-1 px-0">
+    <v-row class="mb-0 mt-0 ml-0 mr-0">
+      
+      <v-col cols="12" sm="9" class="d-flex align-center">
+        <div v-if="userProfile.firstName">
+
+
+          <div
+          class="drawer-toggler pl-5 ms-0 cursor-pointer"
+          :class="{ active: togglerActive }"
+          @click="minifyDrawer"
+          v-if="!$vuetify.breakpoint.mobile"
+          >
+            <div class="drawer-toggler-inner">
+              <i class="material-icons-round text-warning opacity-10">
+                menu_open
+              </i>
+            </div>
+          </div>
+
+
+          <!--<h3 class="text-h3 font-weight-bolder text-warning mb-0">
+            welcome {{ userProfile.firstName + " " + userProfile.lastName }}
+          </h3>-->
+          
+
+          <!--<v-breadcrumbs class="pb-0 pt-1 px-0">
             <v-breadcrumbs-item
-              to="/dashboard"
+              to="/#"
               active-class="active-breadcrumb"
               class="opacity-5 text-dark"
             >
@@ -39,7 +60,7 @@
                 xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
               >
-                <title>shop</title>
+                <title>home</title>
                 <g
                   stroke="none"
                   stroke-width="1"
@@ -63,14 +84,18 @@
                     </g>
                   </g>
                 </g>
+
               </svg>
             </v-breadcrumbs-item>
+
             <li class="v-breadcrumbs__divider opacity-5 px-2 text-warning">
               /
             </li>
+
             <v-breadcrumbs-item class="opacity-5 text-warning">
               {{ $t($route.meta.groupName) }}
             </v-breadcrumbs-item>
+
             <li class="v-breadcrumbs__divider opacity-5 px-2 text-muted">/</li>
             <v-breadcrumbs-item
               active-class="active-breadcrumb"
@@ -79,33 +104,19 @@
               <template v-if="$route.name === 'Dashboard'">Default</template>
               <template v-else>{{ $t($route.name) }}</template>
             </v-breadcrumbs-item>
-          </v-breadcrumbs>
+          </v-breadcrumbs>-->
 
-          <h6 class="text-h6 font-weight-bolder text-warning mb-0">
+          <!--<h6 class="text-h6 font-weight-bolder text-warning mb-0">
             {{ $t($route.name) }}
-          </h6>
+          </h6>-->
         </div>
-        <div
-          class="drawer-toggler pa-5 ms-6 cursor-pointer"
-          :class="{ active: togglerActive }"
-          @click="minifyDrawer"
-          v-if="!$vuetify.breakpoint.mobile"
-        >
-          <div class="drawer-toggler-inner">
-            <i class="drawer-toggler-line bg-body bg-warning"></i>
-            <i class="drawer-toggler-line bg-body bg-warning"></i>
-            <i class="drawer-toggler-line bg-body bg-warning"></i>
-          </div>
-        </div>
+        
       </v-col>
 
-      <v-col
-        cols="12"
-        sm="6"
-        class="d-flex align-center"
+      <v-col cols="12" sm="3" class="d-flex align-center"
         :class="$vuetify.rtl ? 'text-sm-left' : 'text-sm-right'"
       >
-        <v-form
+        <!--<v-form
           v-if="hasBg"
           @submit.prevent="submit"
           class="navbar-search navbar-search-light d-inline-block ms-auto"
@@ -122,16 +133,17 @@
             class="input-style font-size-input me-md-3"
           >
           </v-text-field>
-        </v-form>
-        <v-col sm="3" style="margin-top: 25px">
+        </v-form>-->
+
+        <v-col sm="9" class="px-0 py-0 chooseLng">
           <v-select
             v-model="$i18n.locale"
             :items="locales"
             color="orange"
-            item-text="name"
+            item-text="label"
             item-value="val"
             item-icon="icon"
-            class="text-capitalize text-warning rounded-sm ms-2"
+            class="text-capitalize text-warning rounded-sm ms-0"
             dense
             outlined
             dark
@@ -140,10 +152,12 @@
               <v-img
                 :alt="`${item.name} avatar`"
                 :src="item.icon"
-                max-width="20px"
-                class="me-6"
+                max-width="30px"
+                class="me-3"
               ></v-img>
+              {{item.label}}
             </template>
+            
             <template v-slot:item="slotProps">
               <v-row
                 @click="changeDirection(slotProps.item.name)"
@@ -155,111 +169,117 @@
                   max-width="20px"
                   class="me-6"
                 ></v-img>
-                {{ slotProps.item.name }}
+                
+                {{ slotProps.item.label }}
               </v-row>
             </template>
           </v-select>
         </v-col>
-        <v-menu
+
+        <v-col sm="3" class="px-0 py-0 userLogoTop">
+          <v-menu
           transition="slide-y-transition"
           offset-y
           offset-x
           min-width="100"
           max-width="300"
           v-if="currentUser"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              icon
-              :ripple="false"
-              :class="{ 'btn-dark-hover': !hasBg, 'btn-hover': hasBg }"
-              class="text-body"
-              :color="linkColor"
-              v-bind="attrs"
-              v-on="on"
-              small
-            >
-              <v-avatar size="20" class="border border-warning my-3 ms-2">
-                <span v-if="userProfile.photo === null" class="text-h5">{{
-                  getInitials(
-                    userProfile.firstName + " " + userProfile.lastName
-                  )
-                }}</span>
-                <img v-else :src="userProfile.photo" alt="Brooklyn" />
-              </v-avatar>
-            </v-btn>
-          </template>
-
-          <v-list class="pa-3">
-            <v-list-item
-              v-for="(item, i) in userMenu"
-              :key="i"
-              class="
-                pa-4
-                list-item-hover-active
-                d-flex
-                align-items-center
-                py-1
-                my-1
-                border-radius-md
-              "
-              :to="item.path"
-            >
-              <v-icon class="material-icons-round text-warning" size="20">{{
-                item.icon
-              }}</v-icon>
-
-              <v-list-item-content class="pa-0">
-                <v-list-item-title
-                  class="text-body-2 ls-0 text-typo font-weight-600 mb-0"
-                >
-                  <v-row>
-                    <v-col :to="item.path">
-                      <h6
-                        class="text-sm font-weight-normal ms-2 text-warning"
-                        v-html="$t(item.title)"
-                      >
-                        {{ $t(item.title) }}
-                      </h6>
-                    </v-col>
-                  </v-row>
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item
-              class="
-                pa-4
-                list-item-hover-active
-                d-flex
-                align-items-center
-                py-1
-                my-1
-                border-radius-md
-              "
-              @click="logout"
-            >
-              <v-icon class="material-icons-round text-warning" size="20"
-                >logout</v-icon
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                icon
+                :ripple="false"
+                :class="{ 'btn-dark-hover': !hasBg, 'btn-hover': hasBg }"
+                class="text-body"
+                :color="linkColor"
+                v-bind="attrs"
+                v-on="on"
               >
+                <v-avatar size="40" class="border border-warning my-0 ms-0">
+                  <span v-if="userProfile.photo === null" class="text-h5">{{
+                    getInitials(
+                      userProfile.firstName + " " + userProfile.lastName
+                    )
+                  }}</span>
+                  <img v-else :src="userProfile.photo" alt="Brooklyn" />
+                </v-avatar>
+              </v-btn>
+            </template>
 
-              <v-list-item-content>
-                <v-list-item-title>
-                  <v-row>
-                    <v-col>
-                      <h6
-                        class="text-sm font-weight-normal ms-2 text-warning"
-                        v-html="$t('Logout')"
-                      >
-                        {{ $t("Logout") }}
-                      </h6>
-                    </v-col>
-                  </v-row>
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-        <v-menu
+            <v-list class="pa-3">
+              
+              <v-list-item
+                v-for="(item, i) in userMenu"
+                :key="i"
+                class="
+                  pa-4
+                  list-item-hover-active
+                  d-flex
+                  align-items-center
+                  py-1
+                  my-1
+                  border-radius-md
+                "
+                :to="item.path"
+              >
+                <v-icon class="material-icons-round text-warning" size="20">{{
+                  item.icon
+                }}</v-icon>
+
+                <v-list-item-content class="pa-0">
+                  <v-list-item-title
+                    class="text-body-2 ls-0 text-typo font-weight-600 mb-0"
+                  >
+                    <v-row>
+                      <v-col :to="item.path">
+                        <h6
+                          class="text-sm font-weight-normal ms-2 text-warning"
+                          :v-html="$t(item.title)"
+                        >
+                          {{ $t(item.title) }}
+                        </h6>
+                      </v-col>
+                    </v-row>
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item
+                class="
+                  pa-4
+                  list-item-hover-active
+                  d-flex
+                  align-items-center
+                  py-1
+                  my-1
+                  border-radius-md
+                "
+                @click="logout"
+              >
+                <v-icon class="material-icons-round text-warning" size="20"
+                  >logout</v-icon
+                >
+
+                <v-list-item-content>
+                  <v-list-item-title>
+                    <v-row>
+                      <v-col>
+                        <h6
+                          class="text-sm font-weight-normal ms-2 text-warning"
+                          :v-html="$t('Logout')"
+                        >
+                          {{ $t("Logout") }}
+                        </h6>
+                      </v-col>
+                    </v-row>
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+
+            </v-list>
+          </v-menu>
+        </v-col>
+        <!--<v-menu
           transition="slide-y-transition"
           offset-y
           offset-x
@@ -318,7 +338,7 @@
                     <v-col>
                       <h6
                         class="text-sm font-weight-normal ms-2 text-warning"
-                        v-html="$t(item.title)"
+                        :v-html="$t(item.title)"
                       >
                         {{ $t(item.title) }}
                       </h6>
@@ -328,9 +348,9 @@
               </v-list-item-content>
             </v-list-item>
           </v-list>
-        </v-menu>
+        </v-menu>-->
 
-        <v-btn
+        <!--<v-btn
           elevation="0"
           :ripple="false"
           height="43"
@@ -356,8 +376,9 @@
             <i class="drawer-toggler-line text-body"></i>
             <i class="drawer-toggler-line text-body"></i>
           </div>
-        </v-btn>
+        </v-btn>-->
       </v-col>
+
     </v-row>
   </v-app-bar>
 </template>
@@ -373,7 +394,7 @@ export default {
     toggleActive: Boolean,
     navbarFixed: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     userProfile: Object,
     userGroups: Object,
@@ -381,7 +402,7 @@ export default {
   },
   data() {
     return {
-      language: "en",
+      language: "ar",
       drawer: false,
       togglerActive: false,
       userMenu: [
@@ -391,7 +412,7 @@ export default {
           path: "/profile/overview",
         },
         {
-          icon: "settings",
+          icon: "edit",
           title: "Setting",
           path: "/profile/settings",
         },
@@ -410,24 +431,28 @@ export default {
           title: "Payment successfully completed",
         },
       ],
-      languages: [
+      /*languages: [
         {
-          name: "en",
+         
+          name:"english",
           icon: require("@/assets/img/icons/flags/US.png"),
         },
         {
-          name: "ar",
+         
+          name:"العربية",
           icon: require("@/assets/img/icons/flags/AU.png"),
         },
         {
-          name: "fr",
+          
+          name:"français",
           icon: require("@/assets/img/icons/flags/GB.png"),
         },
         {
-          name: "de",
+          
+          name:"deutsch",
           icon: require("@/assets/img/icons/flags/DE.png"),
         },
-      ],
+      ],*/
     };
   },
   computed: {
@@ -436,9 +461,34 @@ export default {
     },
     locales() {
       return this.$i18n.availableLocales.map((local) => {
+
+        let label="";
+        switch (local) {
+          case 'ar':
+          label="العربية";
+          break;
+         
+          case 'fr':
+          label="français";
+          break;
+          
+          case 'en':
+          label="english";
+          break;
+
+          case 'de':
+          label="deutsch";
+          break;
+
+          default:
+          label="العربية";
+        }
+
+
         return {
           name: this.$t(local),
           val: local,
+          label:label,
           icon: require("@/assets/img/icons/flags/" +
             local.toUpperCase() +
             ".png"),

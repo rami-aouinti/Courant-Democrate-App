@@ -1,47 +1,42 @@
 <template>
   <v-navigation-drawer
     width="100%"
-    height="calc(100% - 2rem)"
+    height="100%"
     fixed
     app
     floating
     :expand-on-hover="mini"
     :value="drawer"
     :right="$vuetify.rtl"
-    class="my-4 ms-4 border-radius-xl text-warning elevation-20"
+    class="text-md"
     :class="!$vuetify.breakpoint.mobile ? '' : 'bg-white'"
     :data-color="sidebarColor"
     :data-theme="sidebarTheme"
   >
     <v-list-item class="pa-0" :to="dashboard">
       <v-list-item-content class="pa-0">
-        <v-list-item-title class="title d-flex align-center mb-0">
+        <v-list-item-title class="title align-center mb-0">
           <div
             class="
               v-navigation-drawer-brand
-              pa-5
-              d-flex
+              pr-5 pt-4 pb-1
               align-center
-              opacity-100
             "
           >
             <v-img
               src="@/assets/img/courant.png"
-              class="navbar-brand-img ms-3 rounded-3 elevation-20"
-              width="50"
+              class="navbar-brand-img"
+              width="60"
               v-if="sidebarTheme === 'dark'"
             >
             </v-img>
             <v-img
               src="@/assets/img/courant.png"
-              class="navbar-brand-img ms-3 rounded-3 evaluation-20"
-              width="50"
+              class="navbar-brand-img"
+              width="60"
               v-else
             >
             </v-img>
-            <span class="ms-2 font-weight-bold text-sm text-warning">{{
-              $t("Platform")
-            }}</span>
           </div>
         </v-list-item-title>
       </v-list-item-content>
@@ -64,14 +59,14 @@
             size="50"
             class="border border-warning my-3 ms-2 elevation-20"
           >
-            <span v-if="userProfile.photo === null" class="text-h5">{{
-              getInitials(userProfile.firstName + " " + userProfile.lastName)
-            }}</span>
+            <span v-if="userProfile.photo === null" class="text-h5">
+              {{getInitials(userProfile.firstName + " " + userProfile.lastName)}}
+            </span>
             <img v-else :src="userProfile.photo" alt="Brooklyn" />
           </v-avatar>
 
           <v-list-item-content>
-            <v-list-item-title class="ms-2 ps-1 font-weight-light text-warning">
+            <v-list-item-title class="ms-2 ps-1 font-weight-light">
               {{ currentUser.username }}
             </v-list-item-title>
           </v-list-item-content>
@@ -85,36 +80,27 @@
           :key="$t(child.title)"
           :to="child.path"
         >
-          <span
-            class="
-              v-list-item-mini
-              ms-0
-              font-weight-light
-              text-center text-warning
-              w-20
-            "
-            v-text="child.prefix"
-          ></span>
+        
+          <v-list-item-icon class="me-2 align-center">
+            <i class="material-icons-round text-warning opacity-10">
+              {{child.icon}}
+            </i>
+          </v-list-item-icon>
 
-          <v-list-item-content
-            class="ms-2 ps-1 text-warning"
-            v-if="!child.items"
-          >
+          <v-list-item-content  class="ms-2 ps-1" v-if="!child.items">
             <v-list-item-title v-text="$t(child.title)"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        
         <v-list-item @click="logout">
-          <span
-            class="
-              v-list-item-mini
-              ms-0
-              font-weight-light
-              text-center text-warning
-              w-20
-            "
-            >L</span
-          >
-          <v-list-item-content class="ms-2 ps-1 text-warning">
+
+          <v-list-item-icon class="me-2 align-center">
+            <i class="material-icons-round text-warning opacity-10">
+              logout
+            </i>
+          </v-list-item-icon>
+
+          <v-list-item-content class="ms-2 ps-1">
             <v-list-item-title> {{ $t("Logout") }} </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -137,14 +123,15 @@
           v-if="!item.external"
         >
           <v-list-item-icon class="me-2 align-center">
-            <i class="material-icons-round text-warning opacity-10">{{
-              item.action
-            }}</i>
+            <i class="material-icons-round text-warning opacity-10">
+              {{item.action}}
+            </i>
           </v-list-item-icon>
+
           <v-list-item-content>
             <v-list-item-title
               v-text="$t(item.title)"
-              class="ms-1 text-warning"
+              class="ms-1"
             ></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -161,12 +148,14 @@
           <v-list-item-icon class="me-2 align-center">
             <i class="material-icons-round opacity-10">{{ item.action }}</i>
           </v-list-item-icon>
+
           <v-list-item-content>
             <v-list-item-title
               v-text="$t(item.title)"
-              class="ms-1 text-warning"
+              class="ms-1"
             ></v-list-item-title>
           </v-list-item-content>
+
         </v-list-item>
       </div>
     </v-list-item-group>
@@ -189,7 +178,7 @@
           <v-list-item-content>
             <v-list-item-title
               v-text="$t(item.title)"
-              class="ms-1 text-warning"
+              class="ms-1"
             ></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -209,7 +198,7 @@
           <v-list-item-content>
             <v-list-item-title
               v-text="$t(item.title)"
-              class="ms-1 text-warning"
+              class="ms-1"
             ></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -234,7 +223,7 @@
           <v-list-item-content>
             <v-list-item-title
               v-text="$t(item.title)"
-              class="ms-1 text-warning"
+              class="ms-1"
             ></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -254,7 +243,7 @@
           <v-list-item-content>
             <v-list-item-title
               v-text="$t(item.title)"
-              class="ms-1 text-warning"
+              class="ms-1"
             ></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -279,7 +268,7 @@
           <v-list-item-content>
             <v-list-item-title
               v-text="$t(item.title)"
-              class="ms-1 text-warning"
+              class="ms-1"
             ></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -299,7 +288,7 @@
           <v-list-item-content>
             <v-list-item-title
               v-text="$t(item.title)"
-              class="ms-1 text-warning"
+              class="ms-1"
             ></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -345,7 +334,7 @@
           <v-list-item-content>
             <v-list-item-title
               v-text="$t(item.title)"
-              class="ms-1 text-warning"
+              class="ms-1"
             ></v-list-item-title>
           </v-list-item-content>
         </template>
@@ -432,7 +421,7 @@
           <v-list-item-content>
             <v-list-item-title
               v-text="$t(item.title)"
-              class="ms-1 text-warning"
+              class="ms-1"
             ></v-list-item-title>
           </v-list-item-content>
         </template>
@@ -537,7 +526,7 @@
           <v-list-item-content>
             <v-list-item-title
               v-text="$t(item.title)"
-              class="ms-1 text-warning"
+              class="ms-1"
             ></v-list-item-title>
           </v-list-item-content>
         </template>
@@ -587,7 +576,7 @@
 
                         <v-list-item-content class="py-0 ms-4">
                           <v-list-item-title
-                            class="ms-2 text-warning"
+                            class="ms-2"
                             v-text="$t(child.title)"
                           ></v-list-item-title>
                         </v-list-item-content>
@@ -613,7 +602,7 @@
                     ></span>
                     <v-list-item-title
                       v-text="child2.title"
-                      class="ms-6 text-warning"
+                      class="ms-6"
                     ></v-list-item-title>
                   </div>
                 </v-list-item-content>
@@ -661,7 +650,7 @@
             <v-list-item-content>
               <v-list-item-title
                 v-text="$t(item.title)"
-                class="ms-1 text-warning"
+                class="ms-1"
               ></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -681,7 +670,7 @@
             <v-list-item-content>
               <v-list-item-title
                 v-text="$t(item.title)"
-                class="ms-1 text-warning"
+                class="ms-1"
               ></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -731,16 +720,16 @@ export default {
     userInfo: [
       {
         title: "MyProfile",
-        prefix: "MP",
+        icon: "account_circle",
         path: "/profile/overview",
       },
       {
         title: "Setting",
-        prefix: "S",
+        icon: "edit",
         path: "/profile/settings",
       },
     ],
-    itemsDocs: [],
+    //itemsDocs: [],
     itemCourant: [
       {
         action: "public",
@@ -749,7 +738,7 @@ export default {
         external: false,
       },
     ],
-    itemPosts: [
+    /*itemPosts: [
       {
         action: "article",
         link: "/article",
@@ -772,7 +761,7 @@ export default {
         title: "Quiz",
         external: false,
       },
-    ],
+    ],*/
     items: [],
     admin: [
       {

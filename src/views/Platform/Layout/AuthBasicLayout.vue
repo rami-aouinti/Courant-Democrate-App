@@ -8,8 +8,8 @@
         <span class="mask bg-gradient-default opacity-25"></span>
         <v-container class="my-auto">
           <v-row class="min-vh-100">
-            <app-bar-auth background="transparent" has-bg linkColor="white">
-            </app-bar-auth>
+            <!--<app-bar-auth background="transparent" has-bg linkColor="white">
+            </app-bar-auth>-->
             <fade-transition :duration="200" origin="center top" mode="out-in">
               <!-- your content here -->
               <v-container class="pb-0 position-relative">

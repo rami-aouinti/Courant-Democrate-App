@@ -2,7 +2,7 @@
   <v-app>
     <div
       class="position-relative min-vh-100"
-      :style="`background-image:  url('https://zomra.de/img/world.webp'); background-size: cover; background-position: 100%;`"
+      :style="`background-color:  #f9fbfd;`"
     >
       <drawer
         :drawer="drawer"
