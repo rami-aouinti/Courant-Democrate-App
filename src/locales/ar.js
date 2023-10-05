@@ -212,6 +212,7 @@ const ar = {
   NumberEvents: "عدد الاجتماعات",
   NumberMeetings: "عدد الانشطة",
   AddUser: "إضافة أعضاء للمجموعة",
+  AddRapport: "إضافة محضر جلسة",
   SearchUsersOffice: "ابحث عن منخرطين...",
   YourProfileProgress: " حسابك غير محدث ",
   CompleteYourProfile: "يرجى ملء البيانات الشخصية الخاصة بك",
@@ -221,7 +222,15 @@ const ar = {
   bureauNationaux:"المكاتب الوطنية",
   bureauRegionaux:"المكاتب الجهوية",
   membreTotal:"عدد الأعضاء",
-  membre:"عضو"
+  membre:"عضو",
+  CompleteYourProfile: "أكمل تسجيل معطياتك",
+  AddStatement: "إضافة بيان",
+  AddEvent: "إضافة نشاط",
+  position: "المسؤولية",
+  Meetings: "إجتماعات",
+  Dashboard: "المجموعة الرسمية",
+  Title: "عنوان",
+  Edit: "تعديل",
 };
 
 export default ar;

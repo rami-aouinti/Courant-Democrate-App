@@ -7,7 +7,7 @@
         </h6>
       </v-col>
       <v-col cols="3">
-        <v-dialog v-model="dialogFinancialRapports" max-width="800px">
+        <v-dialog v-model="dialog" max-width="800px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               v-bind="attrs"
@@ -30,7 +30,7 @@
             </v-btn>
           </template>
           <v-card class="card-shadow border-radius-xl" dark>
-            <v-dialog v-model="dialogFinancialRapports" max-width="500px">
+            <v-dialog v-model="dialog" max-width="500px">
               <v-card class="card-shadow border-radius-xl" dark>
                 <div class="card-header-padding card-border-bottom">
                   <span class="font-weight-bold text-h5 text-warning mb-0">{{
@@ -215,6 +215,9 @@ export default {
   methods: {
     onChange(event) {
       this.file = event.target.files ? event.target.files[0] : null;
+    },
+    close() {
+      this.dialog = false;
     },
   },
   computed: {
