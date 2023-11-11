@@ -1,44 +1,55 @@
 <template>
-  <v-card class="card-shadow border-radius-xl mt-6" id="basic">
+  <v-card class="card-shadow border-solid border-radius-xl mt-6" id="basic">
     <div class="px-6 py-6">
       <h5 class="text-h5 font-weight-bold text-warning">
         {{ $t("BasicInfo") }}
       </h5>
     </div>
-    <div class="px-6 pb-6 pt-0">
+    <div class="px-6 pb-6 pt-0 formLight">
+
+      <!-- image profil  + description-->
       <v-row>
         <v-col md="4" cols="12">
-          <label class="text-sm text-body ms-1">{{ $t("ImageProfile") }}</label>
+          <label class="text-md text-body ms-1">{{ $t("ImageProfile") }}</label>
           <dropzone v-model="fileSingle"></dropzone>
         </v-col>
         <v-col md="8" cols="12">
-          <label class="text-sm text-body ms-1">{{
+          <label class="text-md text-body ms-1">{{
             $t("DescriptionProfile")
           }}</label>
           <html-editor :value="this.userProfile.description"></html-editor>
         </v-col>
-        <v-col cols="12">
+      </v-row>
+
+      <!-- Gender -->
+      <v-row>
+        <v-col cols="3">
           <v-select
             :items="gender"
             :label="$t('Male')"
             color="#e91e63"
-            class="font-size-input input-style"
+            class="font-size-input input-style text-md"
             single-line
             height="36"
             :v-model="$t(userProfile.gender)"
           >
           </v-select>
         </v-col>
+      </v-row>
+       
+      <!--Nom et prenom-->
+      <v-row>
         <v-col cols="6">
           <v-text-field
             color="#e91e63"
             :label="$t('FirstName')"
             placeholder="Alex"
             v-model="userProfile.firstName"
-            class="font-size-input input-style"
+            class="font-size-input input-style text-md"
           >
           </v-text-field>
         </v-col>
+
         <v-col cols="6">
           <v-text-field
             color="#e91e63"
@@ -50,11 +61,13 @@
           </v-text-field>
         </v-col>
       </v-row>
+       
+      <!--date de naissance-->
       <v-row>
         <v-col sm="12">
           <v-row>
-            <v-col cols="5">
-              <label class="text-sm text-body">{{ $t("BirthDate") }}</label>
+            <v-col cols="4">
+              <label class="text-md text-body">{{ $t("BirthDate") }}</label>
               <v-select
                 :items="months"
                 :label="$t('February')"
@@ -66,7 +79,7 @@
               >
               </v-select>
             </v-col>
-            <v-col sm="4" cols="3">
+            <v-col sm="4" cols="4">
               <v-select
                 :items="days"
                 label="1"
@@ -78,7 +91,7 @@
               >
               </v-select>
             </v-col>
-            <v-col sm="3" cols="4">
+            <v-col sm="4" cols="4">
               <v-select
                 :items="years"
                 label="2022"
@@ -93,6 +106,7 @@
           </v-row>
         </v-col>
       </v-row>
+
       <v-row>
         <v-col cols="6" class="py-0">
           <v-text-field
@@ -115,30 +129,60 @@
           </v-text-field>
         </v-col>
       </v-row>
+
       <v-row>
-        <v-col cols="6" class="py-0">
-          <v-text-field
-            color="#e91e63"
-            :label="$t('YourLocation')"
-            placeholder="Sydney, A"
-            class="font-size-input input-style"
-            v-model="userProfile.location"
-          >
-          </v-text-field>
-        </v-col>
+
+
         <v-col cols="6" class="py-0">
           <v-text-field
             color="#e91e63"
             :label="$t('PhoneNumber')"
-            placeholder="+40 735 631 620"
+            placeholder=""
+            class="font-size-input input-style"
+            v-model="userProfile.phone"
+          >
+          </v-text-field>
+        </v-col>
+
+        <v-col cols="6" class="py-0">
+          <v-text-field
+            color="#e91e63"
+            :label="$t('Profession')"
+            placeholder=""
             class="font-size-input input-style"
             v-model="userProfile.phone"
           >
           </v-text-field>
         </v-col>
       </v-row>
+
       <v-row>
-        <div class="d-sm-flex align-center">
+        <v-col cols="6" class="py-0">
+          <v-text-field
+            color="#e91e63"
+            :label="$t('YourLocation')"
+            placeholder=""
+            class="font-size-input input-style"
+            v-model="userProfile.location"
+          >
+          </v-text-field>
+        </v-col>
+
+        <v-col cols="6" class="py-0">
+          <v-text-field
+            color="#e91e63"
+            :label="$t('City')"
+            placeholder=""
+            class="font-size-input input-style"
+            v-model="userProfile.location"
+          >
+          </v-text-field>
+        </v-col>
+      </v-row>
+      
+      <!--Btn save-->
+      <v-row>
+        <div class="d-sm-flex align-center mt-4">
           <v-btn
             @click="save"
             elevation="0"
@@ -158,6 +202,7 @@
           >
         </div>
       </v-row>
+
     </div>
   </v-card>
 </template>
@@ -172,20 +217,20 @@ export default {
   data() {
     return {
       fileSingle: [],
-      gender: ["Female", "Male"],
+      gender: ["أنثى", "ذكر"],
       months: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
+        "جانفي",
+        "فيفري",
+        "مارس",
+        "أفريل",
+        "ماي",
+        "جوان",
+        "جويلية",
+        "أوت",
+        "سبتمبر",
+        "أكتوبر",
+        "نوفمبر",
+        "ديسمبر",
       ],
       days: [
         "1",
@@ -261,6 +306,38 @@ export default {
         "1984",
         "1983",
         "1982",
+        "1981",
+        "1980",
+        "1979",
+        "1978",
+        "1977",
+        "1976",
+        "1975",
+        "1974",
+        "1973",
+        "1972",
+        "1971",
+        "1970",
+        "1969",
+        "1968",
+        "1967",
+        "1966",
+        "1965",
+        "1964",
+        "1963",
+        "1962",
+        "1961",
+        "1960",
+        "1959",
+        "1958",
+        "1957",
+        "1956",
+        "1955",
+        "1954",
+        "1953",
+        "1952",
+        "1951",
+        "1950",
       ],
       languages: ["English", "French", "Spanish", "Deutsch", "Arabic"],
       skills: ["vuejs", "angular", "react"],

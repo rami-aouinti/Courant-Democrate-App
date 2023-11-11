@@ -1,5 +1,5 @@
 <template>
-  <v-card class="card-shadow border-radius-xl mt-6" id="change">
+  <v-card class="card-shadow border-solid border-radius-xl mt-6" id="change">
     <div class="px-6 py-6">
       <h5 class="text-h5 font-weight-bold text-warning">
         {{ $t("ChangePassword") }}
@@ -38,12 +38,14 @@
         </v-col>
       </v-row>
 
-      <h5 class="mt-5 mb-2 text-h5 font-weight-bold text-warning">
+      <v-row>
+        <h5 class="mt-5 mb-2 text-h5 font-weight-bold text-warning">
         {{ $t("PasswordRequirements") }}
       </h5>
       <p class="text-muted font-weight-light mb-2">
         {{ $t("PleaseFollowThisGuideForAStrongPassword") }}
       </p>
+
       <div class="d-sm-flex">
         <ul class="text-muted ps-6 mb-0">
           <li>
@@ -67,23 +69,35 @@
             </span>
           </li>
         </ul>
-        <v-btn
-          color="#cb0c9f"
-          class="
-            font-weight-bolder
-            btn-default
-            bg-gradient-default
-            py-4
-            px-8
-            ms-auto
-            mt-sm-auto mt-4
-          "
-          small
-          @click="save"
-        >
-          {{ $t("UpdatePassword") }}
-        </v-btn>
+
+        
       </div>
+      </v-row>
+     
+      
+
+      <v-row>
+        <div class="d-sm-flex align-center mt-4">
+          <v-btn
+            @click="save"
+            elevation="0"
+            :ripple="false"
+            color="#cb0c9f"
+            class="
+              font-weight-bolder
+              btn-default
+              bg-gradient-default
+              py-4
+              px-8
+              ms-auto
+              mt-sm-auto mt-4
+            "
+            small
+            >{{ $t("UpdatePassword") }}</v-btn
+          >
+        </div>
+      </v-row>
+
     </div>
   </v-card>
 </template>

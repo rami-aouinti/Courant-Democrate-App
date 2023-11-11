@@ -15,7 +15,6 @@
     </div>
     <v-card
       class="shadow px-4 py-4 mx-9 overflow-hidden border-radius-xl mt-n16"
-      dark
     >
       <v-row class="px-4">
         <v-col lg="12">
@@ -53,40 +52,14 @@
                   </h5>
                 </div>
               </v-col>
-              <v-col
-                lg="4"
-                md="6"
-                class="my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3"
-              >
-                <div class="d-flex align-center">
-                  <p
-                    class="mb-0 text-body text-xs ms-auto"
-                    v-if="switche === true"
-                  >
-                    {{ $t("SwitchToInVisible") }}
-                  </p>
-                  <p
-                    class="mb-0 text-body text-xs ms-auto"
-                    v-if="switche === false"
-                  >
-                    {{ $t("SwitchToVisible") }}
-                  </p>
-                  <v-switch
-                    :ripple="false"
-                    class="mt-0 pt-0 ms-3 switch"
-                    v-model="switche"
-                    @click="activateProfile"
-                    hide-details
-                  ></v-switch>
-                </div>
-              </v-col>
+              
             </v-row>
           </v-card>
           <basic-info></basic-info>
           <change-password></change-password>
-          <notifications></notifications>
-          <sessions></sessions>
-          <delete-account></delete-account>
+          <!--<notifications></notifications>-->
+          <!--<sessions></sessions>-->
+          <!--<delete-account></delete-account>-->
         </v-col>
       </v-row>
     </v-card>

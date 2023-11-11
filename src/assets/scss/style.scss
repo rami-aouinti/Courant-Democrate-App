@@ -1,5 +1,15 @@
 // devlopped by omar chaari //
 
+.theme--light .formLight input{
+  color: #000 !important;
+}
+
+.border-solid{
+  border: 1px solid #000;
+}
+.font-size-input .v-label{
+  font-weight: bold;
+}
 .theme--light.v-app-bar.v-toolbar.v-sheet{
   background-color: #3e3e45 !important;
 }
